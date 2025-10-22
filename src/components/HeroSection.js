@@ -190,7 +190,7 @@ const HeroSection = () => {
                 <div className="w-40 h-32 bg-red-600 rounded-lg shadow-xl transform hover:scale-105 transition-transform flex items-center justify-center">
                   <div className="text-center text-white">
                     <div className="text-2xl mb-2">🎁</div>
-                    <div className="text-xs font-bold">Rehmat-e-Shereen</div>
+                    <div className="text-xs font-bold">halwai</div>
                   </div>
                 </div>
               </div>

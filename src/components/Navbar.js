@@ -48,7 +48,7 @@ const Navbar = () => {
             
             {/* Main Logo Text */}
             <h1 className="text-3xl font-bold text-yellow-300 tracking-wide font-serif">
-              Rehmat-e-Shereen
+              halwai
             </h1>
             
             {/* Subtitle */}
