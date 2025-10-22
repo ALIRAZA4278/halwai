@@ -10,7 +10,7 @@ const Navbar = () => {
     setSidebarOpen(!sidebarOpen);
   };
   return (
-    <nav className="bg-red-800 text-white px-6 py-4">
+    <nav className="bg-red-800 text-white px-8 py-6">
       <div className="w-full flex items-center justify-between relative">
         {/* Left Section - Location and Phone */}
         <div className="flex items-center space-x-4 flex-1">
