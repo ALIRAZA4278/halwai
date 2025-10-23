@@ -57,7 +57,7 @@ const Categories = () => {
       id: 7,
       name: "DESSERTS",
       icon: "🍨",
-      bgColor: "from-amber-100 via-amber-50 to-white",
+      bgColor: "from-purple-600 via-purple-500 to-purple-400",
       subcategories: ["DESSERTS"]
     },
     {
@@ -71,7 +71,7 @@ const Categories = () => {
       id: 9,
       name: "PACKED ITEMS",
       icon: "📦",
-      bgColor: "from-purple-600 via-purple-500 to-purple-400",
+      bgColor: "from-gray-600 via-gray-500 to-gray-400",
       subcategories: []
     }
   ];
@@ -118,7 +118,7 @@ const Categories = () => {
 
   const handleCategoryClick = (index) => {
     setSelectedCategory(index);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Remove auto-scroll to top to keep user's position
   };
 
   const handleSubcategoryClick = (subcategory) => {
@@ -179,31 +179,31 @@ const Categories = () => {
       className="group cursor-pointer bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
     >
       {/* Product Image with Tag */}
-      <div className="relative h-64 bg-white flex items-center justify-center p-6">
+      <div className="relative h-48 sm:h-56 lg:h-64 bg-white flex items-center justify-center p-4 sm:p-6">
         {product.tag && (
-          <div className="absolute top-3 left-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-3 py-1 rounded-md text-xs font-bold uppercase shadow-md">
+          <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-2 sm:px-3 py-1 rounded-md text-xs font-bold uppercase shadow-md">
             {product.tag}
           </div>
         )}
-        <div className="text-8xl filter drop-shadow-lg">{product.image}</div>
+        <div className="text-6xl sm:text-7xl lg:text-8xl filter drop-shadow-lg">{product.image}</div>
       </div>
 
       {/* Product Info */}
-      <div className="p-5 text-center border-t border-gray-100">
-        <h3 className="text-xl font-bold text-amber-700 mb-1 font-serif">
+      <div className="p-3 sm:p-4 lg:p-5 text-center border-t border-gray-100">
+        <h3 className="text-lg sm:text-xl font-bold text-amber-700 mb-1 font-serif">
           {product.name} {product.weight}
         </h3>
 
-        <div className="my-3">
+        <div className="my-2 sm:my-3">
           <span className="text-sm text-gray-600 font-semibold">RS. </span>
-          <span className="text-2xl font-bold text-gray-800">{product.price}</span>
+          <span className="text-xl sm:text-2xl font-bold text-gray-800">{product.price}</span>
         </div>
 
-        <p className="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-3">
+        <p className="text-sm text-gray-600 leading-relaxed mb-3 sm:mb-4 line-clamp-3">
           {product.description}
         </p>
 
-        <button className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white py-3 rounded-full font-semibold uppercase tracking-wide hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-md hover:shadow-lg">
+        <button className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white py-2 sm:py-3 rounded-full font-semibold uppercase tracking-wide hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-md hover:shadow-lg text-sm sm:text-base">
           Add
         </button>
       </div>
@@ -214,22 +214,22 @@ const Categories = () => {
     <section className="relative bg-white">
       {/* Main Category Navigation Bar */}
       <div className="bg-gradient-to-r from-red-800 via-red-700 to-red-800">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between overflow-x-auto scrollbar-hide">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4">
+          <div className="flex items-center justify-start overflow-x-auto scrollbar-hide">
             {categories.map((category, index) => (
               <button
                 key={category.id}
                 onClick={() => handleCategoryClick(index)}
-                className={`flex-shrink-0 flex flex-col items-center py-4 px-3 md:px-6 transition-all duration-300 border-b-4 ${
+                className={`flex-shrink-0 flex flex-col items-center py-3 sm:py-4 px-2 sm:px-3 md:px-6 transition-all duration-300 border-b-4 ${
                   selectedCategory === index
                     ? 'border-yellow-400'
                     : 'border-transparent hover:border-yellow-200'
                 }`}
               >
-                <div className="text-3xl md:text-4xl mb-2 filter drop-shadow-lg">
+                <div className="text-2xl sm:text-3xl md:text-4xl mb-1 sm:mb-2 filter drop-shadow-lg">
                   {category.icon}
                 </div>
-                <span className={`text-xs md:text-sm font-semibold tracking-wide uppercase ${
+                <span className={`text-xs sm:text-xs md:text-sm font-semibold tracking-wide uppercase text-center ${
                   selectedCategory === index ? 'text-yellow-400' : 'text-white'
                 }`}>
                   {category.name}
@@ -243,13 +243,13 @@ const Categories = () => {
       {/* Subcategory Bar */}
       {categories[selectedCategory].subcategories.length > 0 && (
         <div className="bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-200 sticky top-0 z-10 shadow-md">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="flex items-center justify-center gap-4 md:gap-8 py-4 overflow-x-auto scrollbar-hide">
+          <div className="max-w-7xl mx-auto px-2 sm:px-4">
+            <div className="flex items-center justify-start sm:justify-center gap-3 sm:gap-4 md:gap-8 py-3 sm:py-4 overflow-x-auto scrollbar-hide">
               {categories[selectedCategory].subcategories.map((subcategory, index) => (
                 <button
                   key={index}
                   onClick={() => handleSubcategoryClick(subcategory)}
-                  className="flex-shrink-0 text-sm md:text-base font-semibold text-red-800 hover:text-red-900 uppercase tracking-wide transition-all hover:scale-105"
+                  className="flex-shrink-0 text-xs sm:text-sm md:text-base font-semibold text-red-800 hover:text-red-900 uppercase tracking-wide transition-all hover:scale-105 px-2 py-1 rounded-md hover:bg-yellow-300/50"
                 >
                   {subcategory}
                 </button>
@@ -260,7 +260,7 @@ const Categories = () => {
       )}
 
       {/* Search Bar Section */}
-      <div className="bg-gradient-to-b from-orange-50 to-white py-8 px-4">
+      <div className="bg-gradient-to-b from-orange-50 to-white py-4 sm:py-6 lg:py-8 px-2 sm:px-4">
         <div className="max-w-4xl mx-auto">
           <div className="relative">
             <input
@@ -270,10 +270,10 @@ const Categories = () => {
               placeholder={`Search for ${categories[selectedCategory].subcategories.length > 0
                 ? categories[selectedCategory].subcategories[0].toLowerCase()
                 : categories[selectedCategory].name.toLowerCase()}...`}
-              className="w-full px-6 py-4 pr-14 rounded-full border-2 border-red-200 focus:border-red-500 focus:outline-none text-gray-700 placeholder-gray-400 shadow-md"
+              className="w-full px-4 sm:px-6 py-3 sm:py-4 pr-12 sm:pr-14 rounded-full border-2 border-red-200 focus:border-red-500 focus:outline-none text-gray-700 placeholder-gray-400 shadow-md text-sm sm:text-base"
             />
-            <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-700 text-white p-3 rounded-full hover:bg-red-800 transition-colors shadow-lg">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button className="absolute right-1 sm:right-2 top-1/2 transform -translate-y-1/2 bg-red-700 text-white p-2 sm:p-3 rounded-full hover:bg-red-800 transition-colors shadow-lg">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </button>
@@ -312,7 +312,7 @@ const Categories = () => {
               />
 
               {/* Subcategory Products */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                 {dummyProducts.map((product) => (
                   <ProductCard
                     key={product.id}
