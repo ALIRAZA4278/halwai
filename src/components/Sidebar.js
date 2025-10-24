@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 const Sidebar = ({ isOpen, onClose }) => {
   const [darkMode, setDarkMode] = useState(false);
@@ -38,21 +39,21 @@ const Sidebar = ({ isOpen, onClose }) => {
 
         {/* Menu Items */}
         <div className="px-6 py-4 space-y-4">
-          
+
           {/* Our Locations Button */}
-          <button className="w-full bg-white text-red-700 py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
+          <Link href="/locations" onClick={onClose} className="block w-full bg-white text-red-700 py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
             Our Locations
-          </button>
+          </Link>
 
           {/* Feedback Button */}
-          <button className="w-full bg-white text-red-700 py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
+          <Link href="/feedback" onClick={onClose} className="block w-full bg-white text-red-700 py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
             Feedback
-          </button>
+          </Link>
 
           {/* Contact Us Button */}
-          <button className="w-full bg-white text-red-700 py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
+          <Link href="/contact" onClick={onClose} className="block w-full bg-white text-red-700 py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
             Contact Us
-          </button>
+          </Link>
 
           {/* Dark Mode Toggle */}
           <div className="flex items-center justify-between py-4">
@@ -86,7 +87,7 @@ const Sidebar = ({ isOpen, onClose }) => {
           <div className="flex items-center justify-center space-x-2 text-sm text-white/80">
             <span>Powered by</span>
             <div className="bg-white text-red-700 px-2 py-1 rounded text-xs font-bold">
-              TechAI
+              The Socialhawks
             </div>
           </div>
         </div>

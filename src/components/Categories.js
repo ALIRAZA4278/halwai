@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import Image from 'next/image';
 import ProductDetail from './ProductDetail';
 
 const Categories = () => {
@@ -8,73 +9,70 @@ const Categories = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
+  const [placeholderText, setPlaceholderText] = useState('');
   const subcategoryRefs = useRef({});
 
-  const categories = [
+  const categories = useMemo(() => [
     {
       id: 1,
       name: "TRENDING",
-      icon: "🏆",
+      image: "/Category/8.png",
       bgColor: "from-yellow-500 via-yellow-400 to-orange-400",
       subcategories: ["TRENDING HOME"]
     },
     {
       id: 2,
-      name: "AMAZING SUMMER",
-      icon: "🥭",
-      bgColor: "from-orange-400 via-orange-300 to-yellow-300",
-      subcategories: []
-    },
-    {
-      id: 3,
       name: "SWEETS",
-      icon: "🍬",
+      // image: "/Category/3.png",
+        image: "/Category/1.png",
       bgColor: "from-red-700 via-red-600 to-red-500",
       subcategories: ["CLASSIC SWEETS", "BAKLAVA", "HALWA JAAT", "PREMIUM SWEETS", "PRE-ORDER"]
     },
     {
-      id: 4,
+      id: 3,
       name: "DAIRY",
-      icon: "🧈",
+      // image: "/Category/4.png",
+         image: "/Category/2.png",
       bgColor: "from-yellow-400 via-yellow-300 to-yellow-200",
       subcategories: ["DAIRY BUTTER", "PURE GHEE"]
     },
     {
-      id: 5,
+      id: 4,
       name: "BAKERY",
-      icon: "🥐",
+      // image: "/Category/5.png",
+        image: "/Category/3.png",
       bgColor: "from-teal-500 via-teal-400 to-teal-300",
       subcategories: ["TEA TIME", "BREAKFAST"]
     },
     {
-      id: 6,
+      id: 5,
       name: "CAKES & PASTRIES",
-      icon: "🎂",
+      image: "/Category/4.png",
       bgColor: "from-pink-700 via-pink-600 to-pink-500",
       subcategories: ["HYDERABADI", "PREMIO CAKES", "FRESH CREAM", "DIY CAKES", "PASTRIES"]
     },
     {
-      id: 7,
+      id: 6,
       name: "DESSERTS",
-      icon: "🍨",
+       image: "/Category/5.png",
       bgColor: "from-purple-600 via-purple-500 to-purple-400",
       subcategories: ["DESSERTS"]
     },
     {
-      id: 8,
+      id: 7,
       name: "GIFT BOX",
-      icon: "🎁",
+       image: "/Category/6.png",
       bgColor: "from-orange-600 via-orange-500 to-orange-400",
       subcategories: ["PRE ORDER BOXES", "SPECIAL BOXES", "BABY GIRL BOXES", "BABY BOY BOXES"]
     },
     {
-      id: 9,
+      id: 8,
       name: "PACKED ITEMS",
-      icon: "📦",
+      image: "/Category/7.png",
       bgColor: "from-gray-600 via-gray-500 to-gray-400",
       subcategories: []
     }
-  ];
+  ], []);
 
   // Dummy product data - matching the honey card design
   const dummyProducts = [
@@ -129,6 +127,63 @@ const Categories = () => {
       subcategoryElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
+
+  // Typing animation effect for placeholder with rotating suggestions
+  useEffect(() => {
+    const suggestions = categories.map(cat => 
+      cat.subcategories.length > 0 
+        ? cat.subcategories[0] 
+        : cat.name
+    );
+    
+    let suggestionIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let timeoutId;
+    
+    const type = () => {
+      const currentSuggestion = `Search for ${suggestions[suggestionIndex].toLowerCase()}...`;
+      
+      if (!isDeleting) {
+        // Typing
+        setPlaceholderText(currentSuggestion.slice(0, charIndex + 1));
+        charIndex++;
+        
+        if (charIndex === currentSuggestion.length) {
+          // Finished typing, wait before deleting
+          timeoutId = setTimeout(() => {
+            isDeleting = true;
+            type();
+          }, 2000);
+          return;
+        }
+        
+        timeoutId = setTimeout(type, 80);
+      } else {
+        // Deleting
+        setPlaceholderText(currentSuggestion.slice(0, charIndex));
+        charIndex--;
+        
+        if (charIndex < 0) {
+          // Finished deleting, move to next suggestion
+          isDeleting = false;
+          charIndex = 0;
+          suggestionIndex = (suggestionIndex + 1) % suggestions.length;
+          timeoutId = setTimeout(type, 500);
+          return;
+        }
+        
+        timeoutId = setTimeout(type, 30);
+      }
+    };
+    
+    // Start the animation
+    timeoutId = setTimeout(type, 500);
+    
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [categories]);
 
   const CategoryBanner = ({ category, title }) => (
     <div className={`relative h-48 md:h-56 rounded-lg overflow-hidden shadow-xl bg-gradient-to-r ${category.bgColor} mb-8`}>
@@ -215,19 +270,24 @@ const Categories = () => {
       {/* Main Category Navigation Bar */}
       <div className="bg-gradient-to-r from-red-800 via-red-700 to-red-800">
         <div className="max-w-7xl mx-auto px-2 sm:px-4">
-          <div className="flex items-center justify-start overflow-x-auto scrollbar-hide">
+          <div className="flex items-center justify-center gap-6 sm:gap-8 md:gap-10 overflow-x-auto scrollbar-hide py-2">
             {categories.map((category, index) => (
               <button
                 key={category.id}
                 onClick={() => handleCategoryClick(index)}
-                className={`flex-shrink-0 flex flex-col items-center py-3 sm:py-4 px-2 sm:px-3 md:px-6 transition-all duration-300 border-b-4 ${
+                className={`flex-shrink-0 flex flex-col items-center py-3 sm:py-4 px-3 transition-all duration-300 border-b-4 ${
                   selectedCategory === index
                     ? 'border-yellow-400'
                     : 'border-transparent hover:border-yellow-200'
                 }`}
               >
-                <div className="text-2xl sm:text-3xl md:text-4xl mb-1 sm:mb-2 filter drop-shadow-lg">
-                  {category.icon}
+                <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mb-1 sm:mb-2 filter drop-shadow-lg">
+                  <Image
+                    src={category.image}
+                    alt={category.name}
+                    fill
+                    className="object-contain"
+                  />
                 </div>
                 <span className={`text-xs sm:text-xs md:text-sm font-semibold tracking-wide uppercase text-center ${
                   selectedCategory === index ? 'text-yellow-400' : 'text-white'
@@ -267,9 +327,7 @@ const Categories = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={`Search for ${categories[selectedCategory].subcategories.length > 0
-                ? categories[selectedCategory].subcategories[0].toLowerCase()
-                : categories[selectedCategory].name.toLowerCase()}...`}
+              placeholder={placeholderText}
               className="w-full px-4 sm:px-6 py-3 sm:py-4 pr-12 sm:pr-14 rounded-full border-2 border-red-200 focus:border-red-500 focus:outline-none text-gray-700 placeholder-gray-400 shadow-md text-sm sm:text-base"
             />
             <button className="absolute right-1 sm:right-2 top-1/2 transform -translate-y-1/2 bg-red-700 text-white p-2 sm:p-3 rounded-full hover:bg-red-800 transition-colors shadow-lg">
