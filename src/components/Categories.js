@@ -74,19 +74,46 @@ const Categories = () => {
     }
   ], []);
 
-  // Dummy product data - matching the honey card design
+  // Dummy product data - matching the card design
   const dummyProducts = [
     {
       id: 1,
-      name: "Honey (Sidr)",
-      weight: "250gm",
+      name: "Honey (Sidr) 250gm",
+      weight: null,
       price: "932",
-      description: "Pure honey is a premium 100% natural honey produced by bees that collect nectar from the...",
+      description: "Sidr honey is a premium, 100% natural honey produced by bees that collect nectar from the...",
       image: "🍯",
       tag: "TRENDING"
     },
     {
       id: 2,
+      name: "Kulfi Falooda",
+      weight: "12 Pcs",
+      price: "1831",
+      description: "Kulfis best described as traditional Pakistani-style ice cream. However, unlike ice...",
+      image: "🍨",
+      tag: "POPULAR"
+    },
+    {
+      id: 3,
+      name: "Bhel Puri (100 GM)",
+      weight: null,
+      price: "148",
+      description: "Bhel Puri is the perfect on-the-go snack—enjoy it anytime, anywhere! It comes with two...",
+      image: "🥗",
+      tag: "TRENDING"
+    },
+    {
+      id: 4,
+      name: "Oat Cookies",
+      weight: null,
+      price: "186",
+      description: "Made with premium oats, our cookies are a rich source of fiber and nutrients. Perfect for...",
+      image: "🍪",
+      tag: "TRENDING"
+    },
+    {
+      id: 5,
       name: "Kaju Katli",
       weight: "500gm",
       price: "650",
@@ -95,7 +122,7 @@ const Categories = () => {
       tag: null
     },
     {
-      id: 3,
+      id: 6,
       name: "Gulab Jamun",
       weight: "1kg",
       price: "450",
@@ -104,12 +131,21 @@ const Categories = () => {
       tag: null
     },
     {
-      id: 4,
+      id: 7,
       name: "Rasgulla",
       weight: "500gm",
       price: "350",
       description: "Traditional Bengali sweet made from cottage cheese, soaked in light sugar syrup...",
       image: "⚪",
+      tag: null
+    },
+    {
+      id: 8,
+      name: "Barfi Special",
+      weight: "1kg",
+      price: "850",
+      description: "Delicious traditional sweet made with condensed milk and nuts, perfect for celebrations...",
+      image: "🟨",
       tag: null
     }
   ];
@@ -231,35 +267,49 @@ const Categories = () => {
   const ProductCard = ({ product }) => (
     <div
       onClick={() => handleProductClick(product)}
-      className="group cursor-pointer bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+      className="group cursor-pointer bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 flex flex-col h-full"
     >
-      {/* Product Image with Tag */}
-      <div className="relative h-48 sm:h-56 lg:h-64 bg-white flex items-center justify-center p-4 sm:p-6">
+      {/* Product Image with Tag - Fixed Height */}
+      <div className="relative h-56 bg-gradient-to-br from-gray-50 to-white flex items-center justify-center p-6 flex-shrink-0">
         {product.tag && (
-          <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-2 sm:px-3 py-1 rounded-md text-xs font-bold uppercase shadow-md">
+          <div className="absolute top-3 left-3 bg-gradient-to-r from-yellow-600 to-yellow-500 text-white px-3 py-1 rounded text-xs font-bold uppercase shadow-md">
             {product.tag}
           </div>
         )}
-        <div className="text-6xl sm:text-7xl lg:text-8xl filter drop-shadow-lg">{product.image}</div>
+        <div className="text-7xl sm:text-8xl filter drop-shadow-lg">{product.image}</div>
       </div>
 
-      {/* Product Info */}
-      <div className="p-3 sm:p-4 lg:p-5 text-center border-t border-gray-100">
-        <h3 className="text-lg sm:text-xl font-bold text-amber-700 mb-1 font-serif">
-          {product.name} {product.weight}
+      {/* Product Info - Flexible Height */}
+      <div className="p-4 sm:p-5 bg-white flex flex-col flex-grow">
+        <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2 font-serif leading-tight h-14 line-clamp-2">
+          {product.name}
         </h3>
 
-        <div className="my-2 sm:my-3">
-          <span className="text-sm text-gray-600 font-semibold">RS. </span>
-          <span className="text-xl sm:text-2xl font-bold text-gray-800">{product.price}</span>
+        <div className="mb-3">
+          <span className="text-red-600 font-bold text-xl sm:text-2xl">
+            RS. {product.price}
+          </span>
         </div>
 
-        <p className="text-sm text-gray-600 leading-relaxed mb-3 sm:mb-4 line-clamp-3">
+        <p className="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-2 h-10 flex-grow">
           {product.description}
         </p>
 
-        <button className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white py-2 sm:py-3 rounded-full font-semibold uppercase tracking-wide hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-md hover:shadow-lg text-sm sm:text-base">
-          Add
+        {/* Weight/Size Options */}
+        {product.weight && (
+          <div className="flex gap-2 mb-4 h-8">
+            <button className="px-3 py-1 border border-gray-300 rounded text-xs font-semibold text-gray-700 hover:border-yellow-600 hover:text-yellow-600 transition-colors">
+              {product.weight}
+            </button>
+          </div>
+        )}
+        {!product.weight && (
+          <div className="mb-4 h-8"></div>
+        )}
+
+        {/* Add Button */}
+        <button className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white py-2.5 rounded-full font-bold uppercase tracking-wide hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-md hover:shadow-lg text-sm mt-auto">
+          ADD
         </button>
       </div>
     </div>
@@ -349,7 +399,7 @@ const Categories = () => {
         />
 
         {/* Main Category Products */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-12">
           {dummyProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -370,14 +420,14 @@ const Categories = () => {
               />
 
               {/* Subcategory Products */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                 {dummyProducts.map((product) => (
                   <ProductCard
                     key={product.id}
                     product={{
                       ...product,
                       name: product.name,
-                      tag: index === 0 && product.id === 1 ? "TRENDING" : null
+                      tag: index === 0 && product.id === 1 ? "TRENDING" : product.tag
                     }}
                   />
                 ))}
