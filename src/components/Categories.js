@@ -320,7 +320,7 @@ const Categories = () => {
       {/* Main Category Navigation Bar */}
       <div className="bg-gradient-to-r from-red-800 via-red-700 to-red-800">
         <div className="max-w-7xl mx-auto px-2 sm:px-4">
-          <div className="flex items-center justify-center gap-6 sm:gap-8 md:gap-10 overflow-x-auto scrollbar-hide py-2">
+          <div className="flex items-center justify-start sm:justify-center gap-6 sm:gap-8 md:gap-10 overflow-x-auto scrollbar-hide py-2">
             {categories.map((category, index) => (
               <button
                 key={category.id}

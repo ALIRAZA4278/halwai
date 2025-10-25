@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
-import Link from 'next/link';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 export default function FeedbackPage() {
   const [feedbackType, setFeedbackType] = useState('takeaway');
@@ -31,8 +32,11 @@ export default function FeedbackPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Navbar */}
+      <Navbar />
+
       {/* Header Banner */}
-      <div className="relative h-48 sm:h-64 overflow-hidden">
+      <div className="relative h-48 sm:h-64 overflow-hidden mt-20">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-pink-50">
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
@@ -200,13 +204,11 @@ export default function FeedbackPage() {
           </div>
         </form>
 
-        {/* Back to Home Link */}
-        <div className="mt-8 text-center">
-          <Link href="/" className="text-red-900 hover:text-red-700 font-medium">
-            ← Back to Home
-          </Link>
-        </div>
+        {/* Back to Home Link - Removed */}
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
