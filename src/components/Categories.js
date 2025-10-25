@@ -16,6 +16,7 @@ const Categories = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const subcategoryRefs = useRef({});
+  const [productVariantSelections, setProductVariantSelections] = useState({});
 
   const categories = useMemo(() => [
     {
@@ -328,8 +329,8 @@ const Categories = () => {
     </div>
   );
 
-  const handleProductClick = (product) => {
-    setSelectedProduct(product);
+  const handleProductClick = (product, preSelectedVariantIndex = 0) => {
+    setSelectedProduct({ ...product, preSelectedVariantIndex });
     setIsProductDetailOpen(true);
   };
 
@@ -345,18 +346,33 @@ const Categories = () => {
   };
 
   const ProductCard = ({ product }) => {
-    const [selectedVariantIndex, setSelectedVariantIndex] = React.useState(0);
-
     const hasVariants = product.variants && product.variants.length > 0;
     const availableVariants = hasVariants ? product.variants.filter(v => v.available !== false) : [];
+
+    // Get persisted selection or default to 0
+    const selectedVariantIndex = productVariantSelections[product.id] ?? 0;
     const selectedVariant = availableVariants[selectedVariantIndex];
     const displayPrice = selectedVariant ? selectedVariant.price : product.price;
+
+    const handleVariantClick = (e, index) => {
+      e.stopPropagation();
+      e.preventDefault();
+      // Update the persistent state
+      setProductVariantSelections(prev => ({
+        ...prev,
+        [product.id]: index
+      }));
+    };
+
+    const handleCardClick = () => {
+      handleProductClick(product, selectedVariantIndex);
+    };
 
     return (
       <div className="bg-white rounded-lg overflow-hidden border-4 border-transparent shadow-lg flex flex-col h-full hover:border-yellow-300 transition-all duration-300">
         {/* Product Image - Fixed Height */}
         <div
-          onClick={() => handleProductClick(product)}
+          onClick={handleCardClick}
           className="relative h-56 bg-gradient-to-b from-gray-100 to-gray-50 flex items-center justify-center p-6 flex-shrink-0 cursor-pointer"
         >
           {product.image && product.image.startsWith('http') ? (
@@ -376,7 +392,7 @@ const Categories = () => {
         <div className="p-5 bg-gradient-to-b from-amber-50/40 to-white flex flex-col flex-grow">
           {/* Product Name */}
           <h3
-            onClick={() => handleProductClick(product)}
+            onClick={handleCardClick}
             className="text-xl font-bold text-amber-700 mb-3 leading-tight line-clamp-2 min-h-[3.5rem] cursor-pointer"
           >
             {product.name}
@@ -392,7 +408,7 @@ const Categories = () => {
 
           {/* Description */}
           <p
-            onClick={() => handleProductClick(product)}
+            onClick={handleCardClick}
             className="text-sm text-gray-700 leading-relaxed mb-4 line-clamp-3 flex-grow cursor-pointer"
           >
             {product.description}
@@ -403,15 +419,13 @@ const Categories = () => {
             <div className="flex flex-wrap gap-2 mb-4">
               {availableVariants.map((variant, index) => (
                 <button
-                  key={index}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedVariantIndex(index);
-                  }}
-                  className={`px-4 py-2 border-2 rounded-md text-xs font-bold transition-all ${
+                  key={`${product.id}-variant-${index}-${variant.size}`}
+                  type="button"
+                  onClick={(e) => handleVariantClick(e, index)}
+                  className={`px-4 py-2 border-2 rounded-md text-xs font-bold transition-all hover:scale-105 select-none ${
                     selectedVariantIndex === index
-                      ? 'border-gray-800 bg-gray-800 text-white'
-                      : 'border-gray-400 text-gray-800 bg-white'
+                      ? 'border-gray-800 bg-gray-800 text-white shadow-md'
+                      : 'border-gray-400 text-gray-800 bg-white hover:border-gray-600'
                   }`}
                 >
                   {variant.size}
@@ -423,7 +437,7 @@ const Categories = () => {
           {/* Add Button */}
           <button
             onClick={(e) => handleAddToCart(e, product, selectedVariant)}
-            className="w-full text-white py-3 rounded-full font-bold uppercase tracking-wider transition-all shadow-md text-sm"
+            className="w-full text-white py-3 rounded-full font-bold uppercase tracking-wider transition-all shadow-md text-sm hover:shadow-lg hover:scale-105 active:scale-95"
             style={{ background: 'linear-gradient(to right, #fef399, #f9d84e)' }}
           >
             ADD

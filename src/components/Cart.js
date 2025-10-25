@@ -2,9 +2,11 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 
 const Cart = () => {
+  const router = useRouter();
   const {
     cartItems,
     removeFromCart,
@@ -15,6 +17,11 @@ const Cart = () => {
     isCartOpen,
     setIsCartOpen
   } = useCart();
+
+  const handleCheckout = () => {
+    setIsCartOpen(false);
+    router.push('/checkout');
+  };
 
   return (
     <>
@@ -161,7 +168,10 @@ const Cart = () => {
             </div>
 
             {/* Checkout Button */}
-            <button className="w-full bg-gradient-to-r from-red-700 to-red-800 text-white py-3 rounded-lg font-bold hover:from-red-800 hover:to-red-900 transition-all shadow-lg flex items-center justify-center gap-2">
+            <button
+              onClick={handleCheckout}
+              className="w-full bg-gradient-to-r from-red-700 to-red-800 text-white py-3 rounded-lg font-bold hover:from-red-800 hover:to-red-900 transition-all shadow-lg flex items-center justify-center gap-2"
+            >
               <span>Proceed to Checkout</span>
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
