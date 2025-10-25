@@ -22,30 +22,31 @@ const Categories = () => {
       id: 1,
       name: "TRENDING",
       image: "/Category/8.png",
+      bannerImage: null,
       bgColor: "from-yellow-500 via-yellow-400 to-orange-400",
       subcategories: []
     },
     {
       id: 2,
       name: "SWEETS",
-      // image: "/Category/3.png",
-        image: "/Category/1.png",
+      image: "/Category/1.png",
+      bannerImage: null,
       bgColor: "from-red-700 via-red-600 to-red-500",
       subcategories: ["CLASSIC SWEETS", "BAKLAVA", "HALWA JAAT", "PREMIUM SWEETS", "PRE-ORDER"]
     },
     {
       id: 3,
       name: "DAIRY",
-      // image: "/Category/4.png",
-         image: "/Category/2.png",
+      image: "/Category/2.png",
+      bannerImage: null,
       bgColor: "from-yellow-400 via-yellow-300 to-yellow-200",
       subcategories: ["DAIRY BUTTER", "PURE GHEE"]
     },
     {
       id: 4,
       name: "BAKERY",
-      // image: "/Category/5.png",
-        image: "/Category/3.png",
+      image: "/Category/3.png",
+      bannerImage: null,
       bgColor: "from-teal-500 via-teal-400 to-teal-300",
       subcategories: ["TEA TIME", "BREAKFAST"]
     },
@@ -53,20 +54,23 @@ const Categories = () => {
       id: 5,
       name: "CAKES & PASTRIES",
       image: "/Category/4.png",
+      bannerImage: null,
       bgColor: "from-pink-700 via-pink-600 to-pink-500",
       subcategories: ["HYDERABADI", "PREMIO CAKES", "FRESH CREAM", "DIY CAKES", "PASTRIES"]
     },
     {
       id: 6,
       name: "DESSERTS",
-       image: "/Category/5.png",
+      image: "/Category/5.png",
+      bannerImage: null,
       bgColor: "from-purple-600 via-purple-500 to-purple-400",
       subcategories: ["DESSERTS"]
     },
     {
       id: 7,
       name: "GIFT BOX",
-       image: "/Category/6.png",
+      image: "/Category/6.png",
+      bannerImage: null,
       bgColor: "from-orange-600 via-orange-500 to-orange-400",
       subcategories: ["PRE ORDER BOXES", "SPECIAL BOXES", "BABY GIRL BOXES", "BABY BOY BOXES"]
     },
@@ -74,6 +78,7 @@ const Categories = () => {
       id: 8,
       name: "PACKED ITEMS",
       image: "/Category/7.png",
+      bannerImage: "/Category - banners/packed.jpg",
       bgColor: "from-gray-600 via-gray-500 to-gray-400",
       subcategories: []
     }
@@ -269,35 +274,57 @@ const Categories = () => {
   }, [categories]);
 
   const CategoryBanner = ({ category, title }) => (
-    <div className={`relative h-48 md:h-56 rounded-lg overflow-hidden shadow-xl bg-gradient-to-r ${category.bgColor} mb-8`}>
-      {/* Decorative Pattern Overlay */}
-      <div className="absolute inset-0 opacity-10"
-           style={{
-             backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0c27.614 0 50 22.386 50 50s-22.386 50-50 50S0 77.614 0 50 22.386 0 50 0zm0 10c22.091 0 40 17.909 40 40s-17.909 40-40 40S10 72.091 10 50 27.909 10 50 10z' fill='%23ffffff' fill-rule='evenodd'/%3E%3C/svg%3E")`,
-             backgroundSize: '80px 80px',
-             backgroundPosition: 'center'
-           }}>
-      </div>
+    <div className={`relative h-48 md:h-56 rounded-lg overflow-hidden shadow-xl mb-8`}>
+      {category.bannerImage ? (
+        <>
+          {/* Background Image */}
+          <div
+            className="absolute inset-0 w-full h-full"
+            style={{
+              backgroundImage: `url('${category.bannerImage}')`,
+              backgroundSize: '100% 100%',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          />
+        </>
+      ) : (
+        <>
+          {/* Gradient Background for categories without banners */}
+          <div className={`absolute inset-0 bg-gradient-to-r ${category.bgColor}`} />
 
-      {/* Lotus/Decorative Icon - Left Side */}
-      <div className="absolute left-8 md:left-16 top-1/2 transform -translate-y-1/2">
-        <div className="text-white/30 text-5xl md:text-7xl">❋</div>
-      </div>
+          {/* Decorative Pattern Overlay */}
+          <div className="absolute inset-0 opacity-10"
+               style={{
+                 backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0c27.614 0 50 22.386 50 50s-22.386 50-50 50S0 77.614 0 50 22.386 0 50 0zm0 10c22.091 0 40 17.909 40 40s-17.909 40-40 40S10 72.091 10 50 27.909 10 50 10z' fill='%23ffffff' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+                 backgroundSize: '80px 80px',
+                 backgroundPosition: 'center'
+               }}>
+          </div>
 
-      {/* Lotus/Decorative Icon - Right Side */}
-      <div className="absolute right-8 md:right-16 top-1/2 transform -translate-y-1/2">
-        <div className="text-white/30 text-5xl md:text-7xl">❋</div>
-      </div>
+          {/* Lotus/Decorative Icon - Left Side */}
+          <div className="absolute left-8 md:left-16 top-1/2 transform -translate-y-1/2">
+            <div className="text-white/30 text-5xl md:text-7xl">❋</div>
+          </div>
 
-      {/* Category Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
-        <div className="mb-3">
-          <div className="text-white/80 text-3xl">❋</div>
-        </div>
-        <h2 className="text-4xl md:text-6xl font-serif font-bold text-white text-center drop-shadow-lg tracking-wide">
-          {title}
-        </h2>
-      </div>
+          {/* Lotus/Decorative Icon - Right Side */}
+          <div className="absolute right-8 md:right-16 top-1/2 transform -translate-y-1/2">
+            <div className="text-white/30 text-5xl md:text-7xl">❋</div>
+          </div>
+
+          {/* Decorative Icon - Top */}
+          <div className="absolute inset-x-0 top-6 flex justify-center">
+            <div className="text-white/80 text-3xl">❋</div>
+          </div>
+
+          {/* Category Content - Only show for categories without banner images */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
+            <h2 className="text-4xl md:text-6xl font-serif font-bold text-white text-center drop-shadow-2xl tracking-wide">
+              {title}
+            </h2>
+          </div>
+        </>
+      )}
     </div>
   );
 
@@ -559,29 +586,63 @@ const Categories = () => {
 
         {/* Subcategories with Banners and Products */}
         {categories[selectedCategory].subcategories.length > 0 ? (
-          categories[selectedCategory].subcategories.map((subcategory, index) => (
-            <div
-              key={index}
-              ref={(el) => (subcategoryRefs.current[subcategory] = el)}
-              className="mb-12 scroll-mt-24 relative"
-            >
-              {/* Decorative Elements for each subcategory */}
-              <div className="absolute -top-10 right-0 w-32 h-32 opacity-5">
-                <svg viewBox="0 0 100 100" fill="currentColor" className="text-orange-200">
-                  <circle cx="50" cy="50" r="40"/>
-                </svg>
-              </div>
-              <div className="absolute top-20 -left-10 w-24 h-24 opacity-5">
-                <svg viewBox="0 0 100 100" fill="currentColor" className="text-yellow-200">
-                  <circle cx="50" cy="50" r="40"/>
-                </svg>
-              </div>
+          categories[selectedCategory].subcategories.map((subcategory, index) => {
+            // Get subcategory specific banner if available - only first subcategory gets the banner
+            const subcategoryBannerMap = {
+              // SWEETS subcategories - only first one gets banner
+              "CLASSIC SWEETS": "/Category - banners/sweets.jpg",
+              "BAKLAVA": null,
+              "HALWA JAAT": null,
+              "PREMIUM SWEETS": null,
+              "PRE-ORDER": null,
+              // DAIRY subcategories - only first one gets banner
+              "DAIRY BUTTER": "/Category - banners/dairy.jpg",
+              "PURE GHEE": null,
+              // BAKERY subcategories - only first one gets banner
+              "TEA TIME": "/Category - banners/bakery.jpg",
+              "BREAKFAST": null,
+              // CAKES & PASTRIES subcategories - only first one gets banner
+              "HYDERABADI": "/Category - banners/cakes.jpg",
+              "PREMIO CAKES": null,
+              "FRESH CREAM": null,
+              "DIY CAKES": null,
+              "PASTRIES": null,
+              // DESSERTS subcategories - only first one gets banner
+              "DESSERTS": "/Category - banners/desserts.jpg",
+              // GIFT BOX subcategories - only first one gets banner
+              "PRE ORDER BOXES": "/Category - banners/gift boxed.jpg",
+              "SPECIAL BOXES": null,
+              "BABY GIRL BOXES": null,
+              "BABY BOY BOXES": null,
+            };
 
-              {/* Subcategory Banner */}
-              <CategoryBanner
-                category={categories[selectedCategory]}
-                title={subcategory}
-              />
+            const subcategoryCategory = subcategoryBannerMap[subcategory] !== undefined
+              ? { ...categories[selectedCategory], bannerImage: subcategoryBannerMap[subcategory] }
+              : categories[selectedCategory];
+
+            return (
+              <div
+                key={index}
+                ref={(el) => (subcategoryRefs.current[subcategory] = el)}
+                className="mb-12 scroll-mt-24 relative"
+              >
+                {/* Decorative Elements for each subcategory */}
+                <div className="absolute -top-10 right-0 w-32 h-32 opacity-5">
+                  <svg viewBox="0 0 100 100" fill="currentColor" className="text-orange-200">
+                    <circle cx="50" cy="50" r="40"/>
+                  </svg>
+                </div>
+                <div className="absolute top-20 -left-10 w-24 h-24 opacity-5">
+                  <svg viewBox="0 0 100 100" fill="currentColor" className="text-yellow-200">
+                    <circle cx="50" cy="50" r="40"/>
+                  </svg>
+                </div>
+
+                {/* Subcategory Banner */}
+                <CategoryBanner
+                  category={subcategoryCategory}
+                  title={subcategory}
+                />
 
               {/* Subcategory Products */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 relative z-10 px-2">
@@ -601,7 +662,8 @@ const Categories = () => {
                   ))}
               </div>
             </div>
-          ))
+          );
+          })
         ) : null}
       </div>
 

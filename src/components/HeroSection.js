@@ -12,14 +12,16 @@ const HeroSection = () => {
       subtitle: "Handcrafted with Love & Tradition",
       buttonText: "Order Now",
       backgroundImage: "/HERO BANNERS/1.jpg",
+      mobileBackgroundImage: "/HERO BANNERS/1 mo.jpg",
       gradient: "from-transparent to-transparent"
     },
     {
       id: 2,
-      title: "Festival Special Collection", 
+      title: "Festival Special Collection",
       subtitle: "Perfect for Every Celebration",
       buttonText: "View Collection",
       backgroundImage: "/HERO BANNERS/2.jpg",
+      mobileBackgroundImage: "/HERO BANNERS/2 mob.jpg",
       gradient: "from-transparent to-transparent"
     },
     {
@@ -27,7 +29,8 @@ const HeroSection = () => {
       title: "Fresh Daily Delights",
       subtitle: "Made Fresh Every Morning",
       buttonText: "Shop Fresh",
-      backgroundImage: "/HERO BANNERS/3.jpg", 
+      backgroundImage: "/HERO BANNERS/3.jpg",
+      mobileBackgroundImage: "/HERO BANNERS/3 mob.jpg",
       gradient: "from-transparent to-transparent"
     }
   ];
@@ -53,7 +56,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative h-[75vh] sm:h-[80vh] lg:h-[85vh] overflow-hidden">
+    <section className="relative h-[70vh] md:h-[75vh] lg:h-[85vh] w-full overflow-hidden">
       
       {/* Background Images with Slider */}
       <div className="absolute inset-0">
@@ -64,11 +67,24 @@ const HeroSection = () => {
               index === currentSlide ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            {/* Background Image */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            {/* Background Image - Desktop */}
+            <div
+              className="hidden md:block absolute inset-0 w-full h-full"
               style={{
-                backgroundImage: `url('${slide.backgroundImage}')`
+                backgroundImage: `url('${slide.backgroundImage}')`,
+                backgroundSize: '100% 100%',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            />
+            {/* Background Image - Mobile */}
+            <div
+              className="block md:hidden absolute inset-0 w-full h-full"
+              style={{
+                backgroundImage: `url('${slide.mobileBackgroundImage}')`,
+                backgroundSize: '100% 100%',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
               }}
             />
             {/* Gradient Overlay - Lighter for full opacity images */}

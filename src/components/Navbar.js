@@ -62,14 +62,15 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
       </div>
 
       {/* Main Navbar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 lg:py-3">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 lg:py-3">
         <div className="flex items-center justify-between">
           
-          {/* Left - Location Button (Desktop) */}
-          <div className="hidden lg:block flex-1">
+          {/* Left - Location Button (Desktop) or Menu (Mobile) */}
+          <div className="flex-1">
+            {/* Desktop Location Button */}
             <button 
               onClick={handleLocationClick}
-              className="group flex items-center space-x-2.5 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-full px-3.5 py-2 transition-all duration-300 border border-white/20 hover:border-yellow-300/50"
+              className="hidden lg:flex group items-center space-x-2.5 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-full px-3.5 py-2 transition-all duration-300 border border-white/20 hover:border-yellow-300/50"
             >
               <div className="bg-yellow-300 rounded-full p-1.5">
                 <svg className="w-3.5 h-3.5 text-red-900" fill="currentColor" viewBox="0 0 20 20">
@@ -97,13 +98,25 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </button>
+
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={toggleSidebar}
+              className="lg:hidden bg-white/10 backdrop-blur-sm p-2 rounded-full hover:bg-white/20 transition-all group"
+            >
+              <div className="flex flex-col space-y-1 w-5 h-5 items-center justify-center">
+                <span className="block w-4 h-0.5 bg-white group-hover:bg-yellow-300 rounded transition-colors"></span>
+                <span className="block w-4 h-0.5 bg-white group-hover:bg-yellow-300 rounded transition-colors"></span>
+                <span className="block w-4 h-0.5 bg-white group-hover:bg-yellow-300 rounded transition-colors"></span>
+              </div>
+            </button>
           </div>
 
           {/* Center - Logo */}
-          <div className="flex-1 flex justify-center lg:justify-center">
+          <div className="flex-1 flex justify-center">
             <div className="text-center transform hover:scale-105 transition-transform duration-300">
-              {/* Decorative Top */}
-              <div className="hidden sm:flex justify-center mb-0.5">
+              {/* Decorative Top - Hidden on mobile */}
+              <div className="hidden md:flex justify-center mb-0.5">
                 <div className="flex items-center space-x-1">
                   <div className="w-1.5 h-1.5 bg-yellow-300 rounded-full animate-pulse"></div>
                   <div className="w-1 h-1 bg-yellow-200 rounded-full"></div>
@@ -115,15 +128,15 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
                 </div>
               </div>
               
-              {/* Logo Text */}
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-wider font-serif">
+              {/* Logo Text - Responsive sizing */}
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-wider font-serif">
                 <span className="bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-200 bg-clip-text text-transparent drop-shadow-lg">
                   halwai
                 </span>
               </h1>
               
-              {/* Subtitle */}
-              <div className="hidden sm:flex items-center justify-center space-x-2 mt-0.5">
+              {/* Subtitle - Hidden on small mobile */}
+              <div className="hidden md:flex items-center justify-center space-x-2 mt-0.5">
                 <div className="h-px w-6 bg-gradient-to-r from-transparent to-yellow-300"></div>
                 <p className="text-[10px] lg:text-xs text-yellow-100 italic tracking-[0.3em] font-light uppercase">
                   Pure Desi Halwai
@@ -134,11 +147,11 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
           </div>
 
           {/* Right - Cart & Menu */}
-          <div className="flex-1 flex items-center justify-end space-x-3 lg:space-x-4">
+          <div className="flex-1 flex items-center justify-end space-x-2 sm:space-x-3 lg:space-x-4">
             
             {/* Phone (Mobile Only) */}
             <a href="tel:021111734628" className="lg:hidden">
-              <div className="bg-white/10 backdrop-blur-sm p-2 rounded-full hover:bg-white/20 transition-all">
+              <div className="bg-white/10 backdrop-blur-sm p-1.5 sm:p-2 rounded-full hover:bg-white/20 transition-all">
                 <svg className="w-4 h-4 text-yellow-300" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
@@ -155,22 +168,22 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
             {/* Shopping Cart */}
             <button 
               onClick={() => setIsCartOpen(true)} 
-              className="relative bg-white/10 backdrop-blur-sm p-2 rounded-full hover:bg-white/20 transition-all group"
+              className="relative bg-white/10 backdrop-blur-sm p-1.5 sm:p-2 rounded-full hover:bg-white/20 transition-all group"
             >
-              <svg className="w-5 h-5 lg:w-5 lg:h-5 text-white group-hover:text-yellow-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-yellow-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
               {cartItemCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-gradient-to-r from-yellow-400 to-yellow-300 text-red-900 text-xs font-bold rounded-full h-4 w-4 lg:h-5 lg:w-5 flex items-center justify-center border-2 border-white shadow-lg animate-bounce">
+                <span className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 bg-gradient-to-r from-yellow-400 to-yellow-300 text-red-900 text-[10px] sm:text-xs font-bold rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center border-2 border-white shadow-lg animate-bounce">
                   {cartItemCount}
                 </span>
               )}
             </button>
 
-            {/* Menu Button */}
+            {/* Desktop Menu Button */}
             <button 
               onClick={toggleSidebar}
-              className="bg-white/10 backdrop-blur-sm p-2 rounded-full hover:bg-white/20 transition-all group"
+              className="hidden lg:block bg-white/10 backdrop-blur-sm p-2 rounded-full hover:bg-white/20 transition-all group"
             >
               <div className="flex flex-col space-y-1 w-5 h-5 items-center justify-center">
                 <span className="block w-4 h-0.5 bg-white group-hover:bg-yellow-300 rounded transition-colors"></span>
