@@ -26,87 +26,135 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50/30 to-white">
       {/* Navbar */}
       <Navbar />
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-20">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 mt-4">
+        {/* Header Section */}
         <div className="text-center mb-12">
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Contact Us</h1>
-          <p className="text-gray-600">Please fill the form and our team will be in touch with you as soon as possible.</p>
+          <div className="inline-block mb-4">
+            <div className="bg-gradient-to-r from-red-900 to-red-800 text-white px-6 py-2 rounded-full">
+              <span className="text-sm font-semibold uppercase tracking-wider">Get In Touch</span>
+            </div>
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-red-900 to-red-700 bg-clip-text text-transparent mb-4">
+            Contact Us
+          </h1>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            We&apos;d love to hear from you. Fill out the form below and our team will get back to you as soon as possible.
+          </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <input
-                type="text"
-                name="fullName"
-                placeholder="Full Name *"
-                value={formData.fullName}
+        {/* Contact Form Card */}
+        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 border-t-4 border-yellow-300">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="relative">
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Full Name <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="fullName"
+                  placeholder="Enter your full name"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-gray-800 placeholder-gray-400"
+                />
+              </div>
+              <div className="relative">
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Email Address <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="your@email.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-gray-800 placeholder-gray-400"
+                />
+              </div>
+              <div className="relative">
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Phone Number <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="+92 300 1234567"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-gray-800 placeholder-gray-400"
+                />
+              </div>
+            </div>
+
+            <div className="relative">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Your Message
+              </label>
+              <textarea
+                name="message"
+                placeholder="Tell us how we can help you..."
+                value={formData.message}
                 onChange={handleChange}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-800 focus:border-transparent outline-none text-black"
+                rows="6"
+                className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none resize-none transition-all text-gray-800 placeholder-gray-400"
               />
             </div>
-            <div>
-              <input
-                type="email"
-                name="email"
-                placeholder="Email *"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-800 focus:border-transparent outline-none text-black"
-              />
+
+            <div className="flex justify-end pt-4">
+              <button
+                type="submit"
+                className="text-white font-bold px-10 py-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-105 text-lg"
+                style={{ background: 'linear-gradient(to right, #fef399, #f9d84e)' }}
+              >
+                Send Message
+              </button>
             </div>
-            <div>
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Phone *"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-800 focus:border-transparent outline-none text-black"
-              />
+          </form>
+        </div>
+
+        {/* Contact Info Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+          <div className="bg-white rounded-xl p-6 shadow-lg text-center border-t-4 border-red-900">
+            <div className="inline-block bg-red-100 p-4 rounded-full mb-4">
+              <svg className="w-8 h-8 text-red-900" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+              </svg>
             </div>
+            <h3 className="font-bold text-gray-800 mb-2">Phone</h3>
+            <p className="text-gray-600">021-111-734-628</p>
           </div>
 
-          <div>
-            <textarea
-              name="message"
-              placeholder="Message"
-              value={formData.message}
-              onChange={handleChange}
-              rows="6"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-800 focus:border-transparent outline-none resize-none text-black"
-            />
+          <div className="bg-white rounded-xl p-6 shadow-lg text-center border-t-4 border-yellow-300">
+            <div className="inline-block bg-yellow-100 p-4 rounded-full mb-4">
+              <svg className="w-8 h-8 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+              </svg>
+            </div>
+            <h3 className="font-bold text-gray-800 mb-2">Email</h3>
+            <p className="text-gray-600">info@halwai.com</p>
           </div>
 
-          <div className="flex justify-end">
-            <button
-              type="submit"
-              className="bg-red-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-red-800 transition-colors"
-            >
-              Submit
-            </button>
+          <div className="bg-white rounded-xl p-6 shadow-lg text-center border-t-4 border-green-500">
+            <div className="inline-block bg-green-100 p-4 rounded-full mb-4">
+              <svg className="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <h3 className="font-bold text-gray-800 mb-2">Location</h3>
+            <p className="text-gray-600">Gali Town, Gujranwala</p>
           </div>
-        </form>
+        </div>
       </main>
-
-      {/* Floating Buttons */}
-      <div className="fixed bottom-6 right-6 flex flex-col space-y-4">
-        <button className="bg-green-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-green-700 transition-colors flex items-center space-x-2">
-          <span className="text-sm font-medium">Continue Shopping</span>
-        </button>
-        <button className="bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-colors">
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
-        </button>
-      </div>
 
       {/* Footer */}
       <Footer />

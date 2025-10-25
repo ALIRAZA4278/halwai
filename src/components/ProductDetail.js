@@ -1,20 +1,20 @@
 "use client";
 
 import React, { useState } from 'react';
+import Image from 'next/image';
+import { useCart } from '@/context/CartContext';
 
 const ProductDetail = ({ product, isOpen, onClose }) => {
+  const { addToCart } = useCart();
   const [selectedSize, setSelectedSize] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [specialInstructions, setSpecialInstructions] = useState('');
 
   if (!isOpen || !product) return null;
 
-  // Size options with prices
-  const sizeOptions = [
-    { weight: '250GM', price: '317.79' },
-    { weight: '500gm', price: '635.59' },
-    { weight: '1 Kg', price: '1271.19' }
-  ];
+  // Get variants from product (from database)
+  const hasVariants = product.variants && product.variants.length > 0;
+  const sizeOptions = hasVariants ? product.variants : [];
 
   const incrementQuantity = () => {
     setQuantity(prev => prev + 1);
@@ -26,19 +26,30 @@ const ProductDetail = ({ product, isOpen, onClose }) => {
     }
   };
 
-  const totalPrice = (parseFloat(sizeOptions[selectedSize].price) * quantity).toFixed(2);
+  // Calculate price based on selected variant or base price
+  const currentPrice = hasVariants
+    ? parseFloat(sizeOptions[selectedSize]?.price || product.price)
+    : parseFloat(product.price);
+
+  const totalPrice = (currentPrice * quantity).toFixed(2);
+
+  const handleAddToCart = () => {
+    const selectedVariant = hasVariants ? sizeOptions[selectedSize] : null;
+    addToCart(product, quantity, selectedVariant, specialInstructions);
+    onClose(); // Close modal after adding to cart
+  };
 
   return (
     <>
       {/* Backdrop Overlay */}
       <div
-        className="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity"
+        className="fixed inset-0 backdrop-blur-md bg-white/30 z-40 transition-opacity"
         onClick={onClose}
       ></div>
 
       {/* Modal Container */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4">
-        <div className="bg-white rounded-lg shadow-2xl w-full max-w-xs sm:max-w-lg lg:max-w-4xl max-h-[95vh] sm:max-h-[90vh] overflow-hidden relative border-2 sm:border-4 border-yellow-600">
+        <div className="bg-white rounded-lg shadow-2xl w-full max-w-md sm:max-w-2xl lg:max-w-5xl xl:max-w-6xl max-h-[95vh] sm:max-h-[90vh] overflow-hidden relative border-2 sm:border-4 border-yellow-600">
 
           {/* Close and Share Buttons */}
           <div className="absolute top-2 sm:top-4 right-2 sm:right-4 flex gap-1 sm:gap-2 z-10">
@@ -61,11 +72,22 @@ const ProductDetail = ({ product, isOpen, onClose }) => {
           <div className="flex flex-col lg:grid lg:grid-cols-2 gap-0 max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
 
             {/* Left Side - Product Image */}
-            <div className="bg-white p-4 sm:p-6 lg:p-8 flex items-center justify-center border-b-2 lg:border-b-0 lg:border-r-4 border-yellow-600">
-              <div className="w-full max-w-xs sm:max-w-sm">
-                <div className="text-6xl sm:text-8xl lg:text-9xl text-center filter drop-shadow-lg">
-                  {product.image || '🍰'}
-                </div>
+            <div className="bg-white p-6 sm:p-8 lg:p-12 flex items-center justify-center border-b-2 lg:border-b-0 lg:border-r-4 border-yellow-600">
+              <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg">
+                {product.image && product.image.startsWith('http') ? (
+                  <div className="relative w-full aspect-square">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                ) : (
+                  <div className="text-8xl sm:text-9xl lg:text-[12rem] text-center filter drop-shadow-lg">
+                    {product.image || '🍰'}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -74,43 +96,45 @@ const ProductDetail = ({ product, isOpen, onClose }) => {
 
               {/* Product Title */}
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold text-amber-700 mb-3 sm:mb-4">
-                {product.name || 'Three Milk Cake'}
+                {product.name}
               </h2>
 
               {/* Base Price */}
               <div className="mb-4 sm:mb-6">
                 <span className="text-sm text-gray-600 font-semibold">RS. </span>
-                <span className="text-2xl sm:text-3xl font-bold text-gray-800">{product.price || '318'}</span>
+                <span className="text-2xl sm:text-3xl font-bold text-gray-800">{product.price}</span>
               </div>
 
               {/* Product Description */}
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-4 sm:mb-6">
-                {product.description || 'A rich, moist dessert soaked in three kinds of milk and topped with whipped cream. Pure indulgence in every bite!'}
+                {product.description}
               </p>
 
-              {/* Size Options */}
-              <div className="mb-4 sm:mb-6">
-                <div className="space-y-2 sm:space-y-3">
-                  {sizeOptions.map((option, index) => (
-                    <label
-                      key={index}
-                      className="flex items-center justify-between p-2 sm:p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-red-400 transition-colors"
-                    >
-                      <div className="flex items-center gap-2 sm:gap-3">
-                        <input
-                          type="radio"
-                          name="size"
-                          checked={selectedSize === index}
-                          onChange={() => setSelectedSize(index)}
-                          className="w-4 h-4 sm:w-5 sm:h-5 text-red-700 focus:ring-red-500"
-                        />
-                        <span className="text-gray-700 font-medium text-sm sm:text-base">{option.weight}</span>
-                      </div>
-                      <span className="text-gray-800 font-semibold text-sm sm:text-base">Rs. {option.price}</span>
-                    </label>
-                  ))}
+              {/* Size Options - Only show if product has variants */}
+              {hasVariants && (
+                <div className="mb-4 sm:mb-6">
+                  <div className="space-y-2 sm:space-y-3">
+                    {sizeOptions.map((option, index) => (
+                      <label
+                        key={index}
+                        className="flex items-center justify-between p-2 sm:p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-red-400 transition-colors"
+                      >
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <input
+                            type="radio"
+                            name="size"
+                            checked={selectedSize === index}
+                            onChange={() => setSelectedSize(index)}
+                            className="w-4 h-4 sm:w-5 sm:h-5 text-red-700 focus:ring-red-500"
+                          />
+                          <span className="text-gray-700 font-medium text-sm sm:text-base">{option.size}</span>
+                        </div>
+                        <span className="text-gray-800 font-semibold text-sm sm:text-base">Rs. {option.price}</span>
+                      </label>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Special Instructions */}
               <div className="mb-4 sm:mb-6">
@@ -150,7 +174,10 @@ const ProductDetail = ({ product, isOpen, onClose }) => {
                 </div>
 
                 {/* Add to Cart Button */}
-                <button className="flex-1 bg-gradient-to-r from-red-700 to-red-800 text-white py-3 sm:py-4 rounded-lg font-bold text-sm sm:text-lg hover:from-red-800 hover:to-red-900 transition-all shadow-lg hover:shadow-xl flex items-center justify-between px-4 sm:px-6">
+                <button
+                  onClick={handleAddToCart}
+                  className="flex-1 bg-gradient-to-r from-red-700 to-red-800 text-white py-3 sm:py-4 rounded-lg font-bold text-sm sm:text-lg hover:from-red-800 hover:to-red-900 transition-all shadow-lg hover:shadow-xl flex items-center justify-between px-4 sm:px-6"
+                >
                   <span className="text-sm sm:text-base">Rs. {totalPrice}</span>
                   <span className="flex items-center gap-1 sm:gap-2">
                     <span className="hidden sm:inline">Add to Cart</span>

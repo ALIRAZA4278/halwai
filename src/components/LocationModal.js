@@ -107,7 +107,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 backdrop-blur-md bg-white/30 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-xl max-w-md w-full">
         
         {/* Header */}
@@ -181,7 +181,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
                 value={cityInput}
                 onChange={(e) => setCityInput(e.target.value)}
                 placeholder="Enter your city"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500 transition-colors"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500 transition-colors text-black"
               />
 
               {/* Area Input */}
@@ -190,7 +190,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
                 value={areaInput}
                 onChange={(e) => setAreaInput(e.target.value)}
                 placeholder="Enter your area"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500 transition-colors"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500 transition-colors text-black"
               />
 
               {/* Complete Address Input */}
@@ -199,7 +199,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
                 onChange={(e) => setFullAddress(e.target.value)}
                 placeholder="Enter your complete address (House #, Street, Landmark)"
                 rows="3"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500 transition-colors resize-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500 transition-colors resize-none text-black"
               />
             </div>
           </div>

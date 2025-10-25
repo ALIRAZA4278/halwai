@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Categories from "@/components/Categories";
 import Footer from "@/components/Footer";
 import LocationModal from "@/components/LocationModal";
+import Cart from "@/components/Cart";
 import Image from "next/image";
 
 export default function Home() {
@@ -120,18 +121,21 @@ export default function Home() {
 
   return (
     <>
-      <Navbar 
-        userLocation={userLocation} 
+      <Navbar
+        userLocation={userLocation}
         onLocationChange={handleLocationChange}
         isDetectingLocation={isDetectingLocation}
       />
       <HeroSection />
       <Categories />
       <Footer />
+
+      {/* Cart Sidebar */}
+      <Cart />
       
       {/* Location Detection Loading */}
       {isDetectingLocation && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 backdrop-blur-md bg-white/30 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 shadow-xl max-w-sm w-full mx-4">
             <div className="text-center">
               <div className="mb-4">
