@@ -57,7 +57,7 @@ const Categories = () => {
       image: "/Category/4.png",
       bannerImage: null,
       bgColor: "from-pink-700 via-pink-600 to-pink-500",
-      subcategories: ["HYDERABADI", "PREMIO CAKES", "FRESH CREAM", "DIY CAKES", "PASTRIES"]
+      subcategories: ["PREMIO CAKES", "FRESH CREAM", "PASTRIES"]
     },
     {
       id: 6,
@@ -616,10 +616,8 @@ const Categories = () => {
               "TEA TIME": "/Category - banners/bakery.jpg",
               "BREAKFAST": null,
               // CAKES & PASTRIES subcategories - only first one gets banner
-              "HYDERABADI": "/Category - banners/cakes.jpg",
-              "PREMIO CAKES": null,
+              "PREMIO CAKES": "/Category - banners/cakes.jpg",
               "FRESH CREAM": null,
-              "DIY CAKES": null,
               "PASTRIES": null,
               // DESSERTS subcategories - only first one gets banner
               "DESSERTS": "/Category - banners/desserts.jpg",

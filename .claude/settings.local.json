@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node scripts/uploadBreakfast.js:*)",
+      "Bash(node scripts/uploadPremioCakes.js:*)",
+      "Bash(node scripts/uploadFreshCream.js:*)",
+      "Bash(node scripts/uploadPastries.js:*)",
+      "Bash(node scripts/uploadDesserts.js:*)",
+      "Bash(node -e:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
