@@ -456,6 +456,8 @@ const Categories = () => {
     return prevProps.product.id === nextProps.product.id;
   });
 
+  ProductCard.displayName = 'ProductCard';
+
   return (
     <section className="relative bg-white min-h-screen">
       {/* Background Image with Overlay */}
