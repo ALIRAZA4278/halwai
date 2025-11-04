@@ -24,7 +24,7 @@ const Categories = () => {
       name: "TRENDING",
       image: "/Category/8.png",
       bannerImage: null,
-      bgColor: "from-yellow-500 via-yellow-400 to-orange-400",
+      bgColor: "from-[#E7BD8B] via-[#E7BD8B] to-orange-400",
       subcategories: []
     },
     {
@@ -32,7 +32,7 @@ const Categories = () => {
       name: "SWEETS",
       image: "/Category/1.png",
       bannerImage: null,
-      bgColor: "from-red-700 via-red-600 to-red-500",
+      bgColor: "from-[#234433] via-[#234433] to-[#234433]",
       subcategories: ["CLASSIC SWEETS", "BAKLAVA", "HALWA JAAT", "PREMIUM SWEETS", "PRE-ORDER"]
     },
     {
@@ -40,7 +40,7 @@ const Categories = () => {
       name: "DAIRY",
       image: "/Category/2.png",
       bannerImage: null,
-      bgColor: "from-yellow-400 via-yellow-300 to-yellow-200",
+      bgColor: "from-[#E7BD8B] via-[#E7BD8B] to-[#FDF4E3]",
       subcategories: ["DAIRY BUTTER", "PURE GHEE"]
     },
     {
@@ -85,11 +85,10 @@ const Categories = () => {
     }
   ], []);
 
-  // Fetch products from Supabase
+  // Fetch products from Supabase with optimizations
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        setLoading(true);
         const { data, error } = await supabase
           .from('products')
           .select('*')
@@ -97,6 +96,7 @@ const Categories = () => {
 
         if (error) {
           console.error('Error fetching products:', error);
+          setLoading(false);
           return;
         }
 
@@ -117,9 +117,9 @@ const Categories = () => {
         }));
 
         setProducts(transformedProducts);
+        setLoading(false);
       } catch (error) {
         console.error('Error:', error);
-      } finally {
         setLoading(false);
       }
     };
@@ -330,13 +330,19 @@ const Categories = () => {
   );
 
   const handleProductClick = (product, preSelectedVariantIndex = 0) => {
+    // Immediately update product data without closing modal if it's already open
     setSelectedProduct({ ...product, preSelectedVariantIndex });
-    setIsProductDetailOpen(true);
+    if (!isProductDetailOpen) {
+      setIsProductDetailOpen(true);
+    }
   };
 
   const closeProductDetail = () => {
     setIsProductDetailOpen(false);
-    setSelectedProduct(null);
+    // Use setTimeout to prevent flickering
+    setTimeout(() => {
+      setSelectedProduct(null);
+    }, 300);
   };
 
   const handleAddToCart = (e, product, selectedVariant = null) => {
@@ -345,36 +351,40 @@ const Categories = () => {
     addToCart(product, 1, variantToAdd);
   };
 
-  const ProductCard = ({ product }) => {
+  const ProductCard = React.memo(({ product }) => {
     const hasVariants = product.variants && product.variants.length > 0;
-    const availableVariants = hasVariants ? product.variants.filter(v => v.available !== false) : [];
+    const availableVariants = React.useMemo(() =>
+      hasVariants ? product.variants.filter(v => v.available !== false) : [],
+      [product.variants, hasVariants]
+    );
 
     // Get persisted selection or default to 0
     const selectedVariantIndex = productVariantSelections[product.id] ?? 0;
     const selectedVariant = availableVariants[selectedVariantIndex];
     const displayPrice = selectedVariant ? selectedVariant.price : product.price;
 
-    const handleVariantClick = (e, index) => {
+    const handleVariantClick = React.useCallback((e, index) => {
       e.stopPropagation();
       e.preventDefault();
-      // Update the persistent state
       setProductVariantSelections(prev => ({
         ...prev,
         [product.id]: index
       }));
-    };
+    }, [product.id]);
 
-    const handleCardClick = () => {
-      handleProductClick(product, selectedVariantIndex);
-    };
+    const handleCardClick = React.useCallback(() => {
+      // Immediate state update
+      setSelectedProduct({ ...product, preSelectedVariantIndex: selectedVariantIndex });
+      setIsProductDetailOpen(true);
+    }, [product, selectedVariantIndex]);
 
     return (
-      <div className="bg-white rounded-lg overflow-hidden border-4 border-transparent shadow-lg flex flex-col h-full hover:border-yellow-300 transition-all duration-300">
+      <div
+        onClick={handleCardClick}
+        className="bg-white rounded-lg overflow-hidden border-4 border-transparent shadow-lg flex flex-col h-full hover:border-[#E7BD8B] transition-all duration-200 cursor-pointer"
+      >
         {/* Product Image - Fixed Height */}
-        <div
-          onClick={handleCardClick}
-          className="relative h-56 bg-gradient-to-b from-gray-100 to-gray-50 flex items-center justify-center p-6 flex-shrink-0 cursor-pointer"
-        >
+        <div className="relative h-56 bg-gradient-to-b from-gray-100 to-gray-50 flex items-center justify-center p-6 flex-shrink-0">
           {product.image && product.image.startsWith('http') ? (
             <Image
               src={product.image}
@@ -382,6 +392,8 @@ const Categories = () => {
               width={200}
               height={200}
               className="object-contain"
+              loading="lazy"
+              quality={85}
             />
           ) : (
             <div className="text-6xl filter drop-shadow-lg">{product.image}</div>
@@ -391,26 +403,20 @@ const Categories = () => {
         {/* Content Section with Cream Background */}
         <div className="p-5 bg-gradient-to-b from-amber-50/40 to-white flex flex-col flex-grow">
           {/* Product Name */}
-          <h3
-            onClick={handleCardClick}
-            className="text-xl font-bold text-amber-700 mb-3 leading-tight line-clamp-2 min-h-[3.5rem] cursor-pointer"
-          >
+          <h3 className="text-xl font-bold text-amber-700 mb-3 leading-tight line-clamp-2 min-h-[3.5rem]">
             {product.name}
           </h3>
 
           {/* Price */}
           <div className="mb-3">
-            <span className="text-xs text-red-700 font-bold uppercase tracking-wide">FROM RS. </span>
-            <span className="text-red-700 font-bold text-lg">
+            <span className="text-xs text-[#234433] font-bold uppercase tracking-wide">FROM RS. </span>
+            <span className="text-[#234433] font-bold text-lg">
               {displayPrice}
             </span>
           </div>
 
           {/* Description */}
-          <p
-            onClick={handleCardClick}
-            className="text-sm text-gray-700 leading-relaxed mb-4 line-clamp-3 flex-grow cursor-pointer"
-          >
+          <p className="text-sm text-gray-700 leading-relaxed mb-4 line-clamp-3 flex-grow">
             {product.description}
           </p>
 
@@ -438,14 +444,17 @@ const Categories = () => {
           <button
             onClick={(e) => handleAddToCart(e, product, selectedVariant)}
             className="w-full text-white py-3 rounded-full font-bold uppercase tracking-wider transition-all shadow-md text-sm hover:shadow-lg hover:scale-105 active:scale-95"
-            style={{ background: 'linear-gradient(to right, #fef399, #f9d84e)' }}
+            style={{ background: 'linear-gradient(to right, #E7BD8B, #E7BD8B)' }}
           >
             ADD
           </button>
         </div>
       </div>
     );
-  };
+  }, (prevProps, nextProps) => {
+    // Only re-render if product ID changes or variant selection changes
+    return prevProps.product.id === nextProps.product.id;
+  });
 
   return (
     <section className="relative bg-white min-h-screen">
@@ -463,7 +472,7 @@ const Categories = () => {
       {/* Content with higher z-index */}
       <div className="relative z-10">
       {/* Main Category Navigation Bar */}
-      <div className="bg-gradient-to-r from-red-800 via-red-700 to-red-800 shadow-lg sticky top-0 z-20">
+      <div className="bg-gradient-to-r from-[#234433] via-[#234433] to-[#234433] shadow-lg sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-2 sm:px-4">
           <div className="flex items-center justify-start sm:justify-center gap-6 sm:gap-8 md:gap-10 overflow-x-auto scrollbar-hide py-3">
             {categories.map((category, index) => (
@@ -487,12 +496,12 @@ const Categories = () => {
                   />
                 </div>
                 <span className={`text-xs sm:text-xs md:text-sm font-semibold tracking-wide uppercase text-center transition-colors duration-300 ${
-                  selectedCategory === index ? 'text-yellow-300' : 'text-white group-hover:text-yellow-100'
+                  selectedCategory === index ? 'text-[#E7BD8B]' : 'text-white group-hover:text-[#FDF4E3]'
                 }`}>
                   {category.name}
                 </span>
                 {selectedCategory === index && (
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-yellow-400 rounded-full animate-pulse"></div>
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-[#E7BD8B] rounded-full animate-pulse"></div>
                 )}
               </button>
             ))}
@@ -502,18 +511,18 @@ const Categories = () => {
 
       {/* Subcategory Bar */}
       {categories[selectedCategory].subcategories.length > 0 && (
-        <div className="bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-200 shadow-lg relative z-10 border-b-2 border-yellow-300">
+        <div className="bg-gradient-to-r from-[#FDF4E3] via-[#FDF4E3] to-[#FDF4E3] shadow-lg relative z-10 border-b-2 border-[#E7BD8B]">
           <div className="max-w-7xl mx-auto px-2 sm:px-4">
             <div className="flex items-center justify-start sm:justify-center gap-3 sm:gap-4 md:gap-8 py-4 overflow-x-auto scrollbar-hide">
               {categories[selectedCategory].subcategories.map((subcategory, index) => (
                 <button
                   key={index}
                   onClick={() => handleSubcategoryClick(subcategory)}
-                  className="group flex-shrink-0 text-xs sm:text-sm md:text-base font-bold text-red-800 hover:text-white uppercase tracking-wide transition-all duration-300 hover:scale-110 px-4 py-2 rounded-full hover:bg-gradient-to-r hover:from-red-600 hover:to-red-700 hover:shadow-lg border-2 border-transparent hover:border-red-800"
+                  className="group flex-shrink-0 text-xs sm:text-sm md:text-base font-bold text-[#234433] hover:text-white uppercase tracking-wide transition-all duration-300 hover:scale-110 px-4 py-2 rounded-full hover:bg-gradient-to-r hover:from-[#234433] hover:to-[#234433] hover:shadow-lg border-2 border-transparent hover:border-[#234433]"
                 >
                   <span className="relative">
                     {subcategory}
-                    <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                    <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-[#234433] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
                   </span>
                 </button>
               ))}
@@ -526,17 +535,17 @@ const Categories = () => {
       <div className="bg-gradient-to-b from-orange-50/50 to-white py-8 sm:py-10 lg:py-12 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-r from-red-400 to-orange-400 rounded-full blur-xl opacity-0 group-hover:opacity-25 transition-opacity duration-500"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#234433] to-[#234433] rounded-full blur-xl opacity-0 group-hover:opacity-25 transition-opacity duration-500"></div>
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={placeholderText}
-              className="relative w-full px-8 sm:px-10 py-5 sm:py-6 pr-16 sm:pr-18 rounded-full border-3 border-gray-200 focus:border-red-400 focus:ring-4 focus:ring-red-100 focus:outline-none text-gray-800 placeholder-gray-400 shadow-xl hover:shadow-2xl transition-all duration-300 text-base sm:text-lg bg-white font-medium"
+              className="relative w-full px-8 sm:px-10 py-5 sm:py-6 pr-16 sm:pr-18 rounded-full border-3 border-gray-200 focus:border-[#234433] focus:ring-4 focus:ring-[#234433]/10 focus:outline-none text-gray-800 placeholder-gray-400 shadow-xl hover:shadow-2xl transition-all duration-300 text-base sm:text-lg bg-white font-medium"
             />
             <button 
               className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-white p-4 sm:p-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 active:scale-95"
-              style={{ background: 'linear-gradient(to right, #fef399, #f9d84e)' }}
+              style={{ background: 'linear-gradient(to right, #E7BD8B, #E7BD8B)' }}
             >
               <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -555,12 +564,12 @@ const Categories = () => {
           </svg>
         </div>
         <div className="absolute top-40 right-10 w-16 h-16 opacity-5">
-          <svg viewBox="0 0 100 100" fill="currentColor" className="text-yellow-300">
+          <svg viewBox="0 0 100 100" fill="currentColor" className="text-[#E7BD8B]">
             <circle cx="50" cy="50" r="40"/>
           </svg>
         </div>
         <div className="absolute top-96 left-20 w-24 h-24 opacity-5">
-          <svg viewBox="0 0 100 100" fill="currentColor" className="text-red-300">
+          <svg viewBox="0 0 100 100" fill="currentColor" className="text-[#234433]/30">
             <circle cx="50" cy="50" r="40"/>
           </svg>
         </div>
@@ -576,7 +585,7 @@ const Categories = () => {
             {/* Main Category Products */}
             {loading ? (
               <div className="flex justify-center items-center py-20">
-                <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-red-800"></div>
+                <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-[#234433]"></div>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mb-12 relative z-10 px-2">
@@ -645,7 +654,7 @@ const Categories = () => {
                   </svg>
                 </div>
                 <div className="absolute top-20 -left-10 w-24 h-24 opacity-5">
-                  <svg viewBox="0 0 100 100" fill="currentColor" className="text-yellow-200">
+                  <svg viewBox="0 0 100 100" fill="currentColor" className="text-[#FDF4E3]">
                     <circle cx="50" cy="50" r="40"/>
                   </svg>
                 </div>
@@ -681,6 +690,7 @@ const Categories = () => {
 
       {/* Product Detail Modal */}
       <ProductDetail
+        key={selectedProduct?.id || 'empty'}
         product={selectedProduct}
         isOpen={isProductDetailOpen}
         onClose={closeProductDetail}

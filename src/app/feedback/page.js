@@ -40,11 +40,11 @@ export default function FeedbackPage() {
         {/* Header Section */}
         <div className="text-center mb-12">
           <div className="inline-block mb-4">
-            <div className="bg-gradient-to-r from-red-900 to-red-800 text-white px-6 py-2 rounded-full">
+            <div className="bg-gradient-to-r from-[#234433] to-[#234433] text-white px-6 py-2 rounded-full">
               <span className="text-sm font-semibold uppercase tracking-wider">We Value Your Feedback</span>
             </div>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-red-900 to-red-700 bg-clip-text text-transparent mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-[#234433] to-[#234433] bg-clip-text text-transparent mb-4">
             Share Your Experience
           </h1>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -53,7 +53,7 @@ export default function FeedbackPage() {
         </div>
 
         {/* Feedback Form Card */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 border-t-4 border-yellow-300">
+        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 border-t-4 border-[#E7BD8B]">
           <div className="mb-8">
             <h2 className="text-xl font-bold text-gray-800 mb-4">Feedback relating to:</h2>
 
@@ -66,7 +66,7 @@ export default function FeedbackPage() {
                     ? 'text-white shadow-lg'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
-                style={feedbackType === 'takeaway' ? { background: 'linear-gradient(to right, #fef399, #f9d84e)' } : {}}
+                style={feedbackType === 'takeaway' ? { background: 'linear-gradient(to right, #E7BD8B, #E7BD8B)' } : {}}
               >
                 🛍️ Takeaway
               </button>
@@ -77,7 +77,7 @@ export default function FeedbackPage() {
                     ? 'text-white shadow-lg'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
-                style={feedbackType === 'dine-in' ? { background: 'linear-gradient(to right, #fef399, #f9d84e)' } : {}}
+                style={feedbackType === 'dine-in' ? { background: 'linear-gradient(to right, #E7BD8B, #E7BD8B)' } : {}}
               >
                 🍽️ Dine-in
               </button>
@@ -88,7 +88,7 @@ export default function FeedbackPage() {
                     ? 'text-white shadow-lg'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
-                style={feedbackType === 'delivery' ? { background: 'linear-gradient(to right, #fef399, #f9d84e)' } : {}}
+                style={feedbackType === 'delivery' ? { background: 'linear-gradient(to right, #E7BD8B, #E7BD8B)' } : {}}
               >
                 🚚 Delivery
               </button>
@@ -103,7 +103,7 @@ export default function FeedbackPage() {
                   name="customerName"
                   value={formData.customerName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-gray-800"
+                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#234433] focus:border-[#234433] outline-none transition-all text-gray-800"
                 >
                   <option value="">Select...</option>
                   <option value="guest">Guest</option>
@@ -119,7 +119,7 @@ export default function FeedbackPage() {
                   placeholder="+92 300 1234567"
                   value={formData.customerPhone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-gray-800 placeholder-gray-400"
+                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#234433] focus:border-[#234433] outline-none transition-all text-gray-800 placeholder-gray-400"
                 />
               </div>
 
@@ -131,7 +131,7 @@ export default function FeedbackPage() {
                   placeholder="Enter order code"
                   value={formData.orderCode}
                   onChange={handleChange}
-                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-gray-800 placeholder-gray-400"
+                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#234433] focus:border-[#234433] outline-none transition-all text-gray-800 placeholder-gray-400"
                 />
               </div>
 
@@ -143,7 +143,7 @@ export default function FeedbackPage() {
                   placeholder="Select branch"
                   value={formData.branch}
                   onChange={handleChange}
-                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-gray-800 placeholder-gray-400"
+                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#234433] focus:border-[#234433] outline-none transition-all text-gray-800 placeholder-gray-400"
                 />
               </div>
 
@@ -154,7 +154,7 @@ export default function FeedbackPage() {
                   name="dateOfVisit"
                   value={formData.dateOfVisit}
                   onChange={handleChange}
-                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-gray-800"
+                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#234433] focus:border-[#234433] outline-none transition-all text-gray-800"
                 />
               </div>
 
@@ -166,7 +166,7 @@ export default function FeedbackPage() {
                   placeholder="Brief description"
                   value={formData.complaintDescription}
                   onChange={handleChange}
-                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-gray-800 placeholder-gray-400"
+                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#234433] focus:border-[#234433] outline-none transition-all text-gray-800 placeholder-gray-400"
                 />
               </div>
             </div>
@@ -176,7 +176,7 @@ export default function FeedbackPage() {
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Upload Receipt or Proof
               </label>
-              <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-yellow-400 transition-colors cursor-pointer bg-gradient-to-b from-gray-50 to-white">
+              <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-[#E7BD8B] transition-colors cursor-pointer bg-gradient-to-b from-gray-50 to-white">
                 <input
                   type="file"
                   name="receipt"
@@ -187,8 +187,8 @@ export default function FeedbackPage() {
                 />
                 <label htmlFor="receipt-upload" className="cursor-pointer">
                   <div className="flex flex-col items-center space-y-3">
-                    <div className="bg-yellow-100 p-4 rounded-full">
-                      <svg className="w-10 h-10 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                    <div className="bg-[#FDF4E3] p-4 rounded-full">
+                      <svg className="w-10 h-10 text-[#E7BD8B]" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
                         <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
                       </svg>
@@ -205,7 +205,7 @@ export default function FeedbackPage() {
               <button
                 type="submit"
                 className="text-white font-bold px-10 py-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-105 text-lg"
-                style={{ background: 'linear-gradient(to right, #fef399, #f9d84e)' }}
+                style={{ background: 'linear-gradient(to right, #E7BD8B, #E7BD8B)' }}
               >
                 Submit Feedback
               </button>

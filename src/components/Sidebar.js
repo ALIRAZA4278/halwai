@@ -21,15 +21,15 @@ const Sidebar = ({ isOpen, onClose }) => {
       )}
       
       {/* Sidebar */}
-      <div className={`fixed top-0 right-0 h-full w-80 bg-red-700 text-white transform transition-transform duration-300 ease-in-out z-50 ${
+      <div className={`fixed top-0 right-0 h-full w-80 bg-[#234433] text-white transform transition-transform duration-300 ease-in-out z-50 ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
         
         {/* Close Button */}
         <div className="flex justify-end p-4">
-          <button 
+          <button
             onClick={onClose}
-            className="text-white hover:text-yellow-300 transition-colors"
+            className="text-white hover:text-[#E7BD8B] transition-colors"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -41,17 +41,17 @@ const Sidebar = ({ isOpen, onClose }) => {
         <div className="px-6 py-4 space-y-4">
 
           {/* Our Locations Button */}
-          <Link href="/locations" onClick={onClose} className="block w-full bg-white text-red-700 py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
+          <Link href="/locations" onClick={onClose} className="block w-full bg-white text-[#234433] py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
             Our Locations
           </Link>
 
           {/* Feedback Button */}
-          <Link href="/feedback" onClick={onClose} className="block w-full bg-white text-red-700 py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
+          <Link href="/feedback" onClick={onClose} className="block w-full bg-white text-[#234433] py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
             Feedback
           </Link>
 
           {/* Contact Us Button */}
-          <Link href="/contact" onClick={onClose} className="block w-full bg-white text-red-700 py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
+          <Link href="/contact" onClick={onClose} className="block w-full bg-white text-[#234433] py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
             Contact Us
           </Link>
 
@@ -69,7 +69,7 @@ const Sidebar = ({ isOpen, onClose }) => {
               <label
                 htmlFor="darkModeToggle"
                 className={`flex items-center cursor-pointer w-14 h-7 rounded-full p-1 transition-colors duration-300 ${
-                  darkMode ? 'bg-yellow-400' : 'bg-gray-400'
+                  darkMode ? 'bg-[#E7BD8B]' : 'bg-gray-400'
                 }`}
               >
                 <div
@@ -86,7 +86,7 @@ const Sidebar = ({ isOpen, onClose }) => {
         <div className="absolute bottom-6 left-6 right-6">
           <div className="flex items-center justify-center space-x-2 text-sm text-white/80">
             <span>Powered by</span>
-            <div className="bg-white text-red-700 px-2 py-1 rounded text-xs font-bold">
+            <div className="bg-white text-[#234433] px-2 py-1 rounded text-xs font-bold">
               The Socialhawks
             </div>
           </div>

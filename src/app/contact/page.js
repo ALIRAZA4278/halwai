@@ -35,11 +35,11 @@ export default function ContactPage() {
         {/* Header Section */}
         <div className="text-center mb-12">
           <div className="inline-block mb-4">
-            <div className="bg-gradient-to-r from-red-900 to-red-800 text-white px-6 py-2 rounded-full">
+            <div className="bg-gradient-to-r from-[#234433] to-[#234433] text-white px-6 py-2 rounded-full">
               <span className="text-sm font-semibold uppercase tracking-wider">Get In Touch</span>
             </div>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-red-900 to-red-700 bg-clip-text text-transparent mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-[#234433] to-[#234433] bg-clip-text text-transparent mb-4">
             Contact Us
           </h1>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -48,12 +48,12 @@ export default function ContactPage() {
         </div>
 
         {/* Contact Form Card */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 border-t-4 border-yellow-300">
+        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 border-t-4 border-[#E7BD8B]">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="relative">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Full Name <span className="text-red-600">*</span>
+                  Full Name <span className="text-[#234433]">*</span>
                 </label>
                 <input
                   type="text"
@@ -62,12 +62,12 @@ export default function ContactPage() {
                   value={formData.fullName}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-gray-800 placeholder-gray-400"
+                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#234433] focus:border-[#234433] outline-none transition-all text-gray-800 placeholder-gray-400"
                 />
               </div>
               <div className="relative">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Email Address <span className="text-red-600">*</span>
+                  Email Address <span className="text-[#234433]">*</span>
                 </label>
                 <input
                   type="email"
@@ -76,12 +76,12 @@ export default function ContactPage() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-gray-800 placeholder-gray-400"
+                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#234433] focus:border-[#234433] outline-none transition-all text-gray-800 placeholder-gray-400"
                 />
               </div>
               <div className="relative">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Phone Number <span className="text-red-600">*</span>
+                  Phone Number <span className="text-[#234433]">*</span>
                 </label>
                 <input
                   type="tel"
@@ -90,7 +90,7 @@ export default function ContactPage() {
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-gray-800 placeholder-gray-400"
+                  className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#234433] focus:border-[#234433] outline-none transition-all text-gray-800 placeholder-gray-400"
                 />
               </div>
             </div>
@@ -105,7 +105,7 @@ export default function ContactPage() {
                 value={formData.message}
                 onChange={handleChange}
                 rows="6"
-                className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none resize-none transition-all text-gray-800 placeholder-gray-400"
+                className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#234433] focus:border-[#234433] outline-none resize-none transition-all text-gray-800 placeholder-gray-400"
               />
             </div>
 
@@ -113,7 +113,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 className="text-white font-bold px-10 py-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-105 text-lg"
-                style={{ background: 'linear-gradient(to right, #fef399, #f9d84e)' }}
+                style={{ background: 'linear-gradient(to right, #E7BD8B, #E7BD8B)' }}
               >
                 Send Message
               </button>
@@ -123,9 +123,9 @@ export default function ContactPage() {
 
         {/* Contact Info Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-          <div className="bg-white rounded-xl p-6 shadow-lg text-center border-t-4 border-red-900">
-            <div className="inline-block bg-red-100 p-4 rounded-full mb-4">
-              <svg className="w-8 h-8 text-red-900" fill="currentColor" viewBox="0 0 20 20">
+          <div className="bg-white rounded-xl p-6 shadow-lg text-center border-t-4 border-[#234433]">
+            <div className="inline-block bg-[#234433]/10 p-4 rounded-full mb-4">
+              <svg className="w-8 h-8 text-[#234433]" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
               </svg>
             </div>
@@ -133,9 +133,9 @@ export default function ContactPage() {
             <p className="text-gray-600">021-111-734-628</p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-lg text-center border-t-4 border-yellow-300">
-            <div className="inline-block bg-yellow-100 p-4 rounded-full mb-4">
-              <svg className="w-8 h-8 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+          <div className="bg-white rounded-xl p-6 shadow-lg text-center border-t-4 border-[#E7BD8B]">
+            <div className="inline-block bg-[#FDF4E3] p-4 rounded-full mb-4">
+              <svg className="w-8 h-8 text-[#E7BD8B]" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
               </svg>

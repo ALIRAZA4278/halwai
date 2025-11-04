@@ -139,7 +139,7 @@ export default function Home() {
           <div className="bg-white rounded-lg p-6 shadow-xl max-w-sm w-full mx-4">
             <div className="text-center">
               <div className="mb-4">
-                <div className="mx-auto w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center animate-pulse">
+                <div className="mx-auto w-16 h-16 bg-gradient-to-br from-[#E7BD8B] to-orange-500 rounded-full flex items-center justify-center animate-pulse">
                   <svg className="w-8 h-8 text-white animate-spin" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                   </svg>

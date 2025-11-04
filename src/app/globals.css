@@ -1,22 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FDF4E3;
+  --foreground: #234433;
+  --primary: #234433;
+  --secondary: #E7BD8B;
+  --accent: #234433;
+  --light: #FDF4E3;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-light: var(--light);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #ffffff;
-    --foreground: #171717;
+    --background: #FDF4E3;
+    --foreground: #234433;
   }
 }
 
@@ -24,17 +31,88 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Font Face Declarations */
+@font-face {
+  font-family: 'Optima';
+  src: url('/fonts/OPTIMA.TTF') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Optima';
+  src: url('/fonts/Optima Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Optima';
+  src: url('/fonts/OPTIMA_B.TTF') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Optima';
+  src: url('/fonts/Optima_Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Sweet Sans Pro';
+  src: url('/fonts/SweetSansPro-Light.woff2') format('woff2'),
+       url('/fonts/SweetSansPro-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sweet Sans Pro';
+  src: url('/fonts/SweetSansPro-Regular.woff2') format('woff2'),
+       url('/fonts/SweetSansPro-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sweet Sans Pro';
+  src: url('/fonts/SweetSansPro-Medium.woff2') format('woff2'),
+       url('/fonts/SweetSansPro-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sweet Sans Pro';
+  src: url('/fonts/SweetSansPro-Bold.woff2') format('woff2'),
+       url('/fonts/SweetSansPro-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family: 'Sweet Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Apply Poppins to all elements */
+/* Apply Sweet Sans Pro to all elements */
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Sweet Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Apply Optima to headings */
+h1, h2, h3, h4, h5, h6, .font-serif {
+  font-family: 'Optima', Georgia, 'Times New Roman', serif;
+  font-weight: 500;
 }
 
 /* Custom Scrollbar */
@@ -43,16 +121,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #FDF4E3;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #fef399;
+  background: #E7BD8B;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #f9d84e;
+  background: #234433;
 }
 
 /* Smooth transitions for all interactive elements */

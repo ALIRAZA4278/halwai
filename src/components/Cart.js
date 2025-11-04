@@ -40,7 +40,7 @@ const Cart = () => {
         }`}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-red-800 to-red-700 text-white p-4 flex items-center justify-between">
+        <div className="bg-gradient-to-r from-[#234433] to-[#234433] text-white p-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -49,7 +49,7 @@ const Cart = () => {
           </div>
           <button
             onClick={() => setIsCartOpen(false)}
-            className="w-8 h-8 rounded-full bg-red-900 hover:bg-red-950 flex items-center justify-center transition-colors"
+            className="w-8 h-8 rounded-full bg-[#234433] hover:bg-[#234433]/90 flex items-center justify-center transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -104,12 +104,12 @@ const Cart = () => {
                         </p>
                       )}
                       <div className="flex items-center justify-between mt-2">
-                        <span className="text-red-600 font-bold text-sm">
+                        <span className="text-[#234433] font-bold text-sm">
                           Rs. {item.price}
                         </span>
                         <button
                           onClick={() => removeFromCart(item.itemId)}
-                          className="text-red-500 hover:text-red-700 text-xs"
+                          className="text-[#234433] hover:text-[#234433]/80 text-xs"
                         >
                           Remove
                         </button>
@@ -133,7 +133,7 @@ const Cart = () => {
                       </span>
                       <button
                         onClick={() => updateQuantity(item.itemId, item.quantity + 1)}
-                        className="w-6 h-6 flex items-center justify-center text-white bg-red-700 rounded-full hover:bg-red-800"
+                        className="w-6 h-6 flex items-center justify-center text-white bg-[#234433] rounded-full hover:bg-[#234433]/90"
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -156,7 +156,7 @@ const Cart = () => {
             {/* Clear Cart Button */}
             <button
               onClick={clearCart}
-              className="w-full text-red-600 text-sm font-medium hover:text-red-700"
+              className="w-full text-[#234433] text-sm font-medium hover:text-[#234433]/80"
             >
               Clear Cart
             </button>
@@ -164,13 +164,13 @@ const Cart = () => {
             {/* Total */}
             <div className="flex items-center justify-between text-lg font-bold">
               <span className="text-gray-800">Total:</span>
-              <span className="text-red-600">Rs. {cartTotal.toFixed(2)}</span>
+              <span className="text-[#234433]">Rs. {cartTotal.toFixed(2)}</span>
             </div>
 
             {/* Checkout Button */}
             <button
               onClick={handleCheckout}
-              className="w-full bg-gradient-to-r from-red-700 to-red-800 text-white py-3 rounded-lg font-bold hover:from-red-800 hover:to-red-900 transition-all shadow-lg flex items-center justify-center gap-2"
+              className="w-full bg-gradient-to-r from-[#234433] to-[#234433] text-white py-3 rounded-lg font-bold hover:from-[#234433]/90 hover:to-[#234433]/90 transition-all shadow-lg flex items-center justify-center gap-2"
             >
               <span>Proceed to Checkout</span>
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
