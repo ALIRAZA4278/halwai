@@ -7,11 +7,20 @@ const Footer = () => {
   return (
     <footer className="bg-[#F5F5DC] py-8 sm:py-10 lg:py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-        
+
+        {/* Logo */}
+        <div className="mb-6 flex justify-center">
+          <img
+            src="/LOGO/halwaiiii-01.png"
+            alt="Halwaiii Logo"
+            className="h-16 sm:h-20 md:h-24 w-auto object-contain"
+          />
+        </div>
+
         {/* Main Content */}
         <div className="mb-6 sm:mb-8">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 font-serif leading-tight">
-            halwai is a name synonymous with<br className="hidden sm:block" />
+            Halwaiii is a name synonymous with<br className="hidden sm:block" />
             <span className="sm:hidden"> </span>taste, tradition, and trust.
           </h2>
           
@@ -21,7 +30,7 @@ const Footer = () => {
               everyday favorites like chips & biscuits, we bring you a complete world of flavor under one roof.
             </p>
             <p>
-              With a passion for quality and a love for tradition, we strive to serve nothing but the best. At halwai, every bite is crafted with care, 
+              With a passion for quality and a love for tradition, we strive to serve nothing but the best. At Halwaiii, every bite is crafted with care,
               carrying forward the sweetness of our heritage and the joy of sharing.
             </p>
           </div>

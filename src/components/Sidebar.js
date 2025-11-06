@@ -24,7 +24,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       <div className={`fixed top-0 right-0 h-full w-80 bg-[#234433] text-white transform transition-transform duration-300 ease-in-out z-50 ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
-        
+
         {/* Close Button */}
         <div className="flex justify-end p-4">
           <button
@@ -35,6 +35,15 @@ const Sidebar = ({ isOpen, onClose }) => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
+        </div>
+
+        {/* Logo */}
+        <div className="flex justify-center px-6 mb-6">
+          <img
+            src="/LOGO/halwaiiii-01.png"
+            alt="Halwaiii Logo"
+            className="h-20 w-auto object-contain"
+          />
         </div>
 
         {/* Menu Items */}

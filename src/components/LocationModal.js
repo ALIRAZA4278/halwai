@@ -113,16 +113,14 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
         {/* Header */}
         <div className="text-center py-6 px-6 border-b border-gray-100">
           {/* Logo */}
-          <div className="mb-4">
-            <div className="mx-auto w-12 h-12 bg-gradient-to-br from-[#E7BD8B] to-orange-500 rounded-full flex items-center justify-center">
-              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 100 60">
-                <path d="M20 40 L30 20 L40 35 L50 15 L60 35 L70 20 L80 40 L50 50 Z" />
-                <path d="M25 45 L35 25 L45 40 L55 20 L65 40 L75 25 L85 45 L55 55 Z" opacity="0.7" />
-              </svg>
-            </div>
+          <div className="mb-4 flex justify-center">
+            <img
+              src="/LOGO/halwaiiii-01.png"
+              alt="Halwaiii Logo"
+              className="h-16 w-auto object-contain"
+            />
           </div>
-          
-          <h1 className="text-xl font-bold text-[#E7BD8B] mb-1 font-serif">Halwaiii</h1>
+
           <p className="text-sm text-gray-500">Pure Desi Halwai</p>
         </div>
 
