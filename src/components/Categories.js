@@ -385,15 +385,12 @@ const Categories = () => {
       >
         {/* Product Image - Fixed Height */}
         <div className="relative h-56 bg-gradient-to-b from-gray-100 to-gray-50 flex items-center justify-center p-6 flex-shrink-0">
-          {product.image && product.image.startsWith('http') ? (
-            <Image
+          {product.image && (product.image.startsWith('http') || product.image.startsWith('/')) ? (
+            <img
               src={product.image}
               alt={product.name}
-              width={200}
-              height={200}
-              className="object-contain"
+              className="object-contain w-full h-full"
               loading="lazy"
-              quality={85}
             />
           ) : (
             <div className="text-6xl filter drop-shadow-lg">{product.image}</div>
