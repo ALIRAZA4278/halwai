@@ -19,14 +19,14 @@ const Categories = () => {
   const [productVariantSelections, setProductVariantSelections] = useState({});
 
   const categories = useMemo(() => [
-    {
-      id: 1,
-      name: "TRENDING",
-      image: "/Category/8.png",
-      bannerImage: null,
-      bgColor: "from-[#E7BD8B] via-[#E7BD8B] to-orange-400",
-      subcategories: []
-    },
+    // {
+    //   id: 1,
+    //   name: "TRENDING",
+    //   image: "/Category/8.png",
+    //   bannerImage: null,
+    //   bgColor: "from-[#E7BD8B] via-[#E7BD8B] to-orange-400",
+    //   subcategories: []
+    // },
     {
       id: 2,
       name: "SWEETS",
