@@ -114,35 +114,13 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
 
           {/* Center - Logo */}
           <div className="flex-1 flex justify-center">
-            <div className="text-center transform hover:scale-105 transition-transform duration-300">
-              {/* Decorative Top - Hidden on mobile */}
-              <div className="hidden md:flex justify-center mb-0.5">
-                <div className="flex items-center space-x-1">
-                  <div className="w-1.5 h-1.5 bg-[#E7BD8B] rounded-full animate-pulse"></div>
-                  <div className="w-1 h-1 bg-[#FDF4E3] rounded-full"></div>
-                  <svg className="w-8 h-6 text-[#E7BD8B]" fill="currentColor" viewBox="0 0 100 60">
-                    <path d="M20 40 L30 20 L40 35 L50 15 L60 35 L70 20 L80 40 L50 50 Z" />
-                  </svg>
-                  <div className="w-1 h-1 bg-[#FDF4E3] rounded-full"></div>
-                  <div className="w-1.5 h-1.5 bg-[#E7BD8B] rounded-full animate-pulse"></div>
-                </div>
-              </div>
-              
-              {/* Logo Text - Responsive sizing */}
-              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-wider font-serif">
-                <span className="bg-gradient-to-r from-[#FDF4E3] via-[#E7BD8B] to-[#FDF4E3] bg-clip-text text-transparent drop-shadow-lg">
-                  halwai
-                </span>
-              </h1>
-              
-              {/* Subtitle - Hidden on small mobile */}
-              <div className="hidden md:flex items-center justify-center space-x-2 mt-0.5">
-                <div className="h-px w-6 bg-gradient-to-r from-transparent to-[#E7BD8B]"></div>
-                <p className="text-[10px] lg:text-xs text-[#FDF4E3] italic tracking-[0.3em] font-light uppercase">
-                  Pure Desi Halwai
-                </p>
-                <div className="h-px w-6 bg-gradient-to-l from-transparent to-[#E7BD8B]"></div>
-              </div>
+            <div className="transform hover:scale-105 transition-transform duration-300">
+              {/* Logo Image */}
+              <img
+                src="/LOGO/halwaiiii-01.png"
+                alt="Halwaiii Logo"
+                className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain"
+              />
             </div>
           </div>
 

@@ -122,7 +122,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
             </div>
           </div>
           
-          <h1 className="text-xl font-bold text-[#E7BD8B] mb-1 font-serif">halwai</h1>
+          <h1 className="text-xl font-bold text-[#E7BD8B] mb-1 font-serif">Halwaiii</h1>
           <p className="text-sm text-gray-500">Pure Desi Halwai</p>
         </div>
 
