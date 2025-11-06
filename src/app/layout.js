@@ -15,10 +15,6 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Halwaiii - Pure Desi Halwai",
   description: "Premium sweets, bakery, and dairy products",
-  icons: {
-    icon: "/LOGO/halwaiiii-01.png",
-    apple: "/LOGO/halwaiiii-01.png",
-  },
 };
 
 export default function RootLayout({ children }) {
