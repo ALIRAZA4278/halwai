@@ -49,6 +49,16 @@ const Sidebar = ({ isOpen, onClose }) => {
         {/* Menu Items */}
         <div className="px-6 py-4 space-y-4">
 
+          {/* Home Button */}
+          <Link href="/" onClick={onClose} className="block w-full bg-white text-[#234433] py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
+            Home
+          </Link>
+
+          {/* Products Button */}
+          <Link href="/products" onClick={onClose} className="block w-full bg-white text-[#234433] py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
+            Products
+          </Link>
+
           {/* Our Locations Button */}
           <Link href="/locations" onClick={onClose} className="block w-full bg-white text-[#234433] py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
             Our Locations

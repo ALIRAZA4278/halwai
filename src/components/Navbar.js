@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import Sidebar from './Sidebar';
 import { useCart } from '@/context/CartContext';
 
@@ -114,14 +115,14 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
 
           {/* Center - Logo */}
           <div className="flex-1 flex justify-center">
-            <div className="transform hover:scale-105 transition-transform duration-300">
+            <Link href="/" className="transform hover:scale-105 transition-transform duration-300">
               {/* Logo Image */}
               <img
                 src="/LOGO/halwaiiii-01.png"
                 alt="Halwaiii Logo"
-                className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain"
+                className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain cursor-pointer"
               />
-            </div>
+            </Link>
           </div>
 
           {/* Right - Cart & Menu */}

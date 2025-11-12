@@ -151,13 +151,10 @@ export default function Home() {
           {/* CTA Button */}
           <a
             href="/products"
-            className="group relative border-2 border-white text-white px-12 py-4 text-lg font-medium overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl"
+            className="group relative border-2 border-white text-white px-12 py-4 text-lg font-semibold overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl"
           >
-            <span className="relative z-10">Explore the Collection</span>
-            <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            <span className="absolute inset-0 flex items-center justify-center text-gray-900 opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-semibold">
-              Explore the Collection
-            </span>
+            <span className="relative z-10 transition-colors duration-300 group-hover:text-black">Explore the Collection</span>
+            <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
           </a>
         </div>
 
