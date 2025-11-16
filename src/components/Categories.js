@@ -17,6 +17,7 @@ const Categories = () => {
   const [loading, setLoading] = useState(true);
   const subcategoryRefs = useRef({});
   const [productVariantSelections, setProductVariantSelections] = useState({});
+  const [isInteracting, setIsInteracting] = useState(false);
 
   const categories = useMemo(() => [
     // {
@@ -204,17 +205,28 @@ const Categories = () => {
   ];
 
   const handleCategoryClick = (index) => {
-    setSelectedCategory(index);
-    // Remove auto-scroll to top to keep user's position
+    setIsInteracting(true);
+    setTimeout(() => {
+      setSelectedCategory(index);
+      setTimeout(() => {
+        setIsInteracting(false);
+      }, 150);
+    }, 250);
   };
 
   const handleSubcategoryClick = (subcategory) => {
-    setSearchQuery(subcategory.toLowerCase());
-    // Scroll to the subcategory section
-    const subcategoryElement = subcategoryRefs.current[subcategory];
-    if (subcategoryElement) {
-      subcategoryElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    setIsInteracting(true);
+    setTimeout(() => {
+      setSearchQuery(subcategory.toLowerCase());
+      // Scroll to the subcategory section
+      const subcategoryElement = subcategoryRefs.current[subcategory];
+      if (subcategoryElement) {
+        subcategoryElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      setTimeout(() => {
+        setIsInteracting(false);
+      }, 150);
+    }, 250);
   };
 
   // Typing animation effect for placeholder with rotating suggestions
@@ -330,11 +342,17 @@ const Categories = () => {
   );
 
   const handleProductClick = (product, preSelectedVariantIndex = 0) => {
-    // Immediately update product data without closing modal if it's already open
-    setSelectedProduct({ ...product, preSelectedVariantIndex });
-    if (!isProductDetailOpen) {
-      setIsProductDetailOpen(true);
-    }
+    setIsInteracting(true);
+    // Fast loading for product click
+    setTimeout(() => {
+      setSelectedProduct({ ...product, preSelectedVariantIndex });
+      if (!isProductDetailOpen) {
+        setIsProductDetailOpen(true);
+      }
+      setTimeout(() => {
+        setIsInteracting(false);
+      }, 150);
+    }, 300);
   };
 
   const closeProductDetail = () => {
@@ -347,11 +365,19 @@ const Categories = () => {
 
   const handleAddToCart = (e, product, selectedVariant = null) => {
     e.stopPropagation(); // Prevent card click
-    const variantToAdd = selectedVariant || (product.variants && product.variants.length > 0 ? product.variants[0] : null);
-    addToCart(product, 1, variantToAdd);
+    setIsInteracting(true);
+    // Fast loading for add to cart
+    setTimeout(() => {
+      const variantToAdd = selectedVariant || (product.variants && product.variants.length > 0 ? product.variants[0] : null);
+      addToCart(product, 1, variantToAdd);
+      setTimeout(() => {
+        setIsInteracting(false);
+      }, 150);
+    }, 300);
   };
 
   const ProductCard = React.memo(({ product }) => {
+    const [isCardLoading, setIsCardLoading] = useState(false);
     const hasVariants = product.variants && product.variants.length > 0;
     const availableVariants = React.useMemo(() =>
       hasVariants ? product.variants.filter(v => v.available !== false) : [],
@@ -366,23 +392,45 @@ const Categories = () => {
     const handleVariantClick = React.useCallback((e, index) => {
       e.stopPropagation();
       e.preventDefault();
-      setProductVariantSelections(prev => ({
-        ...prev,
-        [product.id]: index
-      }));
+      setIsCardLoading(true);
+      // Super fast loading for variant changes
+      setTimeout(() => {
+        setProductVariantSelections(prev => ({
+          ...prev,
+          [product.id]: index
+        }));
+        setTimeout(() => {
+          setIsCardLoading(false);
+        }, 100);
+      }, 150);
     }, [product.id]);
 
     const handleCardClick = React.useCallback(() => {
-      // Immediate state update
-      setSelectedProduct({ ...product, preSelectedVariantIndex: selectedVariantIndex });
-      setIsProductDetailOpen(true);
+      handleProductClick(product, selectedVariantIndex);
     }, [product, selectedVariantIndex]);
 
     return (
-      <div
-        onClick={handleCardClick}
-        className="bg-white rounded-lg overflow-hidden border-4 border-transparent shadow-lg flex flex-col h-full hover:border-[#E7BD8B] transition-all duration-200 cursor-pointer"
-      >
+      <div className="relative">
+        {/* Card Loading Overlay - Cute & Small */}
+        {isCardLoading && (
+          <div className="absolute inset-0 bg-white/95 z-10 rounded-lg flex items-center justify-center">
+            <div className="relative">
+              {/* Cute pulsing background */}
+              <div className="absolute inset-0 bg-[#E7BD8B]/20 rounded-full animate-ping"></div>
+              {/* Main spinner */}
+              <div className="relative bg-white rounded-full p-2.5 shadow-lg">
+                <div className="w-8 h-8 border-3 border-[#E7BD8B] border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div
+          onClick={!isCardLoading ? handleCardClick : undefined}
+          className={`bg-white rounded-lg overflow-hidden shadow-lg flex flex-col h-full ${
+            isCardLoading ? 'cursor-wait' : 'cursor-pointer'
+          }`}
+        >
         {/* Product Image - Fixed Height */}
         <div className="relative h-56 bg-gradient-to-b from-gray-100 to-gray-50 flex items-center justify-center p-6 flex-shrink-0">
           {product.image && (product.image.startsWith('http') || product.image.startsWith('/')) ? (
@@ -425,10 +473,11 @@ const Categories = () => {
                   key={`${product.id}-variant-${index}-${variant.size}`}
                   type="button"
                   onClick={(e) => handleVariantClick(e, index)}
-                  className={`px-4 py-2 border-2 rounded-md text-xs font-bold transition-all hover:scale-105 select-none ${
+                  disabled={isCardLoading}
+                  className={`px-4 py-2 border-2 rounded-md text-xs font-bold select-none disabled:opacity-50 disabled:cursor-not-allowed ${
                     selectedVariantIndex === index
                       ? 'border-gray-800 bg-gray-800 text-white shadow-md'
-                      : 'border-gray-400 text-gray-800 bg-white hover:border-gray-600'
+                      : 'border-gray-400 text-gray-800 bg-white cursor-pointer'
                   }`}
                 >
                   {variant.size}
@@ -440,17 +489,15 @@ const Categories = () => {
           {/* Add Button */}
           <button
             onClick={(e) => handleAddToCart(e, product, selectedVariant)}
-            className="w-full text-white py-3 rounded-full font-bold uppercase tracking-wider transition-all shadow-md text-sm hover:shadow-lg hover:scale-105 active:scale-95"
-            style={{ background: 'linear-gradient(to right, #E7BD8B, #E7BD8B)' }}
+            disabled={isInteracting}
+            className="w-full text-white py-3 rounded-full font-bold uppercase tracking-wider shadow-md text-sm bg-gradient-to-r from-[#E7BD8B] to-[#E7BD8B] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
             ADD
           </button>
         </div>
+        </div>
       </div>
     );
-  }, (prevProps, nextProps) => {
-    // Only re-render if product ID changes or variant selection changes
-    return prevProps.product.id === nextProps.product.id;
   });
 
   ProductCard.displayName = 'ProductCard';
@@ -478,15 +525,13 @@ const Categories = () => {
               <button
                 key={category.id}
                 onClick={() => handleCategoryClick(index)}
-                className={`group flex-shrink-0 flex flex-col items-center py-3 sm:py-4 px-4 transition-all duration-300 rounded-lg ${
+                className={`flex-shrink-0 flex flex-col items-center py-3 sm:py-4 px-4 rounded-lg cursor-pointer ${
                   selectedCategory === index
-                    ? 'bg-white/10 scale-105'
-                    : 'hover:bg-white/5 hover:scale-102'
+                    ? 'bg-white/10'
+                    : ''
                 }`}
               >
-                <div className={`relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mb-2 filter drop-shadow-lg transition-transform duration-300 ${
-                  selectedCategory === index ? 'scale-110' : 'group-hover:scale-105'
-                }`}>
+                <div className={`relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mb-2 filter drop-shadow-lg`}>
                   <Image
                     src={category.image}
                     alt={category.name}
@@ -494,13 +539,13 @@ const Categories = () => {
                     className="object-contain"
                   />
                 </div>
-                <span className={`text-xs sm:text-xs md:text-sm font-semibold tracking-wide uppercase text-center transition-colors duration-300 ${
-                  selectedCategory === index ? 'text-[#E7BD8B]' : 'text-white group-hover:text-[#FDF4E3]'
+                <span className={`text-xs sm:text-xs md:text-sm font-semibold tracking-wide uppercase text-center ${
+                  selectedCategory === index ? 'text-[#E7BD8B]' : 'text-white'
                 }`}>
                   {category.name}
                 </span>
                 {selectedCategory === index && (
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-[#E7BD8B] rounded-full animate-pulse"></div>
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-[#E7BD8B] rounded-full"></div>
                 )}
               </button>
             ))}
@@ -517,12 +562,9 @@ const Categories = () => {
                 <button
                   key={index}
                   onClick={() => handleSubcategoryClick(subcategory)}
-                  className="group flex-shrink-0 text-xs sm:text-sm md:text-base font-bold text-[#234433] hover:text-white uppercase tracking-wide transition-all duration-300 hover:scale-110 px-4 py-2 rounded-full hover:bg-gradient-to-r hover:from-[#234433] hover:to-[#234433] hover:shadow-lg border-2 border-transparent hover:border-[#234433]"
+                  className="flex-shrink-0 text-xs sm:text-sm md:text-base font-bold text-[#234433] uppercase tracking-wide px-4 py-2 rounded-full border-2 border-transparent cursor-pointer"
                 >
-                  <span className="relative">
-                    {subcategory}
-                    <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-[#234433] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-                  </span>
+                  {subcategory}
                 </button>
               ))}
             </div>
@@ -686,6 +728,22 @@ const Categories = () => {
           })
         ) : null}
       </div>
+
+      {/* Global Loading Overlay - Cute & Small */}
+      {isInteracting && (
+        <div className="fixed inset-0 bg-white/90 flex items-center justify-center z-50 pointer-events-none">
+          <div className="relative">
+            {/* Outer pulsing ring */}
+            <div className="absolute inset-0 bg-[#E7BD8B]/20 rounded-full animate-ping"></div>
+            {/* Middle glow */}
+            <div className="absolute inset-2 bg-gradient-to-br from-[#E7BD8B]/30 to-orange-200/30 rounded-full blur-md"></div>
+            {/* Main spinner container */}
+            <div className="relative bg-white rounded-full p-4 shadow-2xl border-2 border-[#E7BD8B]/50">
+              <div className="w-12 h-12 border-4 border-[#E7BD8B] border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Product Detail Modal */}
       <ProductDetail
