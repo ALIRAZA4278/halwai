@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   const slides = [
     {
@@ -35,13 +36,39 @@ const HeroSection = () => {
     }
   ];
 
+  // Preload images
+  useEffect(() => {
+    const imagesToPreload = [];
+    slides.forEach(slide => {
+      const img1 = new Image();
+      img1.src = slide.backgroundImage;
+      imagesToPreload.push(img1);
+
+      const img2 = new Image();
+      img2.src = slide.mobileBackgroundImage;
+      imagesToPreload.push(img2);
+    });
+
+    Promise.all(
+      imagesToPreload.map(img => {
+        return new Promise((resolve) => {
+          img.onload = resolve;
+          img.onerror = resolve;
+        });
+      })
+    ).then(() => {
+      setImagesLoaded(true);
+    });
+  }, []);
+
   // Auto-slide functionality
   useEffect(() => {
+    if (!imagesLoaded) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [slides.length]);
+  }, [slides.length, imagesLoaded]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -57,9 +84,19 @@ const HeroSection = () => {
 
   return (
     <section className="relative h-[70vh] md:h-[75vh] lg:h-[85vh] w-full overflow-hidden">
-      
+
+      {/* Loading State */}
+      {!imagesLoaded && (
+        <div className="absolute inset-0 bg-[#234433] flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-16 h-16 border-4 border-[#E7BD8B] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-[#FDF4E3] text-lg">Loading...</p>
+          </div>
+        </div>
+      )}
+
       {/* Background Images with Slider */}
-      <div className="absolute inset-0">
+      <div className={`absolute inset-0 transition-opacity duration-500 ${imagesLoaded ? 'opacity-100' : 'opacity-0'}`}>
         {slides.map((slide, index) => (
           <div
             key={slide.id}

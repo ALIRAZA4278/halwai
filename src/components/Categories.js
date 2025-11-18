@@ -86,7 +86,7 @@ const Categories = () => {
     }
   ], []);
 
-  // Fetch products from Supabase with optimizations
+  // Fetch products from Supabase with real-time updates
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -118,6 +118,21 @@ const Categories = () => {
         }));
 
         setProducts(transformedProducts);
+
+        console.log('========================================');
+        console.log('📦 PRODUCTS LOADED FROM DATABASE');
+        console.log('Total products:', transformedProducts.length);
+        console.log('========================================');
+
+        // Show each product with its category
+        transformedProducts.forEach((p, idx) => {
+          console.log(`${idx + 1}. "${p.name}"`);
+          console.log(`   Category: "${p.category}"`);
+          console.log(`   Subcategory: "${p.subcategory}"`);
+          console.log(`   ---`);
+        });
+
+        console.log('========================================');
         setLoading(false);
       } catch (error) {
         console.error('Error:', error);
@@ -126,6 +141,23 @@ const Categories = () => {
     };
 
     fetchProducts();
+
+    // Set up real-time subscription for products
+    const channel = supabase
+      .channel('products-changes')
+      .on('postgres_changes',
+        { event: '*', schema: 'public', table: 'products' },
+        () => {
+          // Silently refetch products when any change occurs
+          fetchProducts();
+        }
+      )
+      .subscribe();
+
+    // Cleanup subscription on unmount
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   // Dummy product data - matching the card design (fallback)
@@ -376,7 +408,7 @@ const Categories = () => {
     }, 300);
   };
 
-  const ProductCard = React.memo(({ product }) => {
+  const ProductCard = React.memo(({ product, selectedVariantIndex: propSelectedVariantIndex }) => {
     const [isCardLoading, setIsCardLoading] = useState(false);
     const hasVariants = product.variants && product.variants.length > 0;
     const availableVariants = React.useMemo(() =>
@@ -384,25 +416,23 @@ const Categories = () => {
       [product.variants, hasVariants]
     );
 
-    // Get persisted selection or default to 0
-    const selectedVariantIndex = productVariantSelections[product.id] ?? 0;
+    // Use prop value directly for instant updates
+    const selectedVariantIndex = propSelectedVariantIndex ?? 0;
     const selectedVariant = availableVariants[selectedVariantIndex];
     const displayPrice = selectedVariant ? selectedVariant.price : product.price;
 
     const handleVariantClick = React.useCallback((e, index) => {
-      e.stopPropagation();
-      e.preventDefault();
-      setIsCardLoading(true);
-      // Super fast loading for variant changes
-      setTimeout(() => {
-        setProductVariantSelections(prev => ({
-          ...prev,
-          [product.id]: index
-        }));
-        setTimeout(() => {
-          setIsCardLoading(false);
-        }, 100);
-      }, 150);
+      // Prevent event bubbling
+      if (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+
+      // Instant state update - NO loading delay!
+      setProductVariantSelections(prev => ({
+        ...prev,
+        [product.id]: index
+      }));
     }, [product.id]);
 
     const handleCardClick = React.useCallback(() => {
@@ -437,8 +467,12 @@ const Categories = () => {
             <img
               src={product.image}
               alt={product.name}
-              className="object-contain w-full h-full"
+              className="object-contain w-full h-full transition-opacity duration-300"
               loading="lazy"
+              width="224"
+              height="224"
+              style={{ opacity: 1 }}
+              onLoad={(e) => e.target.style.opacity = 1}
             />
           ) : (
             <div className="text-6xl filter drop-shadow-lg">{product.image}</div>
@@ -473,8 +507,11 @@ const Categories = () => {
                   key={`${product.id}-variant-${index}-${variant.size}`}
                   type="button"
                   onClick={(e) => handleVariantClick(e, index)}
-                  disabled={isCardLoading}
-                  className={`px-4 py-2 border-2 rounded-md text-xs font-bold select-none disabled:opacity-50 disabled:cursor-not-allowed ${
+                  onTouchEnd={(e) => {
+                    e.preventDefault();
+                    handleVariantClick(e, index);
+                  }}
+                  className={`px-4 py-2 border-2 rounded-md text-xs font-bold select-none touch-manipulation transition-all ${
                     selectedVariantIndex === index
                       ? 'border-gray-800 bg-gray-800 text-white shadow-md'
                       : 'border-gray-400 text-gray-800 bg-white cursor-pointer'
@@ -497,6 +534,14 @@ const Categories = () => {
         </div>
         </div>
       </div>
+    );
+  }, (prevProps, nextProps) => {
+    // Only re-render if product.id, selectedVariantIndex, or product data changes
+    return (
+      prevProps.product.id === nextProps.product.id &&
+      prevProps.selectedVariantIndex === nextProps.selectedVariantIndex &&
+      prevProps.product.price === nextProps.product.price &&
+      prevProps.product.name === nextProps.product.name
     );
   });
 
@@ -630,19 +675,37 @@ const Categories = () => {
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mb-12 relative z-10 px-2">
-                {(products.length > 0 ? products : dummyProducts)
-                  .filter(product => {
-                    const categoryName = categories[selectedCategory].name;
-                    // For TRENDING, show products with TRENDING tag or category
-                    if (categoryName === "TRENDING") {
-                      return product.tag === "TRENDING" || product.category === "TRENDING";
-                    }
-                    // For all other categories, show all products with matching category
-                    return product.category === categoryName;
-                  })
-                  .map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                  ))}
+                {(() => {
+                  const categoryName = categories[selectedCategory].name;
+
+                  console.log('🔍 FILTERING FOR CATEGORY:', categoryName);
+                  console.log('Total products available:', products.length);
+
+                  const filtered = (products.length > 0 ? products : dummyProducts)
+                    .filter(product => {
+                      // For TRENDING, show products with TRENDING tag or category
+                      if (categoryName === "TRENDING") {
+                        const match = product.tag === "TRENDING" || product.category === "TRENDING";
+                        console.log(`  ${product.name} (tag: ${product.tag}, cat: ${product.category}) → TRENDING: ${match ? '✅' : '❌'}`);
+                        return match;
+                      }
+                      // For all other categories, show all products with matching category (case-insensitive)
+                      const match = product.category && product.category.toUpperCase() === categoryName.toUpperCase();
+                      console.log(`  ${product.name} (${product.category}) vs ${categoryName} → ${match ? '✅' : '❌'}`);
+                      return match;
+                    });
+
+                  console.log('✅ Filtered results:', filtered.length, 'products');
+                  console.log('─────────────────────────────────────');
+
+                  return filtered.map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      selectedVariantIndex={productVariantSelections[product.id] ?? 0}
+                    />
+                  ));
+                })()}
               </div>
             )}
           </>
@@ -708,11 +771,12 @@ const Categories = () => {
 
               {/* Subcategory Products */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 relative z-10 px-2">
-                {(products.length > 0 ? products : dummyProducts)
-                  .filter(product =>
-                    product.subcategory === subcategory
-                  )
-                  .map((product) => (
+                {(() => {
+                  const filtered = (products.length > 0 ? products : dummyProducts)
+                    .filter(product =>
+                      product.subcategory && product.subcategory.toUpperCase() === subcategory.toUpperCase()
+                    );
+                  return filtered.map((product) => (
                     <ProductCard
                       key={product.id}
                       product={{
@@ -720,8 +784,10 @@ const Categories = () => {
                         name: product.name,
                         tag: index === 0 && product.id === 1 ? "TRENDING" : product.tag
                       }}
+                      selectedVariantIndex={productVariantSelections[product.id] ?? 0}
                     />
-                  ))}
+                  ));
+                })()}
               </div>
             </div>
           );

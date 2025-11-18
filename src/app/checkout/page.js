@@ -69,26 +69,11 @@ export default function CheckoutPage() {
     // Contact validation
     if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
     if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
-    }
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
-    } else if (!/^\d{10}$/.test(formData.phone.replace(/\D/g, ''))) {
-      newErrors.phone = 'Phone number must be 10 digits';
-    }
+    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
 
     // Address validation
     if (!formData.address.trim()) newErrors.address = 'Address is required';
     if (!formData.city.trim()) newErrors.city = 'City is required';
-    if (!formData.state.trim()) newErrors.state = 'State is required';
-    if (!formData.pincode.trim()) {
-      newErrors.pincode = 'Pincode is required';
-    } else if (!/^\d{6}$/.test(formData.pincode)) {
-      newErrors.pincode = 'Pincode must be 6 digits';
-    }
 
     // Delivery details
     if (!formData.deliveryDate) newErrors.deliveryDate = 'Delivery date is required';
@@ -98,12 +83,63 @@ export default function CheckoutPage() {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Get current location
+  const getCurrentLocation = () => {
+    if (!navigator.geolocation) {
+      alert('Geolocation is not supported by your browser');
+      return;
+    }
+
+    setIsProcessing(true);
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+
+        try {
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`
+          );
+          const data = await response.json();
+
+          if (data && data.address) {
+            const road = data.address.road || '';
+            const suburb = data.address.suburb || data.address.neighbourhood || '';
+            const city = data.address.city || data.address.town || data.address.county || '';
+            const state = data.address.state || '';
+            const postcode = data.address.postcode || '';
+
+            const fullAddress = [road, suburb].filter(Boolean).join(', ');
+
+            setFormData(prev => ({
+              ...prev,
+              address: fullAddress || data.display_name,
+              city: city,
+              state: state,
+              pincode: postcode
+            }));
+
+            alert('Location detected successfully!');
+          }
+        } catch (error) {
+          console.error('Error getting location:', error);
+          alert('Failed to get location details');
+        } finally {
+          setIsProcessing(false);
+        }
+      },
+      (error) => {
+        console.error('Geolocation error:', error);
+        alert('Failed to get your location. Please enter manually.');
+        setIsProcessing(false);
+      }
+    );
+  };
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validateForm()) {
-      // Scroll to first error
       const firstError = document.querySelector('.error-message');
       if (firstError) {
         firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -114,25 +150,45 @@ export default function CheckoutPage() {
     setIsProcessing(true);
 
     try {
-      // Prepare order data
+      // Import supabase
+      const { supabase } = await import('@/lib/supabase');
+
+      // Prepare order data for database
       const orderData = {
-        ...formData,
-        items: cartItems,
-        subtotal: cartTotal,
-        deliveryCharges: cartTotal >= 500 ? 0 : 50,
-        total: cartTotal >= 500 ? cartTotal : cartTotal + 50,
-        orderDate: new Date().toISOString(),
+        customer_name: `${formData.firstName} ${formData.lastName}`,
+        customer_email: formData.email || null,
+        customer_phone: formData.phone,
+        delivery_address: `${formData.address}${formData.apartment ? ', ' + formData.apartment : ''}, ${formData.city}${formData.state ? ', ' + formData.state : ''}${formData.pincode ? ' - ' + formData.pincode : ''}`,
+        delivery_location: formData.city,
+        delivery_date: formData.deliveryDate,
+        delivery_time: formData.deliveryTime,
+        total_amount: finalTotal,
+        status: 'pending',
+        items: cartItems.map(item => ({
+          name: item.product.name,
+          quantity: item.quantity,
+          price: item.price,
+          variant: item.selectedVariant?.size || null
+        })),
+        special_instructions: formData.orderNotes || null
       };
 
-      // Here you would typically send the order to your backend
-      console.log('Order Data:', orderData);
+      // Insert order into Supabase
+      const { data, error } = await supabase
+        .from('orders')
+        .insert([orderData])
+        .select();
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
 
-      // Clear cart and redirect to success page
+      console.log('Order created:', data);
+
+      // Clear cart and redirect
       clearCart();
-      alert('Order placed successfully! Thank you for your order.');
+      alert('Order placed successfully! Thank you for your order. Order ID: #' + data[0].id.slice(0, 8));
       router.push('/');
 
     } catch (error) {
@@ -286,16 +342,29 @@ export default function CheckoutPage() {
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
                         Street Address <span className="text-[#234433]">*</span>
                       </label>
-                      <input
-                        type="text"
-                        name="address"
-                        value={formData.address}
-                        onChange={handleInputChange}
-                        className={`w-full px-4 py-3.5 border-2 rounded-xl focus:ring-2 focus:ring-[#234433] outline-none transition-all text-gray-800 placeholder-gray-400 ${
-                          errors.address ? 'border-[#234433]' : 'border-gray-200 focus:border-[#234433]'
-                        }`}
-                        placeholder="House no., Building name, Street"
-                      />
+                      <div className="relative">
+                        <input
+                          type="text"
+                          name="address"
+                          value={formData.address}
+                          onChange={handleInputChange}
+                          className={`w-full px-4 py-3.5 pr-32 border-2 rounded-xl focus:ring-2 focus:ring-[#234433] outline-none transition-all text-gray-800 placeholder-gray-400 ${
+                            errors.address ? 'border-[#234433]' : 'border-gray-200 focus:border-[#234433]'
+                          }`}
+                          placeholder="House no., Building name, Street"
+                        />
+                        <button
+                          type="button"
+                          onClick={getCurrentLocation}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#234433] hover:bg-[#1a3329] text-white px-3 py-2 rounded-lg text-xs font-semibold transition-all flex items-center gap-1"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                          Get Location
+                        </button>
+                      </div>
                       {errors.address && <p className="error-message mt-1 text-sm text-[#234433]">{errors.address}</p>}
                     </div>
 
@@ -517,7 +586,7 @@ export default function CheckoutPage() {
                             )}
                             <div className="flex justify-between items-center mt-1">
                               <span className="text-xs text-gray-600">Qty: {item.quantity}</span>
-                              <span className="font-bold text-[#234433]">₹{item.price * item.quantity}</span>
+                              <span className="font-bold text-[#234433]">Rs {item.price * item.quantity}</span>
                             </div>
                           </div>
                         </div>
@@ -528,7 +597,7 @@ export default function CheckoutPage() {
                     <div className="border-t-2 border-[#E7BD8B] pt-4 space-y-3">
                       <div className="flex justify-between text-gray-700">
                         <span>Subtotal ({cartItemCount} items)</span>
-                        <span className="font-semibold">₹{cartTotal}</span>
+                        <span className="font-semibold">Rs {cartTotal}</span>
                       </div>
 
                       <div className="flex justify-between text-gray-700">
@@ -536,19 +605,19 @@ export default function CheckoutPage() {
                         {deliveryCharges === 0 ? (
                           <span className="font-semibold text-green-600">FREE</span>
                         ) : (
-                          <span className="font-semibold">₹{deliveryCharges}</span>
+                          <span className="font-semibold">Rs {deliveryCharges}</span>
                         )}
                       </div>
 
                       {cartTotal < 500 && (
                         <div className="bg-[#FDF4E3] border border-[#E7BD8B] rounded-lg p-2 text-xs text-gray-700">
-                          Add ₹{500 - cartTotal} more for FREE delivery!
+                          Add Rs {500 - cartTotal} more for FREE delivery!
                         </div>
                       )}
 
                       <div className="border-t-2 border-[#E7BD8B] pt-3 flex justify-between text-lg font-bold">
                         <span className="text-gray-800">Total Amount</span>
-                        <span className="text-[#234433]">₹{finalTotal}</span>
+                        <span className="text-[#234433]">Rs {finalTotal}</span>
                       </div>
                     </div>
 

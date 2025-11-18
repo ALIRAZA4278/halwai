@@ -1,0 +1,106 @@
+/* Admin Panel Brand Colors */
+:root {
+  --admin-primary: #234433;
+  --admin-primary-dark: #1a3329;
+  --admin-secondary: #E7BD8B;
+  --admin-secondary-alt: #C9A86A;
+  --admin-light: #FDF4E3;
+  --admin-light-alt: #f5ede1;
+}
+
+/* Apply to all admin pages */
+.admin-card {
+  @apply bg-white rounded-xl shadow-sm border-2 border-[#E7BD8B]/20;
+}
+
+.admin-card-header {
+  @apply p-6 border-b-2 border-[#E7BD8B]/20;
+}
+
+.admin-btn-primary {
+  @apply bg-[#234433] hover:bg-[#1a3329] text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-lg;
+}
+
+.admin-btn-secondary {
+  @apply bg-[#E7BD8B] hover:bg-[#C9A86A] text-[#234433] px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-lg;
+}
+
+.admin-btn-outline {
+  @apply border-2 border-[#234433] text-[#234433] hover:bg-[#234433] hover:text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300;
+}
+
+.admin-input {
+  @apply w-full px-4 py-2 border-2 border-[#E7BD8B]/30 rounded-xl focus:ring-2 focus:ring-[#234433] focus:border-[#234433] outline-none transition bg-white text-[#234433];
+}
+
+.admin-label {
+  @apply block text-sm font-medium text-[#234433] mb-2;
+}
+
+.admin-badge-success {
+  @apply px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium border border-green-200;
+}
+
+.admin-badge-warning {
+  @apply px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium border border-yellow-200;
+}
+
+.admin-badge-danger {
+  @apply px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-medium border border-red-200;
+}
+
+.admin-badge-info {
+  @apply px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium border border-blue-200;
+}
+
+.admin-badge-brand {
+  @apply px-3 py-1 bg-[#E7BD8B]/20 text-[#234433] rounded-full text-xs font-medium border border-[#E7BD8B];
+}
+
+.admin-stat-card {
+  @apply bg-white rounded-xl shadow-sm p-6 border-2 border-[#E7BD8B]/20 hover:border-[#E7BD8B]/40 transition-all duration-300;
+}
+
+.admin-table {
+  @apply w-full;
+}
+
+.admin-table-header {
+  @apply bg-[#234433]/5;
+}
+
+.admin-table-header-cell {
+  @apply px-6 py-3 text-left text-xs font-medium text-[#234433] uppercase tracking-wider;
+}
+
+.admin-table-row {
+  @apply hover:bg-[#E7BD8B]/5 transition-colors;
+}
+
+.admin-table-cell {
+  @apply px-6 py-4 text-sm text-[#234433];
+}
+
+.admin-modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4;
+}
+
+.admin-modal-content {
+  @apply bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border-2 border-[#E7BD8B]/30;
+}
+
+.admin-modal-header {
+  @apply p-6 border-b-2 border-[#E7BD8B]/20 sticky top-0 bg-white;
+}
+
+/* Headings with Optima font */
+.admin-heading {
+  font-family: 'Optima', Georgia, 'Times New Roman', serif;
+  @apply text-[#234433];
+}
+
+/* Body text with Sweet Sans Pro */
+.admin-text {
+  font-family: 'Sweet Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  @apply text-[#234433];
+}
