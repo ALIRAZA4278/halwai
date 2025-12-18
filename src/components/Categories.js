@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import ProductDetail from './ProductDetail';
+import ProductCard from './ProductCard';
 import { supabase } from '@/lib/supabase';
 import { useCart } from '@/context/CartContext';
 
@@ -16,8 +17,6 @@ const Categories = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const subcategoryRefs = useRef({});
-  const [productVariantSelections, setProductVariantSelections] = useState({});
-  const [isInteracting, setIsInteracting] = useState(false);
 
   const categories = useMemo(() => [
     // {
@@ -119,20 +118,9 @@ const Categories = () => {
 
         setProducts(transformedProducts);
 
-        console.log('========================================');
-        console.log('📦 PRODUCTS LOADED FROM DATABASE');
-        console.log('Total products:', transformedProducts.length);
-        console.log('========================================');
+        // Simple log - no loops
+        console.log('📦 Products loaded:', transformedProducts.length);
 
-        // Show each product with its category
-        transformedProducts.forEach((p, idx) => {
-          console.log(`${idx + 1}. "${p.name}"`);
-          console.log(`   Category: "${p.category}"`);
-          console.log(`   Subcategory: "${p.subcategory}"`);
-          console.log(`   ---`);
-        });
-
-        console.log('========================================');
         setLoading(false);
       } catch (error) {
         console.error('Error:', error);
@@ -237,28 +225,18 @@ const Categories = () => {
   ];
 
   const handleCategoryClick = (index) => {
-    setIsInteracting(true);
-    setTimeout(() => {
-      setSelectedCategory(index);
-      setTimeout(() => {
-        setIsInteracting(false);
-      }, 150);
-    }, 250);
+    // Instant category selection - No delay
+    setSelectedCategory(index);
   };
 
   const handleSubcategoryClick = (subcategory) => {
-    setIsInteracting(true);
-    setTimeout(() => {
-      setSearchQuery(subcategory.toLowerCase());
-      // Scroll to the subcategory section
-      const subcategoryElement = subcategoryRefs.current[subcategory];
-      if (subcategoryElement) {
-        subcategoryElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-      setTimeout(() => {
-        setIsInteracting(false);
-      }, 150);
-    }, 250);
+    // Instant subcategory selection and smooth scroll
+    setSearchQuery(subcategory.toLowerCase());
+    // Scroll to the subcategory section
+    const subcategoryElement = subcategoryRefs.current[subcategory];
+    if (subcategoryElement) {
+      subcategoryElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   // Typing animation effect for placeholder with rotating suggestions
@@ -374,178 +352,23 @@ const Categories = () => {
   );
 
   const handleProductClick = (product, preSelectedVariantIndex = 0) => {
-    setIsInteracting(true);
-    // Fast loading for product click
-    setTimeout(() => {
-      setSelectedProduct({ ...product, preSelectedVariantIndex });
-      if (!isProductDetailOpen) {
-        setIsProductDetailOpen(true);
-      }
-      setTimeout(() => {
-        setIsInteracting(false);
-      }, 150);
-    }, 300);
+    // Instant - No delay for better UX (like ProductDetail.js)
+    setSelectedProduct({ ...product, preSelectedVariantIndex });
+    if (!isProductDetailOpen) {
+      setIsProductDetailOpen(true);
+    }
   };
 
   const closeProductDetail = () => {
+    // Instant close - No delay
     setIsProductDetailOpen(false);
-    // Use setTimeout to prevent flickering
-    setTimeout(() => {
-      setSelectedProduct(null);
-    }, 300);
+    setSelectedProduct(null);
   };
 
-  const handleAddToCart = (e, product, selectedVariant = null) => {
-    e.stopPropagation(); // Prevent card click
-    setIsInteracting(true);
-    // Fast loading for add to cart
-    setTimeout(() => {
-      const variantToAdd = selectedVariant || (product.variants && product.variants.length > 0 ? product.variants[0] : null);
-      addToCart(product, 1, variantToAdd);
-      setTimeout(() => {
-        setIsInteracting(false);
-      }, 150);
-    }, 300);
+  const handleAddToCart = (product, selectedVariant = null) => {
+    const variantToAdd = selectedVariant || (product.variants && product.variants.length > 0 ? product.variants[0] : null);
+    addToCart(product, 1, variantToAdd);
   };
-
-  const ProductCard = React.memo(({ product, selectedVariantIndex: propSelectedVariantIndex }) => {
-    const [isCardLoading, setIsCardLoading] = useState(false);
-    const hasVariants = product.variants && product.variants.length > 0;
-    const availableVariants = React.useMemo(() =>
-      hasVariants ? product.variants.filter(v => v.available !== false) : [],
-      [product.variants, hasVariants]
-    );
-
-    // Use prop value directly for instant updates
-    const selectedVariantIndex = propSelectedVariantIndex ?? 0;
-    const selectedVariant = availableVariants[selectedVariantIndex];
-    const displayPrice = selectedVariant ? selectedVariant.price : product.price;
-
-    const handleVariantClick = React.useCallback((e, index) => {
-      // Prevent event bubbling
-      if (e) {
-        e.stopPropagation();
-        e.preventDefault();
-      }
-
-      // Instant state update - NO loading delay!
-      setProductVariantSelections(prev => ({
-        ...prev,
-        [product.id]: index
-      }));
-    }, [product.id]);
-
-    const handleCardClick = React.useCallback(() => {
-      handleProductClick(product, selectedVariantIndex);
-    }, [product, selectedVariantIndex]);
-
-    return (
-      <div className="relative">
-        {/* Card Loading Overlay - Cute & Small */}
-        {isCardLoading && (
-          <div className="absolute inset-0 bg-white/95 z-10 rounded-lg flex items-center justify-center">
-            <div className="relative">
-              {/* Cute pulsing background */}
-              <div className="absolute inset-0 bg-[#E7BD8B]/20 rounded-full animate-ping"></div>
-              {/* Main spinner */}
-              <div className="relative bg-white rounded-full p-2.5 shadow-lg">
-                <div className="w-8 h-8 border-3 border-[#E7BD8B] border-t-transparent rounded-full animate-spin"></div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        <div
-          onClick={!isCardLoading ? handleCardClick : undefined}
-          className={`bg-white rounded-lg overflow-hidden shadow-lg flex flex-col h-full ${
-            isCardLoading ? 'cursor-wait' : 'cursor-pointer'
-          }`}
-        >
-        {/* Product Image - Fixed Height */}
-        <div className="relative h-56 bg-gradient-to-b from-gray-100 to-gray-50 flex items-center justify-center p-6 flex-shrink-0">
-          {product.image && (product.image.startsWith('http') || product.image.startsWith('/')) ? (
-            <img
-              src={product.image}
-              alt={product.name}
-              className="object-contain w-full h-full transition-opacity duration-300"
-              loading="lazy"
-              width="224"
-              height="224"
-              style={{ opacity: 1 }}
-              onLoad={(e) => e.target.style.opacity = 1}
-            />
-          ) : (
-            <div className="text-6xl filter drop-shadow-lg">{product.image}</div>
-          )}
-        </div>
-
-        {/* Content Section with Cream Background */}
-        <div className="p-5 bg-gradient-to-b from-amber-50/40 to-white flex flex-col flex-grow">
-          {/* Product Name */}
-          <h3 className="text-xl font-bold text-amber-700 mb-3 leading-tight line-clamp-2 min-h-[3.5rem]">
-            {product.name}
-          </h3>
-
-          {/* Price */}
-          <div className="mb-3">
-            <span className="text-xs text-[#234433] font-bold uppercase tracking-wide">FROM RS. </span>
-            <span className="text-[#234433] font-bold text-lg">
-              {displayPrice}
-            </span>
-          </div>
-
-          {/* Description */}
-          <p className="text-sm text-gray-700 leading-relaxed mb-4 line-clamp-3 flex-grow">
-            {product.description}
-          </p>
-
-          {/* Variants - Only show available ones */}
-          {availableVariants.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-4">
-              {availableVariants.map((variant, index) => (
-                <button
-                  key={`${product.id}-variant-${index}-${variant.size}`}
-                  type="button"
-                  onClick={(e) => handleVariantClick(e, index)}
-                  onTouchEnd={(e) => {
-                    e.preventDefault();
-                    handleVariantClick(e, index);
-                  }}
-                  className={`px-4 py-2 border-2 rounded-md text-xs font-bold select-none touch-manipulation transition-all ${
-                    selectedVariantIndex === index
-                      ? 'border-gray-800 bg-gray-800 text-white shadow-md'
-                      : 'border-gray-400 text-gray-800 bg-white cursor-pointer'
-                  }`}
-                >
-                  {variant.size}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {/* Add Button */}
-          <button
-            onClick={(e) => handleAddToCart(e, product, selectedVariant)}
-            disabled={isInteracting}
-            className="w-full text-white py-3 rounded-full font-bold uppercase tracking-wider shadow-md text-sm bg-gradient-to-r from-[#E7BD8B] to-[#E7BD8B] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-          >
-            ADD
-          </button>
-        </div>
-        </div>
-      </div>
-    );
-  }, (prevProps, nextProps) => {
-    // Only re-render if product.id, selectedVariantIndex, or product data changes
-    return (
-      prevProps.product.id === nextProps.product.id &&
-      prevProps.selectedVariantIndex === nextProps.selectedVariantIndex &&
-      prevProps.product.price === nextProps.product.price &&
-      prevProps.product.name === nextProps.product.name
-    );
-  });
-
-  ProductCard.displayName = 'ProductCard';
 
   return (
     <section className="relative bg-white min-h-screen">
@@ -678,31 +501,22 @@ const Categories = () => {
                 {(() => {
                   const categoryName = categories[selectedCategory].name;
 
-                  console.log('🔍 FILTERING FOR CATEGORY:', categoryName);
-                  console.log('Total products available:', products.length);
-
                   const filtered = (products.length > 0 ? products : dummyProducts)
                     .filter(product => {
                       // For TRENDING, show products with TRENDING tag or category
                       if (categoryName === "TRENDING") {
-                        const match = product.tag === "TRENDING" || product.category === "TRENDING";
-                        console.log(`  ${product.name} (tag: ${product.tag}, cat: ${product.category}) → TRENDING: ${match ? '✅' : '❌'}`);
-                        return match;
+                        return product.tag === "TRENDING" || product.category === "TRENDING";
                       }
                       // For all other categories, show all products with matching category (case-insensitive)
-                      const match = product.category && product.category.toUpperCase() === categoryName.toUpperCase();
-                      console.log(`  ${product.name} (${product.category}) vs ${categoryName} → ${match ? '✅' : '❌'}`);
-                      return match;
+                      return product.category && product.category.toUpperCase() === categoryName.toUpperCase();
                     });
-
-                  console.log('✅ Filtered results:', filtered.length, 'products');
-                  console.log('─────────────────────────────────────');
 
                   return filtered.map((product) => (
                     <ProductCard
                       key={product.id}
                       product={product}
-                      selectedVariantIndex={productVariantSelections[product.id] ?? 0}
+                      onProductClick={handleProductClick}
+                      onAddToCart={handleAddToCart}
                     />
                   ));
                 })()}
@@ -779,12 +593,9 @@ const Categories = () => {
                   return filtered.map((product) => (
                     <ProductCard
                       key={product.id}
-                      product={{
-                        ...product,
-                        name: product.name,
-                        tag: index === 0 && product.id === 1 ? "TRENDING" : product.tag
-                      }}
-                      selectedVariantIndex={productVariantSelections[product.id] ?? 0}
+                      product={product}
+                      onProductClick={handleProductClick}
+                      onAddToCart={handleAddToCart}
                     />
                   ));
                 })()}
@@ -794,22 +605,6 @@ const Categories = () => {
           })
         ) : null}
       </div>
-
-      {/* Global Loading Overlay - Cute & Small */}
-      {isInteracting && (
-        <div className="fixed inset-0 bg-white/90 flex items-center justify-center z-50 pointer-events-none">
-          <div className="relative">
-            {/* Outer pulsing ring */}
-            <div className="absolute inset-0 bg-[#E7BD8B]/20 rounded-full animate-ping"></div>
-            {/* Middle glow */}
-            <div className="absolute inset-2 bg-gradient-to-br from-[#E7BD8B]/30 to-orange-200/30 rounded-full blur-md"></div>
-            {/* Main spinner container */}
-            <div className="relative bg-white rounded-full p-4 shadow-2xl border-2 border-[#E7BD8B]/50">
-              <div className="w-12 h-12 border-4 border-[#E7BD8B] border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Product Detail Modal */}
       <ProductDetail

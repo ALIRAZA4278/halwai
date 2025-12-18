@@ -30,7 +30,7 @@ export default function EditProduct() {
     variants: [],
   });
 
-  const [variant, setVariant] = useState({ name: '', price: '' });
+  const [variant, setVariant] = useState({ size: '', price: '' });
 
   useEffect(() => {
     fetchCategories();
@@ -171,12 +171,12 @@ export default function EditProduct() {
   };
 
   const handleAddVariant = () => {
-    if (variant.name && variant.price) {
+    if (variant.size && variant.price) {
       setFormData({
         ...formData,
-        variants: [...formData.variants, { ...variant }],
+        variants: [...formData.variants, { size: variant.size, price: variant.price, available: true }],
       });
-      setVariant({ name: '', price: '' });
+      setVariant({ size: '', price: '' });
     }
   };
 
@@ -396,9 +396,9 @@ export default function EditProduct() {
                 <div>
                   <input
                     type="text"
-                    value={variant.name}
-                    onChange={(e) => setVariant({ ...variant, name: e.target.value })}
-                    placeholder="Variant name (e.g., 500g)"
+                    value={variant.size}
+                    onChange={(e) => setVariant({ ...variant, size: e.target.value })}
+                    placeholder="Variant size (e.g., 500g, 1kg)"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#234433] focus:border-transparent outline-none"
                   />
                 </div>
@@ -433,7 +433,7 @@ export default function EditProduct() {
                         className="flex items-center justify-between bg-[#FDF4E3] p-3 rounded-lg"
                       >
                         <span className="text-sm text-gray-700">
-                          {v.name} - RS{v.price}
+                          {v.size} - Rs {v.price}
                         </span>
                         <button
                           type="button"

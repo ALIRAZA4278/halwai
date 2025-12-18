@@ -25,7 +25,7 @@ export default function NewProduct() {
     variants: [],
   });
 
-  const [variant, setVariant] = useState({ name: '', price: '' });
+  const [variant, setVariant] = useState({ size: '', price: '' });
 
   useEffect(() => {
     fetchCategories();
@@ -107,24 +107,37 @@ export default function NewProduct() {
 
     try {
       setUploadingImage(true);
+      console.log('📤 Starting image upload...');
+      console.log('File:', imageFile.name, 'Size:', imageFile.size, 'bytes');
+
       const fileExt = imageFile.name.split('.').pop();
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
       const filePath = `${fileName}`;
+
+      console.log('Uploading to:', filePath);
 
       const { error: uploadError, data } = await supabase.storage
         .from('product-images')
         .upload(filePath, imageFile);
 
-      if (uploadError) throw uploadError;
+      if (uploadError) {
+        console.error('❌ Upload Error:', uploadError);
+        console.error('Error message:', uploadError.message);
+        console.error('Error details:', uploadError);
+        throw uploadError;
+      }
+
+      console.log('✅ Upload successful!', data);
 
       const { data: { publicUrl } } = supabase.storage
         .from('product-images')
         .getPublicUrl(filePath);
 
+      console.log('✅ Public URL:', publicUrl);
       return publicUrl;
     } catch (error) {
-      console.error('Error uploading image:', error);
-      alert('Failed to upload image');
+      console.error('❌ Error uploading image:', error);
+      alert(`Failed to upload image: ${error.message || 'Unknown error'}`);
       return null;
     } finally {
       setUploadingImage(false);
@@ -132,12 +145,12 @@ export default function NewProduct() {
   };
 
   const handleAddVariant = () => {
-    if (variant.name && variant.price) {
+    if (variant.size && variant.price) {
       setFormData({
         ...formData,
-        variants: [...formData.variants, { ...variant }],
+        variants: [...formData.variants, { size: variant.size, price: variant.price, available: true }],
       });
-      setVariant({ name: '', price: '' });
+      setVariant({ size: '', price: '' });
     }
   };
 
@@ -349,9 +362,9 @@ export default function NewProduct() {
                 <div>
                   <input
                     type="text"
-                    value={variant.name}
-                    onChange={(e) => setVariant({ ...variant, name: e.target.value })}
-                    placeholder="Variant name (e.g., 500g)"
+                    value={variant.size}
+                    onChange={(e) => setVariant({ ...variant, size: e.target.value })}
+                    placeholder="Variant size (e.g., 500g, 1kg)"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#234433] focus:border-transparent outline-none"
                   />
                 </div>
@@ -386,7 +399,7 @@ export default function NewProduct() {
                         className="flex items-center justify-between bg-[#FDF4E3] p-3 rounded-lg"
                       >
                         <span className="text-sm text-gray-700">
-                          {v.name} - RS{v.price}
+                          {v.size} - Rs {v.price}
                         </span>
                         <button
                           type="button"
