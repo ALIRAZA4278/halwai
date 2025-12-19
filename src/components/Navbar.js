@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Sidebar from './Sidebar';
 import { useCart } from '@/context/CartContext';
@@ -8,6 +8,20 @@ import { useCart } from '@/context/CartContext';
 const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
   const { cartItemCount, setIsCartOpen } = useCart();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -19,9 +33,9 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
     }
   };
   return (
-    <nav className="bg-gradient-to-r from-[#234433] via-[#234433] to-[#234433] text-white shadow-2xl sticky top-0 z-50 border-b-2 border-[#E7BD8B]">
-      {/* Top Bar - Desktop Only */}
-      <div className="hidden lg:block bg-[#234433]/50 backdrop-blur-sm">
+    <nav className={`bg-gradient-to-r from-[#234433] via-[#234433] to-[#234433] text-white shadow-2xl sticky top-0 z-50 border-b-2 border-[#E7BD8B] transition-all duration-300 ${isScrolled ? 'py-1' : ''}`}>
+      {/* Top Bar - Desktop Only - Hidden when scrolled */}
+      <div className={`hidden lg:block bg-[#234433]/50 backdrop-blur-sm transition-all duration-300 ${isScrolled ? 'h-0 overflow-hidden opacity-0' : 'h-auto opacity-100'}`}>
         <div className="max-w-7xl mx-auto px-6 py-1.5">
           <div className="flex items-center justify-between text-xs">
             {/* Left Info */}
@@ -63,7 +77,7 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
       </div>
 
       {/* Main Navbar */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 lg:py-3">
+      <div className={`max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 transition-all duration-300 ${isScrolled ? 'py-1.5' : 'py-2 lg:py-3'}`}>
         <div className="flex items-center justify-between">
           
           {/* Left - Location Button (Desktop) or Menu (Mobile) */}
@@ -116,11 +130,13 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
           {/* Center - Logo */}
           <div className="flex-1 flex justify-center">
             <Link href="/" className="transform hover:scale-105 transition-transform duration-300">
-              {/* Logo Image */}
+              {/* Logo Image - Smaller when scrolled */}
               <img
                 src="/LOGO/halwaiiii-01.png"
                 alt="Halwaiii Logo"
-                className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain cursor-pointer"
+                className={`w-auto object-contain cursor-pointer transition-all duration-300 ${
+                  isScrolled ? 'h-8 sm:h-9 md:h-10 lg:h-11' : 'h-10 sm:h-12 md:h-14 lg:h-16'
+                }`}
               />
             </Link>
           </div>

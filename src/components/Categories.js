@@ -19,16 +19,8 @@ const Categories = () => {
   const subcategoryRefs = useRef({});
 
   const categories = useMemo(() => [
-    // {
-    //   id: 1,
-    //   name: "TRENDING",
-    //   image: "/Category/8.png",
-    //   bannerImage: null,
-    //   bgColor: "from-[#E7BD8B] via-[#E7BD8B] to-orange-400",
-    //   subcategories: []
-    // },
     {
-      id: 2,
+      id: 1,
       name: "SWEETS",
       image: "/Category/1.png",
       bannerImage: null,
@@ -36,15 +28,7 @@ const Categories = () => {
       subcategories: ["CLASSIC SWEETS", "BAKLAVA", "HALWA JAAT", "PREMIUM SWEETS", "PRE-ORDER"]
     },
     {
-      id: 3,
-      name: "DAIRY",
-      image: "/Category/2.png",
-      bannerImage: null,
-      bgColor: "from-[#E7BD8B] via-[#E7BD8B] to-[#FDF4E3]",
-      subcategories: ["DAIRY BUTTER", "PURE GHEE"]
-    },
-    {
-      id: 4,
+      id: 2,
       name: "BAKERY",
       image: "/Category/3.png",
       bannerImage: null,
@@ -52,23 +36,7 @@ const Categories = () => {
       subcategories: ["TEA TIME", "BREAKFAST"]
     },
     {
-      id: 5,
-      name: "CAKES & PASTRIES",
-      image: "/Category/4.png",
-      bannerImage: null,
-      bgColor: "from-pink-700 via-pink-600 to-pink-500",
-      subcategories: ["PREMIO CAKES", "FRESH CREAM", "PASTRIES"]
-    },
-    {
-      id: 6,
-      name: "DESSERTS",
-      image: "/Category/5.png",
-      bannerImage: null,
-      bgColor: "from-purple-600 via-purple-500 to-purple-400",
-      subcategories: ["DESSERTS"]
-    },
-    {
-      id: 7,
+      id: 3,
       name: "GIFT BOX",
       image: "/Category/6.png",
       bannerImage: null,
@@ -76,7 +44,7 @@ const Categories = () => {
       subcategories: ["PRE ORDER BOXES", "SPECIAL BOXES", "BABY GIRL BOXES", "BABY BOY BOXES"]
     },
     {
-      id: 8,
+      id: 4,
       name: "PACKED ITEMS",
       image: "/Category/7.png",
       bannerImage: "/Category - banners/packed.jpg",

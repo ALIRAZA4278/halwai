@@ -16,8 +16,8 @@
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
   --color-light: var(--light);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Sweet Sans Pro', var(--font-inter);
+  --font-serif: 'Optima', var(--font-playfair);
 }
 
 @media (prefers-color-scheme: dark) {
