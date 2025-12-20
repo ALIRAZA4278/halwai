@@ -33,7 +33,7 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
     }
   };
   return (
-    <nav className={`bg-gradient-to-r from-[#234433] via-[#234433] to-[#234433] text-white shadow-2xl sticky top-0 z-50 border-b-2 border-[#E7BD8B] transition-all duration-300 ${isScrolled ? 'py-1' : ''}`}>
+    <nav className={`bg-gradient-to-r from-[#234433] via-[#234433] to-[#234433] text-white fixed top-0 left-0 right-0 w-full z-[100] border-b-2 border-[#E7BD8B] transition-all duration-300 ${isScrolled ? 'py-1 shadow-2xl backdrop-blur-md' : 'shadow-lg'}`}>
       {/* Top Bar - Desktop Only - Hidden when scrolled */}
       <div className={`hidden lg:block bg-[#234433]/50 backdrop-blur-sm transition-all duration-300 ${isScrolled ? 'h-0 overflow-hidden opacity-0' : 'h-auto opacity-100'}`}>
         <div className="max-w-7xl mx-auto px-6 py-1.5">
@@ -85,10 +85,10 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
       <div className={`max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 transition-all duration-300 ${isScrolled ? 'py-1.5' : 'py-2 lg:py-3'}`}>
         <div className="flex items-center justify-between">
           
-          {/* Left - Location Button (Desktop) or Menu (Mobile) */}
+          {/* Left - Location Button (Desktop) - Empty on Mobile */}
           <div className="flex-1">
             {/* Desktop Location Button */}
-            <button 
+            <button
               onClick={handleLocationClick}
               className="hidden lg:flex group items-center space-x-2.5 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-full px-3.5 py-2 transition-all duration-300 border border-white/20 hover:border-[#E7BD8B]/50"
             >
@@ -104,12 +104,12 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
                 <div className="text-white text-sm font-medium leading-tight max-w-[200px] truncate">
                   {isDetectingLocation ? (
                     <span className="animate-pulse">Finding location...</span>
-                  ) : userLocation ? 
-                    (userLocation.fullAddress ? 
-                      userLocation.fullAddress.length > 25 ? 
-                        `${userLocation.fullAddress.substring(0, 25)}...` : 
+                  ) : userLocation ?
+                    (userLocation.fullAddress ?
+                      userLocation.fullAddress.length > 25 ?
+                        `${userLocation.fullAddress.substring(0, 25)}...` :
                         userLocation.fullAddress
-                      : `${userLocation.area}, ${userLocation.city}`) : 
+                      : `${userLocation.area}, ${userLocation.city}`) :
                     'Gali Town, Gujranwala'
                   }
                 </div>
@@ -117,18 +117,6 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
               <svg className="w-4 h-4 text-[#E7BD8B] group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
-            </button>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={toggleSidebar}
-              className="lg:hidden bg-white/10 backdrop-blur-sm p-2 rounded-full hover:bg-white/20 transition-all group"
-            >
-              <div className="flex flex-col space-y-1 w-5 h-5 items-center justify-center">
-                <span className="block w-4 h-0.5 bg-white group-hover:bg-[#E7BD8B] rounded transition-colors"></span>
-                <span className="block w-4 h-0.5 bg-white group-hover:bg-[#E7BD8B] rounded transition-colors"></span>
-                <span className="block w-4 h-0.5 bg-white group-hover:bg-[#E7BD8B] rounded transition-colors"></span>
-              </div>
             </button>
           </div>
 
@@ -148,7 +136,7 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
 
           {/* Right - Cart & Menu */}
           <div className="flex-1 flex items-center justify-end space-x-2 sm:space-x-3 lg:space-x-4">
-            
+
             {/* Phone (Mobile Only) */}
             <a href="tel:021111734628" className="lg:hidden">
               <div className="bg-white/10 backdrop-blur-sm p-1.5 sm:p-2 rounded-full hover:bg-white/20 transition-all">
@@ -166,8 +154,8 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
             </button>
 
             {/* Shopping Cart */}
-            <button 
-              onClick={() => setIsCartOpen(true)} 
+            <button
+              onClick={() => setIsCartOpen(true)}
               className="relative bg-white/10 backdrop-blur-sm p-1.5 sm:p-2 rounded-full hover:bg-white/20 transition-all group"
             >
               <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-[#E7BD8B] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -180,10 +168,10 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
               )}
             </button>
 
-            {/* Desktop Menu Button */}
+            {/* Menu Button - Both Mobile & Desktop */}
             <button
               onClick={toggleSidebar}
-              className="hidden lg:block bg-white/10 backdrop-blur-sm p-2 rounded-full hover:bg-white/20 transition-all group"
+              className="bg-white/10 backdrop-blur-sm p-2 rounded-full hover:bg-white/20 transition-all group"
             >
               <div className="flex flex-col space-y-1 w-5 h-5 items-center justify-center">
                 <span className="block w-4 h-0.5 bg-white group-hover:bg-[#E7BD8B] rounded transition-colors"></span>

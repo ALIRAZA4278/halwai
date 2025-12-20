@@ -18,6 +18,11 @@ const inter = Inter({
 export const metadata = {
   title: "Halwaiii - Pure Desi Halwai",
   description: "Premium sweets, bakery, and dairy products",
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+  },
 };
 
 export default function RootLayout({ children }) {

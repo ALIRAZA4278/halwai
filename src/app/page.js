@@ -112,6 +112,7 @@ export default function Home() {
         onLocationChange={handleLocationChange}
         isDetectingLocation={isDetectingLocation}
       />
+      <div className="pt-[80px] lg:pt-[100px]">
 
       {/* Hero Landing Section */}
       <section className="relative h-screen w-full overflow-hidden">
@@ -176,28 +177,28 @@ export default function Home() {
       </section>
 
       {/* Story Section */}
-      <section className="bg-[#1a3329] py-20 md:py-32 lg:py-40">
-        <div className="max-w-[1400px] mx-auto px-8 md:px-12 lg:px-16">
+      <section className="bg-[#1a3329] py-20 md:py-32 lg:py-40 overflow-hidden">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
           <div className="bg-[#f5ede1] overflow-hidden">
-            <div className="grid md:grid-cols-2 gap-0 items-stretch">
+            <div className="grid lg:grid-cols-2 gap-0 items-stretch">
 
               {/* Left - Image */}
-              <div className="relative h-[450px] md:h-[550px] lg:h-[650px] overflow-hidden">
+              <div className="relative h-[600px] sm:h-[550px] md:h-[650px] lg:h-[750px] overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1672632426010-6fda4358bb6b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fGRlc2klMjBTd2VldHN8ZW58MHx8MHx8fDA%3D"
                   alt="The Story of Halwai"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute bottom-12 left-12">
-                  <h3 className="text-xl md:text-2xl font-light text-white tracking-[0.3em] uppercase">
+                <div className="absolute bottom-8 sm:bottom-12 left-6 sm:left-12">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-light text-white tracking-[0.2em] sm:tracking-[0.3em] uppercase">
                     THE STORY OF HALWAI
                   </h3>
                 </div>
               </div>
 
               {/* Right - Content */}
-              <div className="p-12 md:p-16 lg:p-20 xl:p-24 flex flex-col justify-center">
+              <div className="p-6 sm:p-8 md:p-16 lg:p-20 xl:p-24 flex flex-col justify-center">
                 <div className="text-[#C9A86A] text-xs md:text-sm uppercase tracking-[0.2em] mb-8 font-light flex items-center justify-center">
                   <span className="block w-16 h-px bg-[#C9A86A] mr-4"></span>
                   THE SYIDAI OF HALWAI
@@ -234,8 +235,8 @@ export default function Home() {
       </section>
 
       {/* Signature Creations Section */}
-      <section className="bg-[#1a3329] py-20 md:py-24 lg:py-28">
-        <div className="max-w-[1400px] mx-auto px-8 md:px-12 lg:px-16">
+      <section className="bg-[#1a3329] pt-20 md:pt-24 lg:pt-28 pb-0 overflow-hidden">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
 
           {/* Section Heading */}
           <h2 className="text-[#C9A86A] text-center text-lg md:text-xl lg:text-2xl uppercase tracking-[0.3em] mb-16 md:mb-20 font-light">
@@ -246,34 +247,37 @@ export default function Home() {
 
             {/* Left - Large Featured Item */}
             <div className="relative overflow-hidden bg-black">
-              <div className="relative h-[550px] lg:h-[650px]">
-                <img
-                  src="https://plus.unsplash.com/premium_photo-1691030657761-cca2ec5e97e9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fGRlc2klMjBTd2VldHN8ZW58MHx8MHx8fDA%3D"
-                  alt="Gictarus Curentics"
-                  className="w-full h-full object-cover opacity-90"
-                />
+              <div className="relative h-[calc(100vh-80px)] lg:h-[750px] flex items-center justify-center">
+                <div
+                  className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+                  style={{
+                    backgroundImage: `url('https://plus.unsplash.com/premium_photo-1691030657761-cca2ec5e97e9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fGRlc2klMjBTd2VldHN8ZW58MHx8MHx8fDA%3D')`,
+                    opacity: 0.9
+                  }}
+                ></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-              </div>
 
-              <div className="absolute bottom-0 left-0 right-0 p-10 md:p-14 text-center pb-12 md:pb-16">
-                <h3 className="text-white text-3xl md:text-4xl lg:text-5xl font-serif mb-3 leading-tight">
-                  Gictarus Curentics
-                </h3>
-                <p className="text-white text-2xl md:text-3xl font-serif mb-6 leading-tight font-light">
-                  Sweetness, Wrapped<br />in Grace
-                </p>
-                <p className="text-white/95 text-sm md:text-base mb-8 max-w-md mx-auto leading-relaxed">
-                  From weddings to heartfelt gestures. Our<br />
-                  gifting boxes bring together tradition an<br />
-                  elegance.
-                </p>
-                <button className="group relative border-2 border-white text-white px-12 py-4 text-base tracking-wider overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-                  <span className="relative z-10">Explore Gifting</span>
-                  <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-                  <span className="absolute inset-0 flex items-center justify-center text-[#1a3329] opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-semibold">
-                    Explore Gifting
-                  </span>
-                </button>
+                {/* Content Centered */}
+                <div className="relative z-10 text-center px-6 sm:px-8 w-full max-w-2xl">
+                  <h3 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif mb-3 sm:mb-4 leading-tight">
+                    Gictarus Curentics
+                  </h3>
+                  <p className="text-white text-xl sm:text-2xl md:text-3xl font-serif mb-4 sm:mb-6 leading-tight font-light">
+                    Sweetness, Wrapped<br />in Grace
+                  </p>
+                  <p className="text-white/95 text-sm sm:text-base md:text-base mb-6 sm:mb-8 mx-auto leading-relaxed">
+                    From weddings to heartfelt gestures. Our<br />
+                    gifting boxes bring together tradition an<br />
+                    elegance.
+                  </p>
+                  <button className="group relative border-2 border-white text-white px-10 sm:px-12 py-3 sm:py-4 text-sm sm:text-base tracking-wider overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+                    <span className="relative z-10">Explore Gifting</span>
+                    <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                    <span className="absolute inset-0 flex items-center justify-center text-[#1a3329] opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-semibold">
+                      Explore Gifting
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -355,13 +359,13 @@ export default function Home() {
       </section>
 
       {/* Essence of Celebration Section */}
-      <section className="bg-[#1a3329] py-20 md:py-32 lg:py-40">
-        <div className="max-w-[1400px] mx-auto px-8 md:px-12 lg:px-16">
+      <section className="bg-[#1a3329] py-20 md:py-32 lg:py-40 overflow-hidden">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
           <div className="bg-[#f5ede1] overflow-hidden">
             <div className="grid md:grid-cols-2 gap-0 items-stretch">
 
               {/* Left - Image */}
-              <div className="relative h-[450px] md:h-[550px] lg:h-[650px] overflow-hidden">
+              <div className="relative h-[500px] sm:h-[550px] md:h-[550px] lg:h-[650px] overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=800&q=80"
                   alt="The Essence of Celebration"
@@ -371,7 +375,7 @@ export default function Home() {
               </div>
 
               {/* Right - Content */}
-              <div className="p-12 md:p-16 lg:p-20 xl:p-24 flex flex-col justify-center">
+              <div className="p-6 sm:p-8 md:p-16 lg:p-20 xl:p-24 flex flex-col justify-center">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#2d2d2d] mb-8 leading-tight text-center">
                   The Essence of<br />Celebration
                 </h2>
@@ -430,6 +434,7 @@ export default function Home() {
           </div>
         </div>
       )}
+      </div>
 
       <LocationModal
         isOpen={showLocationModal}
