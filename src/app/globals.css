@@ -121,10 +121,6 @@ body {
   box-sizing: border-box;
 }
 
-/* Container constraints */
-.container, section, div {
-  max-width: 100%;
-}
 
 /* Apply Optima to headings */
 h1, h2, h3, h4, h5, h6, .font-serif {
