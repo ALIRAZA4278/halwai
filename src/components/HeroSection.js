@@ -70,17 +70,6 @@ const HeroSection = () => {
     return () => clearInterval(timer);
   }, [slides.length, imagesLoaded]);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-  };
 
   return (
     <section className="relative h-[70vh] md:h-[75vh] lg:h-[85vh] w-full overflow-hidden">
@@ -139,37 +128,6 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Navigation Arrows */}
-      <button 
-        onClick={prevSlide}
-        className="absolute left-4 sm:left-6 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 sm:p-4 rounded-full transition-all z-20 backdrop-blur-sm"
-      >
-        <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-
-      <button 
-        onClick={nextSlide}
-        className="absolute right-4 sm:right-6 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 sm:p-4 rounded-full transition-all z-20 backdrop-blur-sm"
-      >
-        <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
-      {/* Slide Indicators */}
-      <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`h-2.5 rounded-full transition-all ${
-              currentSlide === index ? 'bg-white w-8' : 'bg-white/50 w-2.5 hover:bg-white/75'
-            }`}
-          />
-        ))}
-      </div>
     </section>
   );
 };
