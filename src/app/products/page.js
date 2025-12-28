@@ -122,11 +122,9 @@ export default function Products() {
         onLocationChange={handleLocationChange}
         isDetectingLocation={isDetectingLocation}
       />
-      <div className="pt-[80px] lg:pt-[100px]">
       <HeroSection />
       <Categories />
       <Footer />
-      </div>
 
       {/* Cart Sidebar */}
       <Cart />
