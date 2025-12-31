@@ -265,7 +265,7 @@ const Categories = () => {
   }, [categories]);
 
   const CategoryBanner = ({ category, title }) => (
-    <div className={`relative h-48 md:h-56 rounded-lg overflow-hidden shadow-xl mb-8`}>
+    <div className={`relative h-32 md:h-40 lg:h-44 rounded-lg overflow-hidden shadow-xl mb-6`}>
       {category.bannerImage ? (
         <>
           {/* Background Image */}
@@ -294,23 +294,23 @@ const Categories = () => {
           </div>
 
           {/* Lotus/Decorative Icon - Left Side */}
-          <div className="absolute left-8 md:left-16 top-1/2 transform -translate-y-1/2">
-            <div className="text-white/30 text-5xl md:text-7xl">❋</div>
+          <div className="absolute left-6 md:left-12 top-1/2 transform -translate-y-1/2">
+            <div className="text-white/30 text-3xl md:text-5xl">❋</div>
           </div>
 
           {/* Lotus/Decorative Icon - Right Side */}
-          <div className="absolute right-8 md:right-16 top-1/2 transform -translate-y-1/2">
-            <div className="text-white/30 text-5xl md:text-7xl">❋</div>
+          <div className="absolute right-6 md:right-12 top-1/2 transform -translate-y-1/2">
+            <div className="text-white/30 text-3xl md:text-5xl">❋</div>
           </div>
 
           {/* Decorative Icon - Top */}
-          <div className="absolute inset-x-0 top-6 flex justify-center">
-            <div className="text-white/80 text-3xl">❋</div>
+          <div className="absolute inset-x-0 top-3 flex justify-center">
+            <div className="text-white/80 text-xl md:text-2xl">❋</div>
           </div>
 
           {/* Category Content - Only show for categories without banner images */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
-            <h2 className="text-4xl md:text-6xl font-serif font-bold text-white text-center drop-shadow-2xl tracking-wide">
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-white text-center drop-shadow-2xl tracking-wide">
               {title}
             </h2>
           </div>
@@ -409,7 +409,7 @@ const Categories = () => {
       )}
 
       {/* Search Bar Section */}
-      <div className="bg-gradient-to-b from-orange-50/50 to-white py-8 sm:py-10 lg:py-12 px-4 sm:px-6">
+      <div className="bg-gradient-to-b from-orange-50/50 to-white py-4 sm:py-6 lg:py-8 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-r from-[#234433] to-[#234433] rounded-full blur-xl opacity-0 group-hover:opacity-25 transition-opacity duration-500"></div>
@@ -418,13 +418,13 @@ const Categories = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={placeholderText}
-              className="relative w-full px-8 sm:px-10 py-5 sm:py-6 pr-16 sm:pr-18 rounded-full border-3 border-gray-200 focus:border-[#234433] focus:ring-4 focus:ring-[#234433]/10 focus:outline-none text-gray-800 placeholder-gray-400 shadow-xl hover:shadow-2xl transition-all duration-300 text-base sm:text-lg bg-white font-medium"
+              className="relative w-full px-6 sm:px-8 py-3 sm:py-4 pr-14 sm:pr-16 rounded-full border-2 border-gray-200 focus:border-[#234433] focus:ring-4 focus:ring-[#234433]/10 focus:outline-none text-gray-800 placeholder-gray-400 shadow-xl hover:shadow-2xl transition-all duration-300 text-sm sm:text-base bg-white font-medium"
             />
-            <button 
-              className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-white p-4 sm:p-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 active:scale-95"
+            <button
+              className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-white p-3 sm:p-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 active:scale-95"
               style={{ background: 'linear-gradient(to right, #E7BD8B, #E7BD8B)' }}
             >
-              <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </button>

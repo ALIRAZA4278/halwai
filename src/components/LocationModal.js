@@ -108,40 +108,40 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
 
   return (
     <div className="fixed inset-0 backdrop-blur-md bg-white/30 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-xl max-w-md w-full">
-        
+      <div className="bg-white rounded-xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+
         {/* Header */}
-        <div className="text-center py-6 px-6 border-b border-gray-100">
+        <div className="text-center py-4 px-6 border-b border-gray-100">
           {/* Logo */}
-          <div className="mb-4 flex justify-center">
+          <div className="mb-3 flex justify-center">
             <img
               src="/LOGO/halwaiiii-01.png"
               alt="Halwaiii Logo"
-              className="h-16 w-auto object-contain"
+              className="h-12 w-auto object-contain"
             />
           </div>
 
-          <p className="text-sm text-gray-500">Pure Desi Halwai</p>
+          <p className="text-xs text-gray-500">Pure Desi Halwai</p>
         </div>
 
         {/* Content */}
-        <div className="p-6">
-          
+        <div className="p-4">
+
           {/* Order Type Selection */}
-          <div className="mb-6">
-            <h2 className="text-lg font-medium text-gray-800 mb-3 text-center">
+          <div className="mb-4">
+            <h2 className="text-base font-medium text-gray-800 mb-2 text-center">
               Select your order type
             </h2>
             <div className="flex justify-center">
-              <div className="bg-[#234433] text-white px-6 py-2 rounded-full font-medium text-sm">
+              <div className="bg-[#234433] text-white px-5 py-1.5 rounded-full font-medium text-xs">
                 DELIVERY
               </div>
             </div>
           </div>
 
           {/* Location Section */}
-          <div className="mb-6">
-            <h3 className="text-base font-medium text-gray-800 mb-3">
+          <div className="mb-4">
+            <h3 className="text-sm font-medium text-gray-800 mb-2">
               Please select your location
             </h3>
             
@@ -149,7 +149,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
             <button
               onClick={getCurrentLocation}
               disabled={isLoading}
-              className="w-full mb-4 px-4 py-3 bg-[#234433] text-white rounded-lg font-medium hover:bg-[#234433]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+              className="w-full mb-3 px-4 py-2.5 bg-[#234433] text-white rounded-lg text-sm font-medium hover:bg-[#234433]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
@@ -158,28 +158,28 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
             </button>
 
             {locationError && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-                <p className="text-red-600 text-sm">{locationError}</p>
+              <div className="mb-3 p-2.5 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-red-600 text-xs">{locationError}</p>
               </div>
             )}
 
             {currentLocation && (
-              <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-                <p className="text-green-700 text-sm">
+              <div className="mb-3 p-2.5 bg-green-50 border border-green-200 rounded-lg">
+                <p className="text-green-700 text-xs">
                   Current location: {currentLocation.city}, {currentLocation.area}
                 </p>
               </div>
             )}
 
             {/* Editable Address Fields */}
-            <div className="space-y-3 mb-6">
+            <div className="space-y-2.5 mb-4">
               {/* City Input */}
               <input
                 type="text"
                 value={cityInput}
                 onChange={(e) => setCityInput(e.target.value)}
                 placeholder="Enter your city"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#234433] transition-colors text-black"
+                className="w-full px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-[#234433] transition-colors text-black"
               />
 
               {/* Area Input */}
@@ -188,7 +188,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
                 value={areaInput}
                 onChange={(e) => setAreaInput(e.target.value)}
                 placeholder="Enter your area"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#234433] transition-colors text-black"
+                className="w-full px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-[#234433] transition-colors text-black"
               />
 
               {/* Complete Address Input */}
@@ -196,8 +196,8 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
                 value={fullAddress}
                 onChange={(e) => setFullAddress(e.target.value)}
                 placeholder="Enter your complete address (House #, Street, Landmark)"
-                rows="3"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#234433] transition-colors resize-none text-black"
+                rows="2"
+                className="w-full px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-[#234433] transition-colors resize-none text-black"
               />
             </div>
           </div>
@@ -206,7 +206,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
           <button
             onClick={handleSubmit}
             disabled={!cityInput.trim() || !areaInput.trim() || !fullAddress.trim()}
-            className="w-full py-3 bg-[#234433] text-white rounded-lg font-medium hover:bg-[#234433]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-2.5 text-sm bg-[#234433] text-white rounded-lg font-medium hover:bg-[#234433]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Select
           </button>

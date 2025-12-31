@@ -72,7 +72,7 @@ const HeroSection = () => {
 
 
   return (
-    <section className="relative h-[70vh] md:h-[75vh] lg:h-[85vh] w-full overflow-hidden">
+    <section className="relative h-[50vh] md:h-[55vh] lg:h-[60vh] w-full overflow-hidden">
 
       {/* Loading State */}
       {!imagesLoaded && (

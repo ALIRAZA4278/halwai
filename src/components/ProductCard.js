@@ -33,50 +33,50 @@ const ProductCard = ({ product, onProductClick, onAddToCart }) => {
         className="bg-white rounded-lg overflow-hidden shadow-lg flex flex-col h-full cursor-pointer hover:shadow-xl"
       >
         {/* Product Image */}
-        <div className="relative h-56 bg-gradient-to-b from-gray-100 to-gray-50 flex items-center justify-center p-6 flex-shrink-0">
+        <div className="relative h-40 md:h-44 bg-gradient-to-b from-gray-100 to-gray-50 flex items-center justify-center p-4 flex-shrink-0">
           {product.image && (product.image.startsWith('http') || product.image.startsWith('/')) ? (
             <img
               src={product.image}
               alt={product.name}
               className="object-contain w-full h-full"
               loading="lazy"
-              width="224"
-              height="224"
+              width="176"
+              height="176"
             />
           ) : (
-            <div className="text-6xl filter drop-shadow-lg">{product.image}</div>
+            <div className="text-4xl md:text-5xl filter drop-shadow-lg">{product.image}</div>
           )}
         </div>
 
         {/* Content Section */}
-        <div className="p-5 bg-gradient-to-b from-amber-50/40 to-white flex flex-col flex-grow">
+        <div className="p-3 md:p-4 bg-gradient-to-b from-amber-50/40 to-white flex flex-col flex-grow">
           {/* Product Name */}
-          <h3 className="text-xl font-bold text-amber-700 mb-3 leading-tight line-clamp-2 min-h-[3.5rem]">
+          <h3 className="text-base md:text-lg font-bold text-amber-700 mb-2 leading-tight line-clamp-2 min-h-[2.5rem]">
             {product.name}
           </h3>
 
           {/* Price */}
-          <div className="mb-3">
-            <span className="text-xs text-[#234433] font-bold uppercase tracking-wide">FROM RS. </span>
-            <span className="text-[#234433] font-bold text-lg">
+          <div className="mb-2">
+            <span className="text-[10px] text-[#234433] font-bold uppercase tracking-wide">FROM RS. </span>
+            <span className="text-[#234433] font-bold text-base md:text-lg">
               {displayPrice}
             </span>
           </div>
 
           {/* Description */}
-          <p className="text-sm text-gray-700 leading-relaxed mb-4 line-clamp-3 flex-grow">
+          <p className="text-xs md:text-sm text-gray-700 leading-relaxed mb-3 line-clamp-2 flex-grow">
             {product.description}
           </p>
 
           {/* Variants */}
           {availableVariants.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-1.5 mb-3">
               {availableVariants.map((variant, index) => (
                 <button
                   key={`${product.id}-${index}`}
                   type="button"
                   onClick={(e) => handleVariantClick(e, index)}
-                  className={`px-4 py-2 border-2 rounded-md text-xs font-bold ${
+                  className={`px-3 py-1.5 border-2 rounded-md text-[10px] md:text-xs font-bold ${
                     selectedVariantIndex === index
                       ? 'border-gray-800 bg-gray-800 text-white shadow-md'
                       : 'border-gray-400 text-gray-800 bg-white hover:border-gray-500'
@@ -91,7 +91,7 @@ const ProductCard = ({ product, onProductClick, onAddToCart }) => {
           {/* Add Button */}
           <button
             onClick={handleAddClick}
-            className="w-full text-white py-3 rounded-full font-bold uppercase tracking-wider shadow-md text-sm bg-gradient-to-r from-[#E7BD8B] to-[#E7BD8B] hover:from-[#d4ab7a] hover:to-[#d4ab7a] cursor-pointer"
+            className="w-full text-white py-2 md:py-2.5 rounded-full font-bold uppercase tracking-wider shadow-md text-xs md:text-sm bg-gradient-to-r from-[#E7BD8B] to-[#E7BD8B] hover:from-[#d4ab7a] hover:to-[#d4ab7a] cursor-pointer"
           >
             ADD
           </button>
