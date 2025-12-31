@@ -107,41 +107,41 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 backdrop-blur-md bg-white/30 flex items-center justify-center z-50 p-3 sm:p-4 md:p-6 pt-20 sm:pt-24 md:pt-6 pb-6">
-      <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl max-w-[95%] xs:max-w-[420px] sm:max-w-md md:max-w-lg w-full max-h-[82vh] sm:max-h-[85vh] md:max-h-[90vh] overflow-y-auto my-auto">
+    <div className="fixed inset-0 backdrop-blur-md bg-white/30 flex items-center justify-center z-50 p-2 sm:p-3 md:p-4">
+      <div className="bg-white rounded-lg sm:rounded-xl shadow-xl w-[95%] xs:w-[90%] sm:max-w-md md:max-w-lg max-h-[90vh] overflow-y-auto my-auto">
 
         {/* Header */}
-        <div className="text-center py-3 sm:py-4 md:py-5 px-4 sm:px-6 border-b border-gray-100">
+        <div className="text-center py-2 sm:py-3 md:py-4 px-3 sm:px-4 md:px-5 border-b border-gray-100">
           {/* Logo */}
-          <div className="mb-2 sm:mb-3 flex justify-center">
+          <div className="mb-1.5 sm:mb-2 flex justify-center">
             <img
               src="/LOGO/halwaiiii-01.png"
               alt="Halwaiii Logo"
-              className="h-10 xs:h-11 sm:h-12 md:h-14 w-auto object-contain"
+              className="h-8 xs:h-9 sm:h-10 md:h-12 w-auto object-contain"
             />
           </div>
 
-          <p className="text-[10px] xs:text-xs sm:text-sm text-gray-500">Pure Desi Halwai</p>
+          <p className="text-[9px] xs:text-[10px] sm:text-xs text-gray-500">Pure Desi Halwai</p>
         </div>
 
         {/* Content */}
-        <div className="p-3 xs:p-4 sm:p-5 md:p-6">
+        <div className="p-3 xs:p-3.5 sm:p-4 md:p-5">
 
           {/* Order Type Selection */}
-          <div className="mb-4 sm:mb-5">
-            <h2 className="text-sm xs:text-base sm:text-lg font-medium text-gray-800 mb-2 sm:mb-3 text-center">
+          <div className="mb-3 sm:mb-4">
+            <h2 className="text-xs xs:text-sm sm:text-base font-medium text-gray-800 mb-1.5 sm:mb-2 text-center">
               Select your order type
             </h2>
             <div className="flex justify-center">
-              <div className="bg-[#234433] text-white px-4 xs:px-5 sm:px-6 py-1.5 sm:py-2 rounded-full font-medium text-[11px] xs:text-xs sm:text-sm">
+              <div className="bg-[#234433] text-white px-3 xs:px-4 sm:px-5 py-1 sm:py-1.5 rounded-full font-medium text-[10px] xs:text-xs sm:text-sm">
                 DELIVERY
               </div>
             </div>
           </div>
 
           {/* Location Section */}
-          <div className="mb-4 sm:mb-5">
-            <h3 className="text-xs xs:text-sm sm:text-base font-medium text-gray-800 mb-2 sm:mb-3">
+          <div className="mb-3 sm:mb-4">
+            <h3 className="text-[11px] xs:text-xs sm:text-sm font-medium text-gray-800 mb-1.5 sm:mb-2">
               Please select your location
             </h3>
 
@@ -149,37 +149,37 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
             <button
               onClick={getCurrentLocation}
               disabled={isLoading}
-              className="w-full mb-2.5 sm:mb-3 px-3 xs:px-4 py-2 xs:py-2.5 sm:py-3 bg-[#234433] text-white rounded-lg text-xs xs:text-sm sm:text-base font-medium hover:bg-[#234433]/90 active:bg-[#234433]/95 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-1.5 xs:space-x-2"
+              className="w-full mb-2 sm:mb-2.5 px-2.5 xs:px-3 sm:px-4 py-1.5 xs:py-2 sm:py-2.5 bg-[#234433] text-white rounded-lg text-[11px] xs:text-xs sm:text-sm font-medium hover:bg-[#234433]/90 active:bg-[#234433]/95 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-1.5"
             >
-              <svg className="w-3.5 h-3.5 xs:w-4 xs:h-4 sm:w-5 sm:h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
               </svg>
               <span className="truncate">{isLoading ? 'Getting Location...' : 'Use Current Location'}</span>
             </button>
 
             {locationError && (
-              <div className="mb-2.5 sm:mb-3 p-2 xs:p-2.5 sm:p-3 bg-red-50 border border-red-200 rounded-lg">
-                <p className="text-red-600 text-[10px] xs:text-xs sm:text-sm leading-relaxed">{locationError}</p>
+              <div className="mb-2 sm:mb-2.5 p-1.5 xs:p-2 sm:p-2.5 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-red-600 text-[9px] xs:text-[10px] sm:text-xs leading-relaxed">{locationError}</p>
               </div>
             )}
 
             {currentLocation && (
-              <div className="mb-2.5 sm:mb-3 p-2 xs:p-2.5 sm:p-3 bg-green-50 border border-green-200 rounded-lg">
-                <p className="text-green-700 text-[10px] xs:text-xs sm:text-sm leading-relaxed">
+              <div className="mb-2 sm:mb-2.5 p-1.5 xs:p-2 sm:p-2.5 bg-green-50 border border-green-200 rounded-lg">
+                <p className="text-green-700 text-[9px] xs:text-[10px] sm:text-xs leading-relaxed">
                   Current location: {currentLocation.city}, {currentLocation.area}
                 </p>
               </div>
             )}
 
             {/* Editable Address Fields */}
-            <div className="space-y-2 xs:space-y-2.5 sm:space-y-3 mb-4 sm:mb-5">
+            <div className="space-y-1.5 xs:space-y-2 sm:space-y-2.5 mb-3 sm:mb-4">
               {/* City Input */}
               <input
                 type="text"
                 value={cityInput}
                 onChange={(e) => setCityInput(e.target.value)}
                 placeholder="Enter your city"
-                className="w-full px-2.5 xs:px-3 sm:px-4 py-2 xs:py-2.5 sm:py-3 text-xs xs:text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:border-[#234433] focus:ring-2 focus:ring-[#234433]/20 transition-all text-black placeholder:text-gray-400"
+                className="w-full px-2 xs:px-2.5 sm:px-3 py-1.5 xs:py-2 sm:py-2.5 text-[11px] xs:text-xs sm:text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-[#234433] focus:ring-1 focus:ring-[#234433]/20 transition-all text-black placeholder:text-gray-400"
               />
 
               {/* Area Input */}
@@ -188,7 +188,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
                 value={areaInput}
                 onChange={(e) => setAreaInput(e.target.value)}
                 placeholder="Enter your area"
-                className="w-full px-2.5 xs:px-3 sm:px-4 py-2 xs:py-2.5 sm:py-3 text-xs xs:text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:border-[#234433] focus:ring-2 focus:ring-[#234433]/20 transition-all text-black placeholder:text-gray-400"
+                className="w-full px-2 xs:px-2.5 sm:px-3 py-1.5 xs:py-2 sm:py-2.5 text-[11px] xs:text-xs sm:text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-[#234433] focus:ring-1 focus:ring-[#234433]/20 transition-all text-black placeholder:text-gray-400"
               />
 
               {/* Complete Address Input */}
@@ -197,7 +197,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
                 onChange={(e) => setFullAddress(e.target.value)}
                 placeholder="Enter your complete address (House #, Street, Landmark)"
                 rows="2"
-                className="w-full px-2.5 xs:px-3 sm:px-4 py-2 xs:py-2.5 sm:py-3 text-xs xs:text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:border-[#234433] focus:ring-2 focus:ring-[#234433]/20 transition-all resize-none text-black placeholder:text-gray-400 leading-relaxed"
+                className="w-full px-2 xs:px-2.5 sm:px-3 py-1.5 xs:py-2 sm:py-2.5 text-[11px] xs:text-xs sm:text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-[#234433] focus:ring-1 focus:ring-[#234433]/20 transition-all resize-none text-black placeholder:text-gray-400 leading-relaxed"
               />
             </div>
           </div>
@@ -206,7 +206,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
           <button
             onClick={handleSubmit}
             disabled={!cityInput.trim() || !areaInput.trim() || !fullAddress.trim()}
-            className="w-full py-2.5 xs:py-3 sm:py-3.5 text-xs xs:text-sm sm:text-base bg-[#234433] text-white rounded-lg font-medium hover:bg-[#234433]/90 active:bg-[#234433]/95 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
+            className="w-full py-2 xs:py-2.5 sm:py-3 text-[11px] xs:text-xs sm:text-sm bg-[#234433] text-white rounded-lg font-medium hover:bg-[#234433]/90 active:bg-[#234433]/95 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
           >
             Select
           </button>
