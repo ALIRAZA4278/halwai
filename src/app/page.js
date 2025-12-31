@@ -115,7 +115,7 @@ export default function Home() {
       <div>
 
       {/* Hero Landing Section */}
-      <section className="relative h-[45vh] md:h-[50vh] lg:h-[55vh] w-full overflow-hidden mt-[50px] lg:mt-[60px]">
+      <section className="relative h-[80vh] w-full overflow-hidden mt-[50px] lg:mt-[60px]">
         {/* Background Image */}
         <div
           className="absolute inset-0 w-full h-full"
