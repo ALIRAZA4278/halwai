@@ -112,10 +112,10 @@ export default function Home() {
         onLocationChange={handleLocationChange}
         isDetectingLocation={isDetectingLocation}
       />
-      <div className="pt-[80px] lg:pt-[100px]">
+      <div>
 
       {/* Hero Landing Section */}
-      <section className="relative h-screen w-full overflow-hidden">
+      <section className="relative h-[45vh] md:h-[50vh] lg:h-[55vh] w-full overflow-hidden mt-[50px] lg:mt-[60px]">
         {/* Background Image */}
         <div
           className="absolute inset-0 w-full h-full"
@@ -133,26 +133,26 @@ export default function Home() {
         {/* Content */}
         <div className="relative z-10 h-full flex flex-col items-center justify-center px-4">
           {/* Logo */}
-          <div className="mb-12 transform hover:scale-105 transition-transform duration-300">
+          <div className="mb-4 md:mb-5 transform hover:scale-105 transition-transform duration-300">
             <img
               src="/LOGO/halwaiiii-01.png"
               alt="Halwaiii Logo"
-              className="h-24 md:h-32 lg:h-40 w-auto object-contain drop-shadow-2xl"
+              className="h-12 md:h-16 lg:h-20 w-auto object-contain drop-shadow-2xl"
             />
           </div>
 
           {/* Tagline */}
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif text-white text-center mb-4 max-w-5xl leading-tight tracking-wide">
+          <h2 className="text-xl md:text-3xl lg:text-4xl font-serif text-white text-center mb-1 max-w-5xl leading-tight tracking-wide">
             Where Heritage Meets
           </h2>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif text-white text-center mb-16 max-w-5xl leading-tight tracking-wide">
+          <h2 className="text-xl md:text-3xl lg:text-4xl font-serif text-white text-center mb-5 max-w-5xl leading-tight tracking-wide">
             Indulgence
           </h2>
 
           {/* CTA Button */}
           <a
             href="/products"
-            className="group relative border-2 border-white text-white px-12 py-4 text-lg font-semibold overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+            className="group relative border-2 border-white text-white px-6 md:px-8 py-2 md:py-2.5 text-sm md:text-base font-semibold overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl"
           >
             <span className="relative z-10 transition-colors duration-300 group-hover:text-black">Explore the Collection</span>
             <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
@@ -177,13 +177,13 @@ export default function Home() {
       </section>
 
       {/* Story Section */}
-      <section className="bg-[#1a3329] py-20 md:py-32 lg:py-40 overflow-hidden">
+      <section className="bg-[#1a3329] py-8 md:py-10 lg:py-12 overflow-hidden">
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
           <div className="bg-[#f5ede1] overflow-hidden">
             <div className="grid lg:grid-cols-2 gap-0 items-stretch">
 
               {/* Left - Image */}
-              <div className="relative h-[600px] sm:h-[550px] md:h-[650px] lg:h-[750px] overflow-hidden">
+              <div className="relative h-[250px] sm:h-[280px] md:h-[320px] lg:h-[350px] overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1672632426010-6fda4358bb6b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fGRlc2klMjBTd2VldHN8ZW58MHx8MHx8fDA%3D"
                   alt="The Story of Halwai"
@@ -198,18 +198,18 @@ export default function Home() {
               </div>
 
               {/* Right - Content */}
-              <div className="p-6 sm:p-8 md:p-16 lg:p-20 xl:p-24 flex flex-col justify-center">
-                <div className="text-[#C9A86A] text-xs md:text-sm uppercase tracking-[0.2em] mb-8 font-light flex items-center justify-center">
-                  <span className="block w-16 h-px bg-[#C9A86A] mr-4"></span>
+              <div className="p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex flex-col justify-center">
+                <div className="text-[#C9A86A] text-[10px] uppercase tracking-[0.15em] mb-3 font-light flex items-center justify-center">
+                  <span className="block w-8 h-px bg-[#C9A86A] mr-2"></span>
                   THE SYIDAI OF HALWAI
-                  <span className="block w-16 h-px bg-[#C9A86A] ml-4"></span>
+                  <span className="block w-8 h-px bg-[#C9A86A] ml-2"></span>
                 </div>
 
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#2d2d2d] mb-8 leading-tight text-center">
+                <h2 className="text-xl md:text-2xl lg:text-3xl font-serif text-[#2d2d2d] mb-3 leading-tight text-center">
                   The Art of<br />Sweetmaking
                 </h2>
 
-                <p className="text-[#666666] text-lg md:text-xl leading-relaxed mb-12 text-center max-w-lg mx-auto">
+                <p className="text-[#666666] text-xs md:text-sm leading-relaxed mb-4 text-center max-w-lg mx-auto">
                   Halwai is more than a name: It&apos;s a craft passed down through generations.<br />
                   We blend time-honored tradition with a touch of modern finesse, creating<br />
                   moments that linger beyond taste.
@@ -218,7 +218,7 @@ export default function Home() {
                 <div className="text-center">
                   <a
                     href="/about"
-                    className="group relative inline-block border-2 border-[#C9A86A] text-[#C9A86A] px-12 py-4 text-base md:text-lg tracking-wide overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-lg"
+                    className="group relative inline-block border-2 border-[#C9A86A] text-[#C9A86A] px-6 md:px-8 py-2 md:py-2.5 text-xs md:text-sm tracking-wide overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-lg"
                   >
                     <span className="relative z-10">Discover Our Story</span>
                     <div className="absolute inset-0 bg-[#C9A86A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
@@ -235,19 +235,19 @@ export default function Home() {
       </section>
 
       {/* Signature Creations Section */}
-      <section className="bg-[#1a3329] pt-20 md:pt-24 lg:pt-28 pb-0 overflow-hidden">
+      <section className="bg-[#1a3329] pt-8 md:pt-10 lg:pt-12 pb-0 overflow-hidden">
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
 
           {/* Section Heading */}
-          <h2 className="text-[#C9A86A] text-center text-lg md:text-xl lg:text-2xl uppercase tracking-[0.3em] mb-16 md:mb-20 font-light">
+          <h2 className="text-[#C9A86A] text-center text-sm md:text-base lg:text-lg uppercase tracking-[0.3em] mb-6 md:mb-8 font-light">
             SIGNATURE CREATIONS
           </h2>
 
-          <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-10">
+          <div className="grid lg:grid-cols-[1.2fr_1fr] gap-4 lg:gap-6">
 
             {/* Left - Large Featured Item */}
-            <div className="relative overflow-hidden bg-black">
-              <div className="relative h-[calc(100vh-80px)] lg:h-[750px] flex items-center justify-center">
+            <div className="relative overflow-hidden ">
+              <div className="relative h-[280px] md:h-[320px] lg:h-[360px] flex items-center justify-center">
                 <div
                   className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
                   style={{
@@ -258,19 +258,19 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
                 {/* Content Centered */}
-                <div className="relative z-10 text-center px-6 sm:px-8 w-full max-w-2xl">
-                  <h3 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif mb-3 sm:mb-4 leading-tight">
+                <div className="relative z-10 text-center px-3 sm:px-4 w-full max-w-2xl">
+                  <h3 className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif mb-1.5 sm:mb-2 leading-tight">
                     Gictarus Curentics
                   </h3>
-                  <p className="text-white text-xl sm:text-2xl md:text-3xl font-serif mb-4 sm:mb-6 leading-tight font-light">
+                  <p className="text-white text-base sm:text-lg md:text-xl font-serif mb-2 sm:mb-3 leading-tight font-light">
                     Sweetness, Wrapped<br />in Grace
                   </p>
-                  <p className="text-white/95 text-sm sm:text-base md:text-base mb-6 sm:mb-8 mx-auto leading-relaxed">
+                  <p className="text-white/95 text-[10px] sm:text-xs md:text-xs mb-3 sm:mb-4 mx-auto leading-relaxed">
                     From weddings to heartfelt gestures. Our<br />
                     gifting boxes bring together tradition an<br />
                     elegance.
                   </p>
-                  <button className="group relative border-2 border-white text-white px-10 sm:px-12 py-3 sm:py-4 text-sm sm:text-base tracking-wider overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+                  <button className="group relative border-2 border-white text-white px-5 sm:px-6 py-1.5 sm:py-2 text-[10px] sm:text-xs tracking-wider overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl">
                     <span className="relative z-10">Explore Gifting</span>
                     <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                     <span className="absolute inset-0 flex items-center justify-center text-[#1a3329] opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-semibold">
@@ -282,72 +282,72 @@ export default function Home() {
             </div>
 
             {/* Right - Grid of 4 Items */}
-            <div className="grid grid-cols-2 gap-6 lg:gap-8">
+            <div className="grid grid-cols-2 gap-3 lg:gap-4">
 
               {/* Item 1 - Kesar Pak */}
               <div className="text-center">
-                <div className="relative h-[220px] lg:h-[270px] mb-5 overflow-hidden bg-black">
+                <div className="relative h-[110px] md:h-[125px] lg:h-[140px] mb-2 overflow-hidden bg-black">
                   <img
                     src="https://5.imimg.com/data5/ECOM/Default/2024/6/430579060/LZ/RH/ZT/36070396/kesarpaak-500x500.jpg"
                     alt="Kesar Pak"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h4 className="text-[#C9A86A] text-xl lg:text-2xl font-serif mb-2">
+                <h4 className="text-[#C9A86A] text-sm md:text-base font-serif mb-0.5">
                   Kesar Pak
                 </h4>
-                <p className="text-white/70 text-sm font-light">
+                <p className="text-white/70 text-[10px] font-light">
                   The Bawal Indulgence
                 </p>
               </div>
 
               {/* Item 2 - Pista Roll */}
               <div className="text-center">
-                <div className="relative h-[220px] lg:h-[270px] mb-5 overflow-hidden bg-black">
+                <div className="relative h-[110px] md:h-[125px] lg:h-[140px] mb-2 overflow-hidden bg-black">
                   <img
                     src="https://tse2.mm.bing.net/th/id/OIP.qFcOb6Uc6mlnnvIf1kp52wHaHa?pid=Api&P=0&h=220"
                     alt="Pista Roll"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h4 className="text-[#C9A86A] text-xl lg:text-2xl font-serif mb-2">
+                <h4 className="text-[#C9A86A] text-sm md:text-base font-serif mb-0.5">
                   Pista Roll
                 </h4>
-                <p className="text-white/70 text-sm font-light">
+                <p className="text-white/70 text-[10px] font-light">
                   A Heritage Favorite
                 </p>
               </div>
 
               {/* Item 3 - Gulab Jamun */}
               <div className="text-center">
-                <div className="relative h-[220px] lg:h-[270px] mb-5 overflow-hidden bg-black">
+                <div className="relative h-[110px] md:h-[125px] lg:h-[140px] mb-2 overflow-hidden bg-black">
                   <img
                     src="https://tse2.mm.bing.net/th/id/OIP.8gpEn9J9ZwsYk2NAGqKSkQHaHa?pid=Api&P=0&h=220"
                     alt="Gulab Jamun"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h4 className="text-[#C9A86A] text-xl lg:text-2xl font-serif mb-2">
+                <h4 className="text-[#C9A86A] text-sm md:text-base font-serif mb-0.5">
                   Gulab Jamun
                 </h4>
-                <p className="text-white/70 text-sm font-light">
+                <p className="text-white/70 text-[10px] font-light">
                   Classic Delight
                 </p>
               </div>
 
               {/* Item 4 - Motichoor Ladoo */}
               <div className="text-center">
-                <div className="relative h-[220px] lg:h-[270px] mb-5 overflow-hidden bg-black">
+                <div className="relative h-[110px] md:h-[125px] lg:h-[140px] mb-2 overflow-hidden bg-black">
                   <img
                     src="https://tse4.mm.bing.net/th/id/OIP.JKeMEgXuj2MwAMUYAykHCAHaHa?pid=Api&P=0&h=220"
                     alt="Motichoor Ladoo"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h4 className="text-[#C9A86A] text-xl lg:text-2xl font-serif mb-2">
+                <h4 className="text-[#C9A86A] text-sm md:text-base font-serif mb-0.5">
                   Motichoor Ladoo
                 </h4>
-                <p className="text-white/70 text-sm font-light">
+                <p className="text-white/70 text-[10px] font-light">
                   Rich and Flavorful
                 </p>
               </div>
@@ -359,13 +359,13 @@ export default function Home() {
       </section>
 
       {/* Essence of Celebration Section */}
-      <section className="bg-[#1a3329] py-20 md:py-32 lg:py-40 overflow-hidden">
+      <section className="bg-[#1a3329] py-8 md:py-10 lg:py-12 overflow-hidden">
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
           <div className="bg-[#f5ede1] overflow-hidden">
             <div className="grid md:grid-cols-2 gap-0 items-stretch">
 
               {/* Left - Image */}
-              <div className="relative h-[500px] sm:h-[550px] md:h-[550px] lg:h-[650px] overflow-hidden">
+              <div className="relative h-[200px] sm:h-[230px] md:h-[270px] lg:h-[300px] overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=800&q=80"
                   alt="The Essence of Celebration"
@@ -375,12 +375,12 @@ export default function Home() {
               </div>
 
               {/* Right - Content */}
-              <div className="p-6 sm:p-8 md:p-16 lg:p-20 xl:p-24 flex flex-col justify-center">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#2d2d2d] mb-8 leading-tight text-center">
+              <div className="p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex flex-col justify-center">
+                <h2 className="text-xl md:text-2xl lg:text-3xl font-serif text-[#2d2d2d] mb-3 leading-tight text-center">
                   The Essence of<br />Celebration
                 </h2>
 
-                <p className="text-[#666666] text-lg md:text-xl leading-relaxed mb-12 text-center max-w-lg mx-auto">
+                <p className="text-[#666666] text-xs md:text-sm leading-relaxed mb-4 text-center max-w-lg mx-auto">
                   Every occasion deserves a story<br />
                   as sweet as its memories.
                 </p>
@@ -388,7 +388,7 @@ export default function Home() {
                 <div className="text-center">
                   <a
                     href="/products"
-                    className="group relative inline-block border-2 border-[#C9A86A] text-[#C9A86A] px-12 py-4 text-base md:text-lg tracking-wide overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-lg"
+                    className="group relative inline-block border-2 border-[#C9A86A] text-[#C9A86A] px-6 md:px-8 py-2 md:py-2.5 text-xs md:text-sm tracking-wide overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-lg"
                   >
                     <span className="relative z-10">Explore Collection</span>
                     <div className="absolute inset-0 bg-[#C9A86A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>

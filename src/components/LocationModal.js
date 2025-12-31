@@ -107,8 +107,8 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 backdrop-blur-md bg-white/30 flex items-center justify-center z-50 p-3 sm:p-4 md:p-6">
-      <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl max-w-[95%] xs:max-w-[420px] sm:max-w-md md:max-w-lg w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 backdrop-blur-md bg-white/30 flex items-center justify-center z-50 p-3 sm:p-4 md:p-6 pt-20 sm:pt-24 md:pt-6 pb-6">
+      <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl max-w-[95%] xs:max-w-[420px] sm:max-w-md md:max-w-lg w-full max-h-[82vh] sm:max-h-[85vh] md:max-h-[90vh] overflow-y-auto my-auto">
 
         {/* Header */}
         <div className="text-center py-3 sm:py-4 md:py-5 px-4 sm:px-6 border-b border-gray-100">
