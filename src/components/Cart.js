@@ -28,19 +28,19 @@ const Cart = () => {
       {/* Backdrop */}
       {isCartOpen && (
         <div
-          className="fixed inset-0 backdrop-blur-md bg-white/30 z-40 transition-opacity"
+          className="fixed inset-0 backdrop-blur-md bg-white/30 z-[90] transition-opacity"
           onClick={() => setIsCartOpen(false)}
         ></div>
       )}
 
       {/* Cart Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl z-50 transform transition-transform duration-300 ${
+        className={`fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl z-[110] transform transition-transform duration-300 flex flex-col ${
           isCartOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        {/* Header */}
-        <div className="bg-gradient-to-r from-[#234433] to-[#234433] text-white p-4 flex items-center justify-between">
+        {/* Header - Fixed at top */}
+        <div className="bg-gradient-to-r from-[#234433] to-[#234433] text-white p-4 flex items-center justify-between flex-shrink-0">
           <div className="flex items-center gap-2">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -49,10 +49,11 @@ const Cart = () => {
           </div>
           <button
             onClick={() => setIsCartOpen(false)}
-            className="w-8 h-8 rounded-full bg-[#234433] hover:bg-[#234433]/90 flex items-center justify-center transition-colors"
+            className="w-9 h-9 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors border border-white/30 relative z-10"
+            aria-label="Close cart"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
