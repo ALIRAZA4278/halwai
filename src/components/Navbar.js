@@ -140,7 +140,7 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
             {/* Phone (Mobile Only) */}
             <a href="tel:021111734628" className="lg:hidden">
               <div className="bg-white/10 backdrop-blur-sm p-1.5 rounded-full hover:bg-white/20 transition-all">
-                <svg className="w-3.5 h-3.5 text-[#E7BD8B]" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 text-[#E7BD8B]" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
               </div>
@@ -158,7 +158,7 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
               onClick={() => setIsCartOpen(true)}
               className="relative bg-white/10 backdrop-blur-sm p-1.5 rounded-full hover:bg-white/20 transition-all group"
             >
-              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white group-hover:text-[#E7BD8B] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-white group-hover:text-[#E7BD8B] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
               {cartItemCount > 0 && (
@@ -173,10 +173,10 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
               onClick={toggleSidebar}
               className="bg-white/10 backdrop-blur-sm p-1.5 rounded-full hover:bg-white/20 transition-all group"
             >
-              <div className="flex flex-col space-y-0.5 w-4 h-4 items-center justify-center">
-                <span className="block w-3.5 h-0.5 bg-white group-hover:bg-[#E7BD8B] rounded transition-colors"></span>
-                <span className="block w-3.5 h-0.5 bg-white group-hover:bg-[#E7BD8B] rounded transition-colors"></span>
-                <span className="block w-3.5 h-0.5 bg-white group-hover:bg-[#E7BD8B] rounded transition-colors"></span>
+              <div className="flex flex-col space-y-0.5 w-4.5 h-4.5 items-center justify-center">
+                <span className="block w-4 h-0.5 bg-white group-hover:bg-[#E7BD8B] rounded transition-colors"></span>
+                <span className="block w-4 h-0.5 bg-white group-hover:bg-[#E7BD8B] rounded transition-colors"></span>
+                <span className="block w-4 h-0.5 bg-white group-hover:bg-[#E7BD8B] rounded transition-colors"></span>
               </div>
             </button>
           </div>
