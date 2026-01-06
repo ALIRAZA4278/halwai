@@ -33,12 +33,12 @@ const ProductCard = ({ product, onProductClick, onAddToCart }) => {
         className="bg-white rounded-lg overflow-hidden shadow-lg flex flex-col h-full cursor-pointer hover:shadow-xl"
       >
         {/* Product Image */}
-        <div className="relative h-40 md:h-44 bg-gradient-to-b from-gray-100 to-gray-50 flex items-center justify-center p-4 flex-shrink-0">
+        <div className="relative h-40 md:h-44 bg-gradient-to-b from-gray-100 to-gray-50 flex items-center justify-center flex-shrink-0">
           {product.image && (product.image.startsWith('http') || product.image.startsWith('/')) ? (
             <img
               src={product.image}
               alt={product.name}
-              className="object-contain w-full h-full"
+              className="object-cover w-full h-full"
               loading="lazy"
               width="176"
               height="176"

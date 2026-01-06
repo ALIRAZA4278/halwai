@@ -16,7 +16,18 @@ const Categories = () => {
   const [placeholderText, setPlaceholderText] = useState('');
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const subcategoryRefs = useRef({});
+
+  // Detect mobile screen
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const categories = useMemo(() => [
     {
@@ -264,15 +275,27 @@ const Categories = () => {
     };
   }, [categories]);
 
-  const CategoryBanner = ({ category, title }) => (
+  // Helper function to get mobile banner path
+  const getMobileBannerPath = (bannerPath) => {
+    if (!bannerPath) return null;
+    // Convert "/Category - banners/sweets.jpg" to "/Category - banners/sweets mob.jpg"
+    return bannerPath.replace('.jpg', ' mob.jpg');
+  };
+
+  const CategoryBanner = ({ category, title }) => {
+    const bannerToShow = category.bannerImage
+      ? (isMobile ? getMobileBannerPath(category.bannerImage) : category.bannerImage)
+      : null;
+
+    return (
     <div className={`relative h-48 md:h-56 rounded-lg overflow-hidden shadow-xl mb-8`}>
-      {category.bannerImage ? (
+      {bannerToShow ? (
         <>
           {/* Background Image */}
           <div
             className="absolute inset-0 w-full h-full"
             style={{
-              backgroundImage: `url('${category.bannerImage}')`,
+              backgroundImage: `url('${bannerToShow}')`,
               backgroundSize: '100% 100%',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat'
@@ -318,6 +341,7 @@ const Categories = () => {
       )}
     </div>
   );
+  };
 
   const handleProductClick = (product, preSelectedVariantIndex = 0) => {
     // Instant - No delay for better UX (like ProductDetail.js)
@@ -355,19 +379,19 @@ const Categories = () => {
       <div className="relative z-10">
       {/* Main Category Navigation Bar */}
       <div className="bg-gradient-to-r from-[#234433] via-[#234433] to-[#234433] shadow-lg sticky top-0 z-20">
-        <div className="max-w-7xl mx-auto px-2 sm:px-4">
-          <div className="flex items-center justify-start sm:justify-center gap-6 sm:gap-8 md:gap-10 overflow-x-auto scrollbar-hide py-3">
+        <div className="max-w-7xl mx-auto px-1 sm:px-4">
+          <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-8 md:gap-10 overflow-x-auto scrollbar-hide py-2 sm:py-3">
             {categories.map((category, index) => (
               <button
                 key={category.id}
                 onClick={() => handleCategoryClick(index)}
-                className={`flex-shrink-0 flex flex-col items-center py-3 sm:py-4 px-4 rounded-lg cursor-pointer ${
+                className={`flex-shrink-0 flex flex-col items-center py-2 sm:py-4 px-2 sm:px-4 rounded-lg cursor-pointer ${
                   selectedCategory === index
                     ? 'bg-white/10'
                     : ''
                 }`}
               >
-                <div className={`relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mb-2 filter drop-shadow-lg`}>
+                <div className={`relative w-9 h-9 sm:w-14 sm:h-14 md:w-16 md:h-16 mb-1 sm:mb-2 filter drop-shadow-lg`}>
                   <Image
                     src={category.image}
                     alt={category.name}
@@ -375,13 +399,13 @@ const Categories = () => {
                     className="object-contain"
                   />
                 </div>
-                <span className={`text-xs sm:text-xs md:text-sm font-semibold tracking-wide uppercase text-center ${
+                <span className={`text-[10px] sm:text-xs md:text-sm font-semibold tracking-wide uppercase text-center ${
                   selectedCategory === index ? 'text-[#E7BD8B]' : 'text-white'
                 }`}>
                   {category.name}
                 </span>
                 {selectedCategory === index && (
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-[#E7BD8B] rounded-full"></div>
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-6 sm:w-8 h-1 bg-[#E7BD8B] rounded-full"></div>
                 )}
               </button>
             ))}
@@ -392,13 +416,13 @@ const Categories = () => {
       {/* Subcategory Bar */}
       {categories[selectedCategory].subcategories.length > 0 && (
         <div className="bg-gradient-to-r from-[#FDF4E3] via-[#FDF4E3] to-[#FDF4E3] shadow-lg relative z-10 border-b-2 border-[#E7BD8B]">
-          <div className="max-w-7xl mx-auto px-2 sm:px-4">
-            <div className="flex items-center justify-start sm:justify-center gap-3 sm:gap-4 md:gap-8 py-4 overflow-x-auto scrollbar-hide">
+          <div className="max-w-7xl mx-auto px-1 sm:px-4">
+            <div className="flex items-center justify-start sm:justify-center gap-1 sm:gap-4 md:gap-8 py-2 sm:py-4 overflow-x-auto scrollbar-hide">
               {categories[selectedCategory].subcategories.map((subcategory, index) => (
                 <button
                   key={index}
                   onClick={() => handleSubcategoryClick(subcategory)}
-                  className="flex-shrink-0 text-xs sm:text-sm md:text-base font-bold text-[#234433] uppercase tracking-wide px-4 py-2 rounded-full border-2 border-transparent cursor-pointer"
+                  className="flex-shrink-0 text-[10px] sm:text-sm md:text-base font-bold text-[#234433] uppercase tracking-wide px-2 sm:px-4 py-1 sm:py-2 rounded-full border-2 border-transparent cursor-pointer"
                 >
                   {subcategory}
                 </button>
@@ -409,7 +433,7 @@ const Categories = () => {
       )}
 
       {/* Search Bar Section */}
-      <div className="bg-gradient-to-b from-orange-50/50 to-white py-8 sm:py-10 lg:py-12 px-4 sm:px-6">
+      <div className="bg-gradient-to-b from-orange-50/50 to-white py-4 sm:py-8 lg:py-10 px-3 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-r from-[#234433] to-[#234433] rounded-full blur-xl opacity-0 group-hover:opacity-25 transition-opacity duration-500"></div>
@@ -418,13 +442,13 @@ const Categories = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={placeholderText}
-              className="relative w-full px-8 sm:px-10 py-5 sm:py-6 pr-16 sm:pr-18 rounded-full border-3 border-gray-200 focus:border-[#234433] focus:ring-4 focus:ring-[#234433]/10 focus:outline-none text-gray-800 placeholder-gray-400 shadow-xl hover:shadow-2xl transition-all duration-300 text-base sm:text-lg bg-white font-medium"
+              className="relative w-full px-5 sm:px-10 py-3 sm:py-5 pr-14 sm:pr-18 rounded-full border-2 sm:border-3 border-gray-200 focus:border-[#234433] focus:ring-4 focus:ring-[#234433]/10 focus:outline-none text-gray-800 placeholder-gray-400 shadow-lg sm:shadow-xl hover:shadow-2xl transition-all duration-300 text-sm sm:text-lg bg-white font-medium"
             />
             <button
-              className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-white p-4 sm:p-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 active:scale-95"
+              className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 text-white p-3 sm:p-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 active:scale-95"
               style={{ background: 'linear-gradient(to right, #E7BD8B, #E7BD8B)' }}
             >
-              <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </button>

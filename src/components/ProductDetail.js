@@ -11,6 +11,7 @@ const ProductDetail = ({ product, isOpen, onClose }) => {
   const [selectedSize, setSelectedSize] = useState(product?.preSelectedVariantIndex ?? 0);
   const [quantity, setQuantity] = useState(1);
   const [specialInstructions, setSpecialInstructions] = useState('');
+  const [showFullDescription, setShowFullDescription] = useState(false);
 
   if (!isOpen || !product) return null;
 
@@ -50,7 +51,7 @@ const ProductDetail = ({ product, isOpen, onClose }) => {
       ></div>
 
       {/* Modal Container */}
-      <div className="fixed inset-x-0 bottom-0 top-[70px] sm:top-[80px] lg:top-[90px] z-50 flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+      <div className="fixed inset-x-0 bottom-0 top-[70px] sm:top-[80px] lg:top-[90px] z-50 flex items-center justify-center p-2 sm:p-4 overflow-hidden">
         <div className="bg-white rounded-lg shadow-2xl w-full max-w-md sm:max-w-2xl lg:max-w-5xl xl:max-w-6xl my-auto max-h-[calc(100vh-80px)] sm:max-h-[calc(100vh-100px)] overflow-hidden relative border-2 sm:border-4 border-[#E7BD8B]">
 
           {/* Close and Share Buttons */}
@@ -71,11 +72,11 @@ const ProductDetail = ({ product, isOpen, onClose }) => {
           </div>
 
           {/* Content Container */}
-          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-0 max-h-[calc(100vh-80px)] sm:max-h-[calc(100vh-100px)] overflow-y-auto">
+          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-0 max-h-[calc(100vh-80px)] sm:max-h-[calc(100vh-100px)] overflow-hidden">
 
             {/* Left Side - Product Image */}
-            <div className="bg-white p-4 sm:p-6 lg:p-8 xl:p-12 flex items-center justify-center border-b-2 lg:border-b-0 lg:border-r-4 border-[#E7BD8B]">
-              <div className="w-full max-w-[200px] sm:max-w-sm md:max-w-md lg:max-w-lg">
+            <div className="bg-white p-2 sm:p-3 lg:p-4 flex items-center justify-center border-b-2 lg:border-b-0 lg:border-r-4 border-[#E7BD8B]">
+              <div className="w-full max-w-[160px] sm:max-w-[200px] md:max-w-xs lg:max-w-sm">
                 {product.image && product.image.startsWith('http') ? (
                   <div className="relative w-full aspect-square">
                     <Image
@@ -89,7 +90,7 @@ const ProductDetail = ({ product, isOpen, onClose }) => {
                     />
                   </div>
                 ) : (
-                  <div className="text-6xl sm:text-8xl md:text-9xl lg:text-[12rem] text-center filter drop-shadow-lg">
+                  <div className="text-6xl sm:text-8xl md:text-9xl lg:text-[8rem] text-center filter drop-shadow-lg">
                     {product.image || '🍰'}
                   </div>
                 )}
@@ -97,88 +98,99 @@ const ProductDetail = ({ product, isOpen, onClose }) => {
             </div>
 
             {/* Right Side - Product Details */}
-            <div className="bg-gradient-to-b from-amber-50 to-white p-3 sm:p-4 md:p-6 lg:p-8">
+            <div className="bg-gradient-to-b from-amber-50 to-white p-2.5 sm:p-3 md:p-4 lg:p-6 flex flex-col justify-between h-full overflow-x-hidden">
+              <div className="flex-1 lg:overflow-y-visible overflow-y-auto overflow-x-hidden">
+                {/* Product Title */}
+                <h2 className="text-sm sm:text-base md:text-lg lg:text-xl font-serif font-bold text-amber-700 mb-1 sm:mb-1.5 lg:mb-2">
+                  {product.name}
+                </h2>
 
-              {/* Product Title */}
-              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif font-bold text-amber-700 mb-2 sm:mb-3 md:mb-4">
-                {product.name}
-              </h2>
-
-              {/* Base Price */}
-              <div className="mb-3 sm:mb-4 md:mb-6">
-                <span className="text-xs sm:text-sm text-gray-600 font-semibold">RS. </span>
-                <span className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">{product.price}</span>
-              </div>
-
-              {/* Product Description */}
-              <p className="text-gray-600 text-xs sm:text-sm md:text-base leading-relaxed mb-3 sm:mb-4 md:mb-6">
-                {product.description}
-              </p>
-
-              {/* Size Options - Only show if product has variants */}
-              {hasVariants && (
-                <div className="mb-3 sm:mb-4 md:mb-6">
-                  <label className="block text-gray-700 font-semibold mb-2 text-xs sm:text-sm md:text-base">
-                    Select Size
-                  </label>
-                  <div className="flex gap-2 sm:gap-3 flex-wrap">
-                    {sizeOptions.map((option, index) => (
-                      <button
-                        key={`size-${index}-${option.size}`}
-                        type="button"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          setSelectedSize(index);
-                        }}
-                        className={`flex-1 min-w-[100px] px-3 sm:px-4 py-2 sm:py-3 rounded-lg font-semibold text-xs sm:text-sm md:text-base transition-all ${
-                          selectedSize === index
-                            ? 'bg-gradient-to-r from-[#234433] to-[#234433] text-white border-2 border-[#234433] shadow-lg scale-105'
-                            : 'bg-white text-gray-700 border-2 border-gray-300 hover:border-[#234433]'
-                        }`}
-                      >
-                        <div className="text-center">
-                          <div className="font-bold">{option.size}</div>
-                          <div className="text-xs opacity-90">Rs. {option.price}</div>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
+                {/* Base Price */}
+                <div className="mb-1.5 sm:mb-2 lg:mb-3">
+                  <span className="text-xs sm:text-sm text-gray-600 font-semibold">RS. </span>
+                  <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-800">{product.price}</span>
                 </div>
-              )}
 
-              {/* Special Instructions */}
-              <div className="mb-3 sm:mb-4 md:mb-6">
-                <label className="block text-gray-700 font-semibold mb-1.5 sm:mb-2 text-xs sm:text-sm md:text-base">
-                  Special Instructions
-                </label>
-                <textarea
-                  value={specialInstructions}
-                  onChange={(e) => setSpecialInstructions(e.target.value)}
-                  placeholder="Please enter instructions about this item"
-                  className="w-full text-black px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-3 border-2 border-gray-200 rounded-lg focus:border-[#234433] focus:outline-none resize-none text-xs sm:text-sm md:text-base"
-                  rows="2"
-                ></textarea>
+                {/* Product Description */}
+                <div className="mb-1.5 sm:mb-2 lg:mb-3">
+                  <p className={`text-gray-600 text-xs sm:text-sm leading-relaxed ${!showFullDescription ? 'line-clamp-2' : ''}`}>
+                    {product.description}
+                  </p>
+                  {product.description && product.description.length > 100 && (
+                    <button
+                      onClick={() => setShowFullDescription(!showFullDescription)}
+                      className="text-[#234433] text-xs font-semibold mt-0.5 hover:underline"
+                    >
+                      {showFullDescription ? 'less' : 'more...'}
+                    </button>
+                  )}
+                </div>
+
+                {/* Size Options - Only show if product has variants */}
+                {hasVariants && (
+                  <div className="mb-1.5 sm:mb-2 lg:mb-3">
+                    <label className="block text-gray-700 font-semibold mb-1 lg:mb-2 text-xs sm:text-sm">
+                      Select Size
+                    </label>
+                    <div className="flex gap-1.5 sm:gap-2 flex-wrap">
+                      {sizeOptions.map((option, index) => (
+                        <button
+                          key={`size-${index}-${option.size}`}
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setSelectedSize(index);
+                          }}
+                          className={`flex-1 min-w-[85px] lg:min-w-[100px] px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all ${
+                            selectedSize === index
+                              ? 'bg-gradient-to-r from-[#234433] to-[#234433] text-white border-2 border-[#234433] shadow-lg scale-105'
+                              : 'bg-white text-gray-700 border-2 border-gray-300 hover:border-[#234433]'
+                          }`}
+                        >
+                          <div className="text-center">
+                            <div className="font-bold">{option.size}</div>
+                            <div className="text-[10px] sm:text-xs opacity-90">Rs. {option.price}</div>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Special Instructions */}
+                <div className="mb-1.5 sm:mb-2 lg:mb-3">
+                  <label className="block text-gray-700 font-semibold mb-1 lg:mb-2 text-xs sm:text-sm">
+                    Special Instructions
+                  </label>
+                  <textarea
+                    value={specialInstructions}
+                    onChange={(e) => setSpecialInstructions(e.target.value)}
+                    placeholder="Please enter instructions about this item"
+                    className="w-full text-black px-2 sm:px-3 py-1.5 sm:py-2 border-2 border-gray-200 rounded-lg focus:border-[#234433] focus:outline-none resize-none text-xs sm:text-sm"
+                    rows="2"
+                  ></textarea>
+                </div>
               </div>
 
-              {/* Quantity and Add to Cart */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 md:gap-4">
+              {/* Quantity and Add to Cart - Fixed at bottom */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 mt-2 lg:mt-3">
                 {/* Quantity Selector */}
                 <div className="flex items-center bg-gray-100 rounded-full w-fit mx-auto sm:mx-0">
                   <button
                     onClick={decrementQuantity}
-                    className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center text-gray-600 hover:text-gray-800 transition-colors bg-gray-300 rounded-full"
+                    className="w-7 h-7 sm:w-9 sm:h-9 lg:w-10 lg:h-10 flex items-center justify-center text-gray-600 hover:text-gray-800 transition-colors bg-gray-300 rounded-full"
                   >
-                    <svg className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                     </svg>
                   </button>
-                  <span className="w-8 sm:w-10 md:w-12 text-center font-bold text-gray-800 text-xs sm:text-sm md:text-base">{quantity}</span>
+                  <span className="w-7 sm:w-9 lg:w-10 text-center font-bold text-gray-800 text-xs sm:text-sm">{quantity}</span>
                   <button
                     onClick={incrementQuantity}
-                    className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center text-white hover:bg-[#234433]/90 transition-colors bg-[#234433] rounded-full"
+                    className="w-7 h-7 sm:w-9 sm:h-9 lg:w-10 lg:h-10 flex items-center justify-center text-white hover:bg-[#234433]/90 transition-colors bg-[#234433] rounded-full"
                   >
-                    <svg className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                     </svg>
                   </button>
@@ -187,13 +199,12 @@ const ProductDetail = ({ product, isOpen, onClose }) => {
                 {/* Add to Cart Button */}
                 <button
                   onClick={handleAddToCart}
-                  className="flex-1 bg-gradient-to-r from-[#234433] to-[#234433] text-white py-2.5 sm:py-3 md:py-4 rounded-lg font-bold text-xs sm:text-sm md:text-lg hover:from-[#234433]/90 hover:to-[#234433]/90 transition-all shadow-lg hover:shadow-xl flex items-center justify-between px-3 sm:px-4 md:px-6"
+                  className="flex-1 bg-gradient-to-r from-[#234433] to-[#234433] text-white py-2 sm:py-2.5 lg:py-3 rounded-lg font-bold text-xs sm:text-sm hover:from-[#234433]/90 hover:to-[#234433]/90 transition-all shadow-lg hover:shadow-xl flex items-center justify-between px-3 sm:px-4"
                 >
-                  <span className="text-xs sm:text-sm md:text-base">Rs. {totalPrice}</span>
+                  <span className="text-xs sm:text-sm">Rs. {totalPrice}</span>
                   <span className="flex items-center gap-1 sm:gap-2">
-                    <span className="hidden sm:inline">Add to Cart</span>
-                    <span className="sm:hidden">Add</span>
-                    <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <span>Add</span>
+                    <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </span>
