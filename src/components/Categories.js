@@ -19,10 +19,10 @@ const Categories = () => {
   const [isMobile, setIsMobile] = useState(false);
   const subcategoryRefs = useRef({});
 
-  // Detect mobile screen
+  // Detect mobile screen (below 786px)
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 786);
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
@@ -296,7 +296,7 @@ const Categories = () => {
             className="absolute inset-0 w-full h-full"
             style={{
               backgroundImage: `url('${bannerToShow}')`,
-              backgroundSize: '100% 100%',
+              backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat'
             }}

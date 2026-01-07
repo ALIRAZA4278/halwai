@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const slides = [
     {
@@ -35,6 +36,16 @@ const HeroSection = () => {
       gradient: "from-transparent to-transparent"
     }
   ];
+
+  // Detect mobile screen (below 786px)
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 786);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Preload images
   useEffect(() => {
@@ -72,7 +83,7 @@ const HeroSection = () => {
 
 
   return (
-    <section className="relative h-[70vh] md:h-[75vh] lg:h-[85vh] w-full overflow-hidden">
+    <section className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh] xl:h-screen w-screen overflow-hidden z-0">
 
       {/* Loading State */}
       {!imagesLoaded && (
@@ -93,21 +104,11 @@ const HeroSection = () => {
               index === currentSlide ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            {/* Background Image - Desktop */}
+            {/* Background Image - switches at 786px */}
             <div
-              className="hidden md:block absolute inset-0 w-full h-full"
+              className="absolute inset-0 w-full h-full"
               style={{
-                backgroundImage: `url('${slide.backgroundImage}')`,
-                backgroundSize: '100% 100%',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat'
-              }}
-            />
-            {/* Background Image - Mobile */}
-            <div
-              className="block md:hidden absolute inset-0 w-full h-full"
-              style={{
-                backgroundImage: `url('${slide.mobileBackgroundImage}')`,
+                backgroundImage: `url('${isMobile ? slide.mobileBackgroundImage : slide.backgroundImage}')`,
                 backgroundSize: '100% 100%',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat'
