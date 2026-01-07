@@ -380,7 +380,7 @@ const Categories = () => {
       {/* Main Category Navigation Bar */}
       <div className="bg-gradient-to-r from-[#234433] via-[#234433] to-[#234433] shadow-lg sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-1 sm:px-4">
-          <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-8 md:gap-10 overflow-x-auto scrollbar-hide py-2 sm:py-3">
+          <div className="flex items-center justify-center gap-2 sm:gap-8 md:gap-10 overflow-x-auto scrollbar-hide py-2 sm:py-3">
             {categories.map((category, index) => (
               <button
                 key={category.id}
@@ -417,7 +417,7 @@ const Categories = () => {
       {categories[selectedCategory].subcategories.length > 0 && (
         <div className="bg-gradient-to-r from-[#FDF4E3] via-[#FDF4E3] to-[#FDF4E3] shadow-lg relative z-10 border-b-2 border-[#E7BD8B]">
           <div className="max-w-7xl mx-auto px-1 sm:px-4">
-            <div className="flex items-center justify-start sm:justify-center gap-1 sm:gap-4 md:gap-8 py-2 sm:py-4 overflow-x-auto scrollbar-hide">
+            <div className="flex items-center justify-center gap-1 sm:gap-4 md:gap-8 py-2 sm:py-4 overflow-x-auto scrollbar-hide">
               {categories[selectedCategory].subcategories.map((subcategory, index) => (
                 <button
                   key={index}
