@@ -296,7 +296,7 @@ const Categories = () => {
             className="absolute inset-0 w-full h-full"
             style={{
               backgroundImage: `url('${bannerToShow}')`,
-              backgroundSize: 'cover',
+              backgroundSize: '100% 100%',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat'
             }}
