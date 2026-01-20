@@ -9,14 +9,14 @@ const Sidebar = ({ isOpen, onClose }) => {
     <>
       {/* Overlay */}
       {isOpen && (
-        <div 
-          className="fixed inset-0 backdrop-blur-md bg-white/30 z-40"
+        <div
+          className="fixed inset-0 backdrop-blur-md bg-white/30 z-[110]"
           onClick={onClose}
         />
       )}
-      
+
       {/* Sidebar */}
-      <div className={`fixed top-0 right-0 h-full w-80 bg-[#234433] text-white transform transition-transform duration-300 ease-in-out z-50 ${
+      <div className={`fixed top-0 right-0 h-full w-80 bg-[#234433] text-white transform transition-transform duration-300 ease-in-out z-[120] ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
 

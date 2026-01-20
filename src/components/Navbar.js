@@ -33,6 +33,7 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
     }
   };
   return (
+    <>
     <nav className={`bg-gradient-to-r from-[#234433] via-[#234433] to-[#234433] text-white fixed top-0 left-0 right-0 w-full z-[100] border-b border-[#E7BD8B] transition-all duration-300 ${isScrolled ? 'py-0.5 shadow-2xl backdrop-blur-md' : 'shadow-lg'}`}>
       {/* Top Bar - Desktop Only - Hidden when scrolled */}
       <div className={`hidden lg:block bg-[#234433]/50 backdrop-blur-sm transition-all duration-300 ${isScrolled ? 'h-0 overflow-hidden opacity-0' : 'h-auto opacity-100'}`}>
@@ -183,9 +184,11 @@ const Navbar = ({ userLocation, onLocationChange, isDetectingLocation }) => {
         </div>
       </div>
       
-      {/* Sidebar Component */}
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
     </nav>
+
+    {/* Sidebar Component - Outside nav to avoid backdrop-blur inheritance */}
+    <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+  </>
   );
 };
 
