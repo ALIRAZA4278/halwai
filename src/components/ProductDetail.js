@@ -101,7 +101,7 @@ const ProductDetail = ({ product, isOpen, onClose }) => {
             <div className="bg-gradient-to-b from-amber-50 to-white p-2.5 sm:p-3 md:p-4 lg:p-6 flex flex-col justify-between h-full overflow-x-hidden">
               <div className="flex-1 lg:overflow-y-visible overflow-y-auto overflow-x-hidden">
                 {/* Product Title */}
-                <h2 className="text-sm sm:text-base md:text-lg lg:text-xl font-serif font-bold text-amber-700 mb-1 sm:mb-1.5 lg:mb-2">
+                <h2 className="text-sm sm:text-base md:text-lg lg:text-xl font-serif font-bold text-[#6D1112] mb-1 sm:mb-1.5 lg:mb-2">
                   {product.name}
                 </h2>
 
