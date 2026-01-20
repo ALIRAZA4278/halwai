@@ -30,7 +30,7 @@ const ProductCard = ({ product, onProductClick, onAddToCart }) => {
     <div className="relative">
       <div
         onClick={handleCardClick}
-        className="bg-white rounded-lg overflow-hidden shadow-lg flex flex-col h-full cursor-pointer hover:shadow-xl"
+        className="bg-[#E7BD8B] rounded-lg overflow-hidden shadow-lg flex flex-col h-full cursor-pointer hover:shadow-xl"
       >
         {/* Product Image */}
         <div className="relative h-40 md:h-44 bg-gradient-to-b from-gray-100 to-gray-50 flex items-center justify-center flex-shrink-0">
