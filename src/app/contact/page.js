@@ -141,7 +141,7 @@ export default function ContactPage() {
               </svg>
             </div>
             <h3 className="font-bold text-gray-800 mb-2">Email</h3>
-            <p className="text-gray-600">info@halwai.com</p>
+            <p className="text-gray-600">info@halwaiii.com</p>
           </div>
 
           <div className="bg-white rounded-xl p-6 shadow-lg text-center border-t-4 border-green-500">

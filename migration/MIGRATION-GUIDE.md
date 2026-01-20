@@ -1,8 +1,8 @@
 # 🚀 Supabase Migration Guide / Supabase Migration Ki Guide
 
-Complete guide to migrate your Halwai app from old Supabase to new Supabase project.
+Complete guide to migrate your halwaiii app from old Supabase to new Supabase project.
 
-Apne Halwai app ko purane Supabase se naye Supabase project mein migrate karne ki complete guide.
+Apne halwaiii app ko purane Supabase se naye Supabase project mein migrate karne ki complete guide.
 
 ---
 
@@ -39,7 +39,7 @@ node migration/1-export-data.js
 
 1. Click "New Project"
 2. Choose organization
-3. Enter project name (e.g., "halwai-new")
+3. Enter project name (e.g., "halwaiii-new")
 4. Set database password (SAVE THIS!)
 5. Select region (closest to Pakistan/India for better performance)
 6. Click "Create new project"
@@ -170,7 +170,7 @@ node migration/1-export-data.js
    # New Supabase Configuration
    NEXT_PUBLIC_SUPABASE_URL=YOUR_NEW_SUPABASE_URL
    NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_NEW_SUPABASE_ANON_KEY
-   ADMIN_EMAIL=admin@halwaiii.com
+   ADMIN_EMAIL=admin@halwaiiiii.com
    ADMIN_PASSWORD=9wSAJafh3NZE
    ```
 

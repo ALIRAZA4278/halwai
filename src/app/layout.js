@@ -16,7 +16,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Halwaiii - Pure Desi Halwai",
+  title: "halwaiiiii - Pure Desi halwaiii",
   description: "Premium sweets, bakery, and dairy products",
 };
 

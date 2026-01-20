@@ -192,7 +192,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                 <div className="absolute bottom-8 sm:bottom-12 left-6 sm:left-12">
                   <h3 className="text-lg sm:text-xl md:text-2xl font-light text-white tracking-[0.2em] sm:tracking-[0.3em] uppercase">
-                    THE STORY OF HALWAI
+                    THE STORY OF HALWAIII
                   </h3>
                 </div>
               </div>
@@ -201,7 +201,7 @@ export default function Home() {
               <div className="p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex flex-col justify-center">
                 <div className="text-[#C9A86A] text-[10px] uppercase tracking-[0.15em] mb-3 font-light flex items-center justify-center">
                   <span className="block w-8 h-px bg-[#C9A86A] mr-2"></span>
-                  THE SYIDAI OF HALWAI
+                  THE SYIDAI OF HALWAIII
                   <span className="block w-8 h-px bg-[#C9A86A] ml-2"></span>
                 </div>
 
@@ -210,7 +210,7 @@ export default function Home() {
                 </h2>
 
                 <p className="text-[#666666] text-xs md:text-sm leading-relaxed mb-4 text-center max-w-lg mx-auto">
-                  Halwai is more than a name: It&apos;s a craft passed down through generations.<br />
+                  halwaiiii is more than a name: It&apos;s a craft passed down through generations.<br />
                   We blend time-honored tradition with a touch of modern finesse, creating<br />
                   moments that linger beyond taste.
                 </p>

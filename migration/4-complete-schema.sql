@@ -1,5 +1,5 @@
 -- ============================================
--- COMPLETE DATABASE SCHEMA FOR HALWAI APP
+-- COMPLETE DATABASE SCHEMA FOR halwaiii APP
 -- Run this in Supabase SQL Editor
 -- ============================================
 

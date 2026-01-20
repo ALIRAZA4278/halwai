@@ -132,7 +132,7 @@ const LocationModal = ({ isOpen, onClose, onLocationSelect }) => {
             />
           </div>
 
-          <p className="text-[8px] xs:text-[9px] sm:text-[10px] text-gray-500">Pure Desi Halwai</p>
+          <p className="text-[8px] xs:text-[9px] sm:text-[10px] text-gray-500">Pure Desi Halwaiii</p>
         </div>
 
         {/* Content */}
