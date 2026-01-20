@@ -30,7 +30,7 @@ const ProductCard = ({ product, onProductClick, onAddToCart }) => {
     <div className="relative">
       <div
         onClick={handleCardClick}
-        className="bg-[#E7BD8B] rounded-lg overflow-hidden shadow-lg flex flex-col h-full cursor-pointer hover:shadow-xl"
+        className="bg-[#FDF4E3] rounded-lg overflow-hidden shadow-lg flex flex-col h-full cursor-pointer hover:shadow-xl"
       >
         {/* Product Image */}
         <div className="relative h-40 md:h-44 bg-gradient-to-b from-gray-100 to-gray-50 flex items-center justify-center flex-shrink-0">
@@ -49,9 +49,9 @@ const ProductCard = ({ product, onProductClick, onAddToCart }) => {
         </div>
 
         {/* Content Section */}
-        <div className="p-3 md:p-4 bg-gradient-to-b from-amber-50/40 to-white flex flex-col flex-grow">
+               <div className="p-3 md:p-4 bg-gradient-to-b from-amber-50/40 to-white flex flex-col flex-grow">
           {/* Product Name */}
-          <h3 className="text-base md:text-lg font-bold text-amber-700 mb-2 leading-tight line-clamp-2 min-h-[2.5rem]">
+          <h3 className="text-base md:text-lg font-bold text-[#6D1112] mb-2 leading-tight line-clamp-2 min-h-[2.5rem]">
             {product.name}
           </h3>
 
@@ -91,7 +91,7 @@ const ProductCard = ({ product, onProductClick, onAddToCart }) => {
           {/* Add Button */}
           <button
             onClick={handleAddClick}
-            className="w-full text-white py-2 md:py-2.5 rounded-full font-bold uppercase tracking-wider shadow-md text-xs md:text-sm bg-gradient-to-r from-[#E7BD8B] to-[#E7BD8B] hover:from-[#d4ab7a] hover:to-[#d4ab7a] cursor-pointer"
+            className="w-full text-white py-2 md:py-2.5 rounded-full font-bold uppercase tracking-wider shadow-md text-xs md:text-sm bg-[#6D1112] hover:bg-[#5a0e0f] cursor-pointer"
           >
             ADD
           </button>
