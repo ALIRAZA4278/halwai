@@ -363,19 +363,8 @@ const Categories = () => {
   };
 
   return (
-    <section className="relative bg-white min-h-screen">
-      {/* Background Image with Overlay */}
-      <div 
-        className="fixed inset-0 opacity-[0.15] pointer-events-none z-0"
-        style={{
-          backgroundImage: `url("https://assets.indolj.io/upload/1757683140-web--3-.png")`,
-          backgroundSize: '400px 400px',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'repeat'
-        }}>
-      </div>
-
-      {/* Content with higher z-index */}
+    <section className="relative bg-transparent min-h-screen">
+      {/* Content */}
       <div className="relative z-10">
       {/* Main Category Navigation Bar */}
       <div className="bg-gradient-to-r from-[#234433] via-[#234433] to-[#234433] shadow-lg sticky top-0 z-20">
@@ -433,7 +422,7 @@ const Categories = () => {
       )}
 
       {/* Search Bar Section */}
-      <div className="bg-gradient-to-b from-orange-50/50 to-white py-4 sm:py-8 lg:py-10 px-3 sm:px-6">
+      <div className="py-4 sm:py-8 lg:py-10 px-3 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-r from-[#234433] to-[#234433] rounded-full blur-xl opacity-0 group-hover:opacity-25 transition-opacity duration-500"></div>

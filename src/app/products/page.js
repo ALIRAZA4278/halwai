@@ -116,7 +116,19 @@ export default function Products() {
   };
 
   return (
-    <>
+    <div className="relative">
+      {/* Background Image - covers entire page */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0"
+        style={{
+          backgroundImage: `url('/product-bg.jpeg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.4
+        }}
+      />
+
       <Navbar
         userLocation={userLocation}
         onLocationChange={handleLocationChange}
@@ -160,6 +172,6 @@ export default function Products() {
         onClose={handleModalClose}
         onLocationSelect={handleLocationSelect}
       />
-    </>
+    </div>
   );
 }

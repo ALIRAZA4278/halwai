@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#F5F5DC] py-8 sm:py-10 lg:py-12">
+    <footer className="relative z-10 bg-white py-8 sm:py-10 lg:py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
 
         {/* Logo */}
