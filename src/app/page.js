@@ -375,13 +375,13 @@ export default function Home() {
                     gifting boxes bring together tradition an<br />
                     elegance.
                   </p>
-                  <button className="group relative border-2 border-white text-white px-5 sm:px-6 py-1.5 sm:py-2 text-[10px] sm:text-xs tracking-wider overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+                  <a href="/products" className="group relative border-2 border-white text-white px-5 sm:px-6 py-1.5 sm:py-2 text-[10px] sm:text-xs tracking-wider overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl inline-block">
                     <span className="relative z-10">Explore Gifting</span>
                     <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                     <span className="absolute inset-0 flex items-center justify-center text-[#1a3329] opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-semibold">
                       Explore Gifting
                     </span>
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -390,7 +390,7 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-3 lg:gap-4">
 
               {/* Item 1 - Kesar Pak */}
-              <div className="text-center">
+              <a href="/products" className="text-center block hover:scale-105 transition-transform duration-300">
                 <div className="relative h-[110px] md:h-[125px] lg:h-[140px] mb-2 overflow-hidden bg-black">
                   <img
                     src="https://5.imimg.com/data5/ECOM/Default/2024/6/430579060/LZ/RH/ZT/36070396/kesarpaak-500x500.jpg"
@@ -404,10 +404,10 @@ export default function Home() {
                 <p className="text-white/70 text-[10px] font-light">
                   The Bawal Indulgence
                 </p>
-              </div>
+              </a>
 
               {/* Item 2 - Pista Roll */}
-              <div className="text-center">
+              <a href="/products" className="text-center block hover:scale-105 transition-transform duration-300">
                 <div className="relative h-[110px] md:h-[125px] lg:h-[140px] mb-2 overflow-hidden bg-black">
                   <img
                     src="https://tse2.mm.bing.net/th/id/OIP.qFcOb6Uc6mlnnvIf1kp52wHaHa?pid=Api&P=0&h=220"
@@ -421,10 +421,10 @@ export default function Home() {
                 <p className="text-white/70 text-[10px] font-light">
                   A Heritage Favorite
                 </p>
-              </div>
+              </a>
 
               {/* Item 3 - Gulab Jamun */}
-              <div className="text-center">
+              <a href="/products" className="text-center block hover:scale-105 transition-transform duration-300">
                 <div className="relative h-[110px] md:h-[125px] lg:h-[140px] mb-2 overflow-hidden bg-black">
                   <img
                     src="https://tse2.mm.bing.net/th/id/OIP.8gpEn9J9ZwsYk2NAGqKSkQHaHa?pid=Api&P=0&h=220"
@@ -438,10 +438,10 @@ export default function Home() {
                 <p className="text-white/70 text-[10px] font-light">
                   Classic Delight
                 </p>
-              </div>
+              </a>
 
               {/* Item 4 - Motichoor Ladoo */}
-              <div className="text-center">
+              <a href="/products" className="text-center block hover:scale-105 transition-transform duration-300">
                 <div className="relative h-[110px] md:h-[125px] lg:h-[140px] mb-2 overflow-hidden bg-black">
                   <img
                     src="https://tse4.mm.bing.net/th/id/OIP.JKeMEgXuj2MwAMUYAykHCAHaHa?pid=Api&P=0&h=220"
@@ -455,7 +455,7 @@ export default function Home() {
                 <p className="text-white/70 text-[10px] font-light">
                   Rich and Flavorful
                 </p>
-              </div>
+              </a>
 
             </div>
 
