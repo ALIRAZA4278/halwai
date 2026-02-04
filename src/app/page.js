@@ -234,6 +234,111 @@ export default function Home() {
         </div>
       </section>
 
+      {/* About & Founder's Story Section */}
+      <section className="bg-[#1a3329] py-8 md:py-10 lg:py-12 overflow-hidden">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
+
+          {/* Section Heading */}
+          <div className="text-center mb-8 md:mb-10">
+            <div className="text-[#C9A86A] text-[10px] uppercase tracking-[0.15em] mb-3 font-light flex items-center justify-center">
+              <span className="block w-8 h-px bg-[#C9A86A] mr-2"></span>
+              OUR LEGACY
+              <span className="block w-8 h-px bg-[#C9A86A] ml-2"></span>
+            </div>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif text-white leading-tight">
+              About & Founder&apos;s Story
+            </h2>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+
+            {/* Left - About Us */}
+            <div className="bg-[#f5ede1] overflow-hidden">
+              <div className="p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center h-full">
+                <div className="text-[#C9A86A] text-[10px] uppercase tracking-[0.15em] mb-4 font-light flex items-center">
+                  <span className="block w-6 h-px bg-[#C9A86A] mr-2"></span>
+                  WHO WE ARE
+                </div>
+
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-serif text-[#2d2d2d] mb-4 leading-tight">
+                  A Legacy of<br />Sweet Excellence
+                </h3>
+
+                <p className="text-[#666666] text-xs md:text-sm leading-relaxed mb-4">
+                  For generations, Halwaiii has been crafting the finest traditional sweets,
+                  preserving the authentic flavors that have defined celebrations across the subcontinent.
+                  Our recipes are treasured heirlooms, passed down through decades of master craftsmen.
+                </p>
+
+                <p className="text-[#666666] text-xs md:text-sm leading-relaxed mb-6">
+                  Every sweet we create tells a story of dedication, quality ingredients,
+                  and an unwavering commitment to bringing joy to every occasion.
+                </p>
+
+                <div>
+                  <a
+                    href="/about"
+                    className="group relative inline-block border-2 border-[#C9A86A] text-[#C9A86A] px-6 md:px-8 py-2 md:py-2.5 text-xs md:text-sm tracking-wide overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-lg"
+                  >
+                    <span className="relative z-10">Learn More</span>
+                    <div className="absolute inset-0 bg-[#C9A86A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                    <span className="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-semibold">
+                      Learn More
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Right - Founder's Story */}
+            <div className="bg-[#f5ede1] overflow-hidden">
+              <div className="grid md:grid-rows-[auto_1fr] h-full">
+
+                {/* Founder Image */}
+                <div className="relative h-[200px] sm:h-[230px] md:h-[250px] overflow-hidden">
+                  <img
+                    src="about.jpeg"
+                    alt="Traditional Indian Sweets"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                  <div className="absolute bottom-4 left-6">
+                    <h4 className="text-white text-lg sm:text-xl font-serif tracking-wide">
+                      The Founder
+                    </h4>
+                  </div>
+                </div>
+
+                {/* Founder Content */}
+                <div className="p-6 sm:p-8 flex flex-col justify-center">
+                  <div className="text-[#C9A86A] text-[10px] uppercase tracking-[0.15em] mb-3 font-light flex items-center">
+                    <span className="block w-6 h-px bg-[#C9A86A] mr-2"></span>
+                    FOUNDER&apos;S STORY
+                  </div>
+
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-serif text-[#2d2d2d] mb-3 leading-tight">
+                    A Vision Born from Passion
+                  </h3>
+
+                  <p className="text-[#666666] text-xs md:text-sm leading-relaxed mb-4">
+                    Our founder&apos;s journey began with a simple dream: to share the authentic taste
+                    of traditional sweets with the world. What started as a humble endeavor has
+                    blossomed into a beloved institution, known for its unwavering quality and
+                    dedication to the art of sweet-making.
+                  </p>
+
+                  <p className="text-[#C9A86A] text-xs italic font-serif">
+                    &quot;Every sweet carries a piece of our heart and heritage.&quot;
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* Signature Creations Section */}
       <section className="bg-[#1a3329] pt-8 md:pt-10 lg:pt-12 pb-0 overflow-hidden">
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
