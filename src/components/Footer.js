@@ -78,7 +78,7 @@ const Footer = () => {
         <div className="border-t border-gray-300 pt-4 sm:pt-6">
           <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-1 text-xs sm:text-sm text-gray-600">
             <span>Powered by</span>
-            <a href="#" className="text-blue-600 hover:underline font-medium">The Socialhawks</a>
+            <a href="#" className="text-gray-600 hover:text-pink-600 transition-colors font-medium">The Socialhawks</a>
             <span className="hidden sm:inline">|</span>
             <a href="#" className="hover:text-gray-800 transition-colors">Privacy Policy</a>
             <span className="hidden sm:inline">|</span>
