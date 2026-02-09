@@ -217,10 +217,10 @@ export default function Home() {
 
                 <div className="text-center">
                   <a
-                    href="/about"
+                    href="#about-story"
                     className="group relative inline-block border-2 border-[#C9A86A] text-[#C9A86A] px-6 md:px-8 py-2 md:py-2.5 text-xs md:text-sm tracking-wide overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-lg"
                   >
-                    <span className="relative z-10">Discover Our Story</span>
+                    <span className="relative z-10 group-hover:opacity-0 transition-opacity duration-500">Discover Our Story</span>
                     <div className="absolute inset-0 bg-[#C9A86A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                     <span className="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-semibold">
                       Discover Our Story
@@ -235,7 +235,7 @@ export default function Home() {
       </section>
 
       {/* About & Founder's Story Section */}
-      <section className="bg-[#1a3329] py-8 md:py-10 lg:py-12 overflow-hidden">
+      <section id="about-story" className="bg-[#1a3329] py-8 md:py-10 lg:py-12 overflow-hidden">
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
 
           {/* Section Heading */}
@@ -280,7 +280,7 @@ export default function Home() {
                     href="/about"
                     className="group relative inline-block border-2 border-[#C9A86A] text-[#C9A86A] px-6 md:px-8 py-2 md:py-2.5 text-xs md:text-sm tracking-wide overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-lg"
                   >
-                    <span className="relative z-10">Learn More</span>
+                    <span className="relative z-10 group-hover:opacity-0 transition-opacity duration-500">Learn More</span>
                     <div className="absolute inset-0 bg-[#C9A86A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                     <span className="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-semibold">
                       Learn More
@@ -365,18 +365,18 @@ export default function Home() {
                 {/* Content Centered */}
                 <div className="relative z-10 text-center px-3 sm:px-4 w-full max-w-2xl">
                   <h3 className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif mb-1.5 sm:mb-2 leading-tight">
-                    Gictarus Curentics
+                    Gifting Collection
                   </h3>
                   <p className="text-white text-base sm:text-lg md:text-xl font-serif mb-2 sm:mb-3 leading-tight font-light">
-                    Sweetness, Wrapped<br />in Grace
+                    Sweetness, Wrapped<br />in Elegance
                   </p>
                   <p className="text-white/95 text-[10px] sm:text-xs md:text-xs mb-3 sm:mb-4 mx-auto leading-relaxed">
-                    From weddings to heartfelt gestures. Our<br />
-                    gifting boxes bring together tradition an<br />
-                    elegance.
+                    From weddings to heartfelt gestures, our<br />
+                    mithai boxes bring together tradition and<br />
+                    elegance in every bite.
                   </p>
                   <a href="/products" className="group relative border-2 border-white text-white px-5 sm:px-6 py-1.5 sm:py-2 text-[10px] sm:text-xs tracking-wider overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl inline-block">
-                    <span className="relative z-10">Explore Gifting</span>
+                    <span className="relative z-10 group-hover:opacity-0 transition-opacity duration-500">Explore Gifting</span>
                     <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                     <span className="absolute inset-0 flex items-center justify-center text-[#1a3329] opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-semibold">
                       Explore Gifting
@@ -495,7 +495,7 @@ export default function Home() {
                     href="/products"
                     className="group relative inline-block border-2 border-[#C9A86A] text-[#C9A86A] px-6 md:px-8 py-2 md:py-2.5 text-xs md:text-sm tracking-wide overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-lg"
                   >
-                    <span className="relative z-10">Explore Collection</span>
+                    <span className="relative z-10 group-hover:opacity-0 transition-opacity duration-500">Explore Collection</span>
                     <div className="absolute inset-0 bg-[#C9A86A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                     <span className="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-semibold">
                       Explore Collection
