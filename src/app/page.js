@@ -253,16 +253,27 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
 
             {/* Left - About Us */}
-            <div className="bg-[#f5ede1] overflow-hidden">
+            <a href="#founders-story" className="relative block bg-[#f5ede1] overflow-hidden group hover:shadow-lg transition-all duration-500">
+              {/* Decorative corner accents */}
+              <div className="absolute top-4 left-4 w-10 h-10 border-t-2 border-l-2 border-[#C9A86A]/30"></div>
+              <div className="absolute bottom-4 right-4 w-10 h-10 border-b-2 border-r-2 border-[#C9A86A]/30"></div>
+
               <div className="p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center h-full">
                 <div className="text-[#C9A86A] text-[10px] uppercase tracking-[0.15em] mb-4 font-light flex items-center">
                   <span className="block w-6 h-px bg-[#C9A86A] mr-2"></span>
                   WHO WE ARE
                 </div>
 
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-serif text-[#2d2d2d] mb-4 leading-tight">
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-serif text-[#2d2d2d] mb-5 leading-tight">
                   A Legacy of<br />Sweet Excellence
                 </h3>
+
+                {/* Decorative divider */}
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="block w-8 h-px bg-[#C9A86A]"></span>
+                  <span className="text-[#C9A86A] text-lg">&#10043;</span>
+                  <span className="block w-8 h-px bg-[#C9A86A]"></span>
+                </div>
 
                 <p className="text-[#666666] text-xs md:text-sm leading-relaxed mb-4">
                   For generations, Halwaiii has been crafting the finest traditional sweets,
@@ -275,23 +286,17 @@ export default function Home() {
                   and an unwavering commitment to bringing joy to every occasion.
                 </p>
 
-                <div>
-                  <a
-                    href="/about"
-                    className="group relative inline-block border-2 border-[#C9A86A] text-[#C9A86A] px-6 md:px-8 py-2 md:py-2.5 text-xs md:text-sm tracking-wide overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-lg"
-                  >
-                    <span className="relative z-10 group-hover:opacity-0 transition-opacity duration-500">Learn More</span>
-                    <div className="absolute inset-0 bg-[#C9A86A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-                    <span className="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-semibold">
-                      Learn More
-                    </span>
-                  </a>
+                {/* Highlight quote */}
+                <div className="border-l-2 border-[#C9A86A] pl-4">
+                  <p className="text-[#2d2d2d] text-xs md:text-sm italic font-serif leading-relaxed">
+                    &ldquo;Where every bite is a celebration of heritage and flavor.&rdquo;
+                  </p>
                 </div>
               </div>
-            </div>
+            </a>
 
             {/* Right - Founder's Story */}
-            <div className="bg-[#f5ede1] overflow-hidden">
+            <div id="founders-story" className="bg-[#f5ede1] overflow-hidden">
               <div className="grid md:grid-rows-[auto_1fr] h-full">
 
                 {/* Founder Image */}
