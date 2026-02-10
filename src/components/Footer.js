@@ -38,26 +38,7 @@ const Footer = () => {
 
         {/* App Download Section */}
         <div className="mb-6 sm:mb-8">
-          <div className="flex flex-col sm:flex-row justify-center items-center space-y-3 sm:space-y-0 sm:space-x-4 mb-4 sm:mb-6">
-            <a href="#" className="inline-block">
-              <Image 
-                src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" 
-                alt="Get it on Google Play" 
-                width={160}
-                height={56}
-                className="h-12 sm:h-14 w-auto hover:opacity-80 transition-opacity"
-              />
-            </a>
-            <a href="#" className="inline-block">
-              <Image 
-                src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" 
-                alt="Download on the App Store" 
-                width={160}
-                height={56}
-                className="h-12 sm:h-14 w-auto hover:opacity-80 transition-opacity"
-              />
-            </a>
-          </div>
+         
           
           {/* Social Media Icons */}
           <div className="flex justify-center items-center space-x-4 sm:space-x-6 mb-6 sm:mb-8">
