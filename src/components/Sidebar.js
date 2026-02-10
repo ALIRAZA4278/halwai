@@ -49,6 +49,11 @@ const Sidebar = ({ isOpen, onClose }) => {
             Home
           </Link>
 
+          {/* About Us Button */}
+          <Link href="/about" onClick={onClose} className="block w-full bg-white text-[#234433] py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
+            About Us
+          </Link>
+
           {/* Products Button */}
           <Link href="/products" onClick={onClose} className="block w-full bg-white text-[#234433] py-4 px-6 rounded-lg font-medium text-left hover:bg-gray-100 transition-colors shadow-sm">
             Products

@@ -31,7 +31,7 @@ export default function ContactPage() {
       <Navbar />
 
       {/* Main Content */}
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 mt-4">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 mt-20">
         {/* Header Section */}
         <div className="text-center mb-12">
           <div className="inline-block mb-4">
@@ -39,10 +39,10 @@ export default function ContactPage() {
               <span className="text-sm font-semibold uppercase tracking-wider">Get In Touch</span>
             </div>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-[#234433] to-[#234433] bg-clip-text text-transparent mb-4">
+          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-[#234433] to-[#234433] bg-clip-text text-transparent mb-4">
             Contact Us
           </h1>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-600 text-base max-w-2xl mx-auto">
             We&apos;d love to hear from you. Fill out the form below and our team will get back to you as soon as possible.
           </p>
         </div>

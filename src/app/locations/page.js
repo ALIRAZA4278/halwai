@@ -29,7 +29,7 @@ export default function LocationsPage() {
       <Navbar />
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 mt-4">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 mt-20">
         {/* Header Section */}
         <div className="text-center mb-12">
           <div className="inline-block mb-4">
@@ -37,10 +37,10 @@ export default function LocationsPage() {
               <span className="text-sm font-semibold uppercase tracking-wider">Find Us</span>
             </div>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-[#234433] to-[#234433] bg-clip-text text-transparent mb-4">
+          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-[#234433] to-[#234433] bg-clip-text text-transparent mb-4">
             Our Locations
           </h1>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-600 text-base max-w-2xl mx-auto">
             Visit any of our branches to experience the finest Pakistani sweets and delicacies.
           </p>
         </div>
@@ -81,8 +81,8 @@ export default function LocationsPage() {
                     </svg>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Address</h3>
-                    <h2 className="text-xl font-bold text-gray-800 leading-relaxed">
+                    <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Address</h3>
+                    <h2 className="text-sm sm:text-base font-bold text-gray-800 leading-relaxed">
                       {location.address}
                     </h2>
                   </div>
@@ -98,7 +98,7 @@ export default function LocationsPage() {
                     <p className="text-sm text-gray-600 font-medium mb-1">Call Us</p>
                     <a
                       href={`tel:${location.phone}`}
-                      className="text-2xl font-bold text-[#234433] hover:text-[#234433]/80 transition-colors"
+                      className="text-lg font-bold text-[#234433] hover:text-[#234433]/80 transition-colors"
                     >
                       {location.phone}
                     </a>
@@ -112,15 +112,15 @@ export default function LocationsPage() {
         {/* Additional Info Section */}
         <div className="mt-12 bg-white rounded-2xl shadow-xl p-8 border-t-4 border-green-500">
           <div className="text-center">
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">Opening Hours</h3>
+            <h3 className="text-xl font-bold text-gray-800 mb-4">Opening Hours</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
               <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl">
                 <p className="text-gray-600 font-semibold mb-2">Monday - Saturday</p>
-                <p className="text-2xl font-bold text-[#234433]">9:00 AM - 11:00 PM</p>
+                <p className="text-lg font-bold text-[#234433]">9:00 AM - 11:00 PM</p>
               </div>
               <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl">
                 <p className="text-gray-600 font-semibold mb-2">Sunday</p>
-                <p className="text-2xl font-bold text-[#234433]">10:00 AM - 10:00 PM</p>
+                <p className="text-lg font-bold text-[#234433]">10:00 AM - 10:00 PM</p>
               </div>
             </div>
           </div>

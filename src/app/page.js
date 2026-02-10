@@ -217,7 +217,7 @@ export default function Home() {
 
                 <div className="text-center">
                   <a
-                    href="#about-story"
+                    href="/about"
                     className="group relative inline-block border-2 border-[#C9A86A] text-[#C9A86A] px-6 md:px-8 py-2 md:py-2.5 text-xs md:text-sm tracking-wide overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-lg"
                   >
                     <span className="relative z-10 group-hover:opacity-0 transition-opacity duration-500">Discover Our Story</span>
@@ -253,7 +253,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
 
             {/* Left - About Us */}
-            <a href="#founders-story" className="relative block bg-[#f5ede1] overflow-hidden group hover:shadow-lg transition-all duration-500">
+            <div className="relative bg-[#f5ede1] overflow-hidden">
               {/* Decorative corner accents */}
               <div className="absolute top-4 left-4 w-10 h-10 border-t-2 border-l-2 border-[#C9A86A]/30"></div>
               <div className="absolute bottom-4 right-4 w-10 h-10 border-b-2 border-r-2 border-[#C9A86A]/30"></div>
@@ -287,13 +287,27 @@ export default function Home() {
                 </p>
 
                 {/* Highlight quote */}
-                <div className="border-l-2 border-[#C9A86A] pl-4">
+                <div className="border-l-2 border-[#C9A86A] pl-4 mb-6">
                   <p className="text-[#2d2d2d] text-xs md:text-sm italic font-serif leading-relaxed">
                     &ldquo;Where every bite is a celebration of heritage and flavor.&rdquo;
                   </p>
                 </div>
+
+                {/* Learn More Button */}
+                <div>
+                  <a
+                    href="/about"
+                    className="group relative inline-block border-2 border-[#C9A86A] text-[#C9A86A] px-6 md:px-8 py-2 md:py-2.5 text-xs md:text-sm tracking-wide overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-lg"
+                  >
+                    <span className="relative z-10 group-hover:opacity-0 transition-opacity duration-500">Learn More</span>
+                    <div className="absolute inset-0 bg-[#C9A86A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                    <span className="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-semibold">
+                      Learn More
+                    </span>
+                  </a>
+                </div>
               </div>
-            </a>
+            </div>
 
             {/* Right - Founder's Story */}
             <div id="founders-story" className="bg-[#f5ede1] overflow-hidden">
