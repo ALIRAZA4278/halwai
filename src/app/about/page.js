@@ -43,7 +43,7 @@ export default function AboutPage() {
               <div className="absolute -top-3 -left-3 w-16 h-16 border-t-2 border-l-2 border-[#C9A86A]/40"></div>
               <div className="absolute -bottom-3 -right-3 w-16 h-16 border-b-2 border-r-2 border-[#C9A86A]/40"></div>
               <img
-                src="about.jpeg"
+                src="/about/about1.jpeg"
                 alt="Halwaiii Traditional Sweets"
                 className="w-full h-[300px] sm:h-[350px] md:h-[400px] object-cover"
               />
@@ -158,7 +158,7 @@ export default function AboutPage() {
               <div className="absolute -top-3 -left-3 w-16 h-16 border-t-2 border-l-2 border-[#C9A86A]/40"></div>
               <div className="absolute -bottom-3 -right-3 w-16 h-16 border-b-2 border-r-2 border-[#C9A86A]/40"></div>
               <img
-                src="about.jpeg"
+                src="/about/about2.jpeg"
                 alt="The Founder"
                 className="w-full h-[300px] sm:h-[350px] md:h-[400px] object-cover"
               />
